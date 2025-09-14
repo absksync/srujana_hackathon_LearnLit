@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascot Doubt Buddy - LearnBuddy</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 min-h-screen" style="font-family: 'Nunito', sans-serif;">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center animate-bounce">
+                        <span class="text-2xl">🦉</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white" style="font-family: 'Fredoka One', cursive;">Ollie - Your Doubt Buddy</h1>
+                        <p class="text-yellow-100 text-sm">Ask me anything! I'm here to help 🌟</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Language Toggle -->
+                    <div class="relative">
+                        <button id="language-toggle" class="flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-xl hover:bg-white/30 transition-all duration-300 text-sm font-medium">
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                            <span id="current-language">English</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <div id="language-dropdown" class="hidden absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-200 min-w-32 z-50">
+                            <button onclick="switchLanguage('en')" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-yellow-50 rounded-t-xl transition-colors">English</button>
+                            <button onclick="switchLanguage('hi')" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-yellow-50 transition-colors">हिंदी</button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="window.location.href='/dashboard'" class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-xl hover:bg-white/30 transition-all duration-300 text-sm font-medium">
+                        <i data-lucide="arrow-left" class="w-4 h-4 inline mr-2"></i>
+                        <span data-translate="back">Back to Dashboard</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Mascot Introduction -->
+        <section class="text-center mb-12">
+            <div class="relative inline-block mb-6">
+                <!-- Ollie the Owl Mascot -->
+                <div id="ollie-mascot" class="w-32 h-32 mx-auto relative cursor-pointer transform hover:scale-110 transition-all duration-300">
+                    <div class="w-full h-full bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center shadow-2xl animate-pulse">
+                        <span class="text-6xl animate-bounce">🦉</span>
+                    </div>
+                    
+                    <!-- Speech Bubble -->
+                    <div id="speech-bubble" class="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl px-4 py-2 shadow-lg border-2 border-orange-200 opacity-0 transition-all duration-300">
+                        <div class="text-sm font-medium text-gray-800" data-translate="ollie_greeting">Hi! I'm Ollie! 🌟</div>
+                        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
+                    </div>
+                    
+                    <!-- Floating Hearts -->
+                    <div class="floating-hearts absolute inset-0">
+                        <span class="heart">💖</span>
+                        <span class="heart">✨</span>
+                        <span class="heart">🌟</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                <span data-translate="meet_ollie">Meet Ollie, Your</span>
+                <span class="bg-gradient-to-r from-orange-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">Smart Buddy!</span>
+            </h2>
+            
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8" data-translate="ollie_description">
+                I'm here to answer all your questions with fun gestures, voice responses, and interactive animations. Let's make learning exciting together!
+            </p>
+        </section>
+
+        <!-- Chat Interface -->
+        <section class="mb-12">
+            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                <!-- Chat Header -->
+                <div class="bg-gradient-to-r from-orange-400 to-yellow-500 p-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🦉</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg" data-translate="chat_with_ollie">Chat with Ollie</h3>
+                            <p class="text-orange-100 text-sm" data-translate="ollie_status">Ready to help • Online</p>
+                        </div>
+                        <div class="ml-auto flex space-x-2">
+                            <button id="voice-toggle" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                <i data-lucide="mic" class="w-5 h-5 text-white"></i>
+                            </button>
+                            <button id="clear-chat" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                <i data-lucide="refresh-cw" class="w-5 h-5 text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="h-96 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-orange-50/50 to-yellow-50/50">
+                    <!-- Welcome Message -->
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-sm">🦉</span>
+                        </div>
+                        <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 max-w-md shadow-sm border border-orange-100">
+                            <p class="text-gray-800" data-translate="welcome_message">
+                                Hello there! I'm Ollie, your friendly learning companion! 🌟 Ask me anything about your studies - Math, Science, History, or any subject you're curious about. I'll explain it in a fun and easy way!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="border-t border-gray-100 p-6">
+                    <div class="flex items-center space-x-4">
+                        <button id="attachment-btn" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                            <i data-lucide="paperclip" class="w-5 h-5 text-gray-600"></i>
+                        </button>
+                        
+                        <div class="flex-1 relative">
+                            <input 
+                                type="text" 
+                                id="chat-input" 
+                                placeholder="Ask Ollie anything..." 
+                                data-translate-placeholder="ask_ollie"
+                                class="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition-all"
+                            >
+                            <button id="emoji-btn" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                <i data-lucide="smile" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                        
+                        <button id="send-btn" class="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full flex items-center justify-center hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                            <i data-lucide="send" class="w-5 h-5 text-white"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Questions -->
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-500 mb-2" data-translate="quick_questions">Quick questions to get started:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="askQuickQuestion('What is photosynthesis?')" class="quick-question bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm hover:bg-orange-200 transition-colors" data-translate="q1">
+                                What is photosynthesis? 🌱
+                            </button>
+                            <button onclick="askQuickQuestion('Explain fractions simply')" class="quick-question bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm hover:bg-yellow-200 transition-colors" data-translate="q2">
+                                Explain fractions simply 🔢
+                            </button>
+                            <button onclick="askQuickQuestion('Tell me about dinosaurs')" class="quick-question bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm hover:bg-red-200 transition-colors" data-translate="q3">
+                                Tell me about dinosaurs 🦕
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ollie's Features -->
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center" data-translate="ollie_features">What Makes Ollie Special?</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Fun Animations -->
+                <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-orange-100 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl animate-bounce">🎭</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-center mb-2" data-translate="fun_animations">Fun Animations</h4>
+                    <p class="text-gray-600 text-center text-sm" data-translate="animations_desc">
+                        I use exciting gestures and movements to make learning more engaging and memorable!
+                    </p>
+                </div>
+
+                <!-- Voice Responses -->
+                <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-orange-100 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🎵</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-center mb-2" data-translate="voice_responses">Voice Responses</h4>
+                    <p class="text-gray-600 text-center text-sm" data-translate="voice_desc">
+                        Hear my friendly voice explaining concepts in a way that's easy to understand!
+                    </p>
+                </div>
+
+                <!-- Interactive Learning -->
+                <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-orange-100 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🎯</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 text-center mb-2" data-translate="interactive_learning">Interactive Learning</h4>
+                    <p class="text-gray-600 text-center text-sm" data-translate="interactive_desc">
+                        I adapt to your learning style and make each explanation perfect just for you!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subject Categories -->
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center" data-translate="subjects_i_love">Subjects I Love to Help With</h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="selectSubject('math')" class="subject-btn bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-2xl text-center hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <div class="text-4xl mb-2">🔢</div>
+                    <div class="font-medium text-blue-800" data-translate="mathematics">Mathematics</div>
+                </button>
+                
+                <button onclick="selectSubject('science')" class="subject-btn bg-gradient-to-br from-green-100 to-green-200 p-6 rounded-2xl text-center hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <div class="text-4xl mb-2">🔬</div>
+                    <div class="font-medium text-green-800" data-translate="science">Science</div>
+                </button>
+                
+                <button onclick="selectSubject('history')" class="subject-btn bg-gradient-to-br from-purple-100 to-purple-200 p-6 rounded-2xl text-center hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <div class="text-4xl mb-2">🏛️</div>
+                    <div class="font-medium text-purple-800" data-translate="history">History</div>
+                </button>
+                
+                <button onclick="selectSubject('language')" class="subject-btn bg-gradient-to-br from-pink-100 to-pink-200 p-6 rounded-2xl text-center hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <div class="text-4xl mb-2">📚</div>
+                    <div class="font-medium text-pink-800" data-translate="language">Language</div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Fun Stats -->
+        <section class="text-center">
+            <div class="bg-gradient-to-r from-orange-100 to-yellow-100 rounded-3xl p-8 border border-orange-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6" data-translate="ollie_stats">Ollie's Helping Stats</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div>
+                        <div class="text-3xl font-bold text-orange-600 mb-2" id="questions-answered">1,247</div>
+                        <div class="text-sm text-gray-600" data-translate="questions_answered">Questions Answered</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-yellow-600 mb-2" id="students-helped">892</div>
+                        <div class="text-sm text-gray-600" data-translate="students_helped">Students Helped</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-red-600 mb-2" id="fun-moments">2,156</div>
+                        <div class="text-sm text-gray-600" data-translate="fun_moments">Fun Moments</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-pink-600 mb-2" id="smiles-created">5,423</div>
+                        <div class="text-sm text-gray-600" data-translate="smiles_created">Smiles Created</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Emoji Picker Modal -->
+    <div id="emoji-picker" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-gray-900" data-translate="choose_emoji">Choose an Emoji</h3>
+                <button onclick="closeEmojiPicker()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-8 gap-2 text-2xl">
+                <button onclick="addEmoji('😊')" class="p-2 hover:bg-gray-100 rounded">😊</button>
+                <button onclick="addEmoji('😄')" class="p-2 hover:bg-gray-100 rounded">😄</button>
+                <button onclick="addEmoji('🤔')" class="p-2 hover:bg-gray-100 rounded">🤔</button>
+                <button onclick="addEmoji('😮')" class="p-2 hover:bg-gray-100 rounded">😮</button>
+                <button onclick="addEmoji('🎉')" class="p-2 hover:bg-gray-100 rounded">🎉</button>
+                <button onclick="addEmoji('❤️')" class="p-2 hover:bg-gray-100 rounded">❤️</button>
+                <button onclick="addEmoji('👍')" class="p-2 hover:bg-gray-100 rounded">👍</button>
+                <button onclick="addEmoji('🌟')" class="p-2 hover:bg-gray-100 rounded">🌟</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Recording Modal -->
+    <div id="voice-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center">
+            <div class="w-20 h-20 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <i data-lucide="mic" class="w-10 h-10 text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2" data-translate="listening">Listening...</h3>
+            <p class="text-gray-600 mb-6" data-translate="speak_now">Speak now and I'll help you with your question!</p>
+            <button onclick="stopRecording()" class="bg-red-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-600 transition-colors" data-translate="stop_recording">
+                Stop Recording
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/mascot-buddy.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+
+    <style>
+        .floating-hearts {
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 12px;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        .heart:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .heart:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+        
+        .heart:nth-child(3) {
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% { opacity: 0; transform: translateY(0px); }
+            50% { opacity: 1; transform: translateY(-20px); }
+        }
+        
+        .feature-card:hover .text-3xl {
+            animation: bounce 1s ease-in-out;
+        }
+        
+        .subject-btn:hover .text-4xl {
+            animation: wiggle 0.5s ease-in-out;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        #chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: #fbbf24;
+            border-radius: 3px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+    </style>
+</body>
+</html>

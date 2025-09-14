@@ -94,6 +94,14 @@ app.get('/vernacular-engine', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'vernacular-engine.html'));
 });
 
+app.get('/smart-retry', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'smart-retry.html'));
+});
+
+app.get('/mascot-buddy', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'mascot-buddy.html'));
+});
+
 // Start server (for local development)
 if (ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
