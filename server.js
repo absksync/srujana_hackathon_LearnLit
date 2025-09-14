@@ -41,8 +41,12 @@ if (ENV === 'development') {
   console.log(`📊 Features: ${summary.enabledFeatures}/${summary.totalFeatures} enabled`);
   console.log(`🌍 Languages: ${summary.languages.join(', ')}`);
 }
-// Set up middleware
-app.use(express.static('public'));
+
+// Set up middleware - Enhanced static file serving
+app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
+app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
+app.use('/audio', express.static(path.join(__dirname, 'public', 'audio')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // Set up view engine
