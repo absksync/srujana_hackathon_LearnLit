@@ -55,6 +55,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Routes
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'landing.html'));
+});
+
+app.get('/landing', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'landing.html'));
+});
+
+app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
 
