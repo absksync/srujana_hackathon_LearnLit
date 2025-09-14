@@ -11,7 +11,6 @@
     "build-css-watch": "npx tailwindcss -i ./src/styles.css -o ./public/css/styles.css --watch",
     "validate-env": "node scripts/validate-env.js",
     "setup": "npm install && node scripts/validate-env.js",
-    "vercel-build": "npm run build-css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,9 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.6.1",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
-    "tailwindcss": "^4.1.13"
   }
 }
