@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Gap Mapper - LearnBuddy</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-red-100 via-pink-50 to-orange-100 min-h-screen" style="font-family: 'Nunito', sans-serif;">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <button onclick="goHome()" class="text-white hover:text-pink-200 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg bounce-animation">
+                            <span class="text-2xl">🔍</span>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white" style="font-family: 'Fredoka One', cursive;" data-en="Concept Gap Mapper" data-hi="अवधारणा अंतर मैपर">Concept Gap Mapper</h1>
+                            <p class="text-pink-100 text-sm" data-en="Find what you don't understand!" data-hi="पता करें कि आप क्या नहीं समझते!">Find what you don't understand!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageToggle" class="bg-white hover:bg-gray-100 text-red-600 px-4 py-2 rounded-full font-semibold transition-all duration-300 shadow-lg">
+                        🌐 English
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Introduction Section -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8 slide-in-up">
+            <div class="text-center">
+                <div class="w-24 h-24 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 bounce-animation">
+                    <span class="text-4xl">🧠</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4" style="font-family: 'Fredoka One', cursive;" data-en="Let's Find Your Knowledge Gaps!" data-hi="आइए आपके ज्ञान के अंतर खोजें!">Let's Find Your Knowledge Gaps!</h2>
+                <p class="text-gray-600 text-lg mb-6" data-en="Don't worry! Even superheroes have things they don't know yet. Let's discover yours and fix them together! 🦸‍♀️" data-hi="चिंता न करें! सुपरहीरो के पास भी ऐसी चीजें हैं जो वे अभी तक नहीं जानते। आइए आपकी खोजें और उन्हें एक साथ ठीक करें! 🦸‍♀️">Don't worry! Even superheroes have things they don't know yet. Let's discover yours and fix them together! 🦸‍♀️</p>
+                <button onclick="startGapAnalysis()" class="fun-button text-lg px-8 py-3" data-en="🔍 Start Gap Analysis" data-hi="🔍 अंतर विश्लेषण शुरू करें">🔍 Start Gap Analysis</button>
+            </div>
+        </div>
+
+        <!-- Subject Selection -->
+        <div id="subjectSelection" class="bg-white rounded-3xl shadow-xl p-8 mb-8 hidden">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center" style="font-family: 'Fredoka One', cursive;" data-en="Choose Your Subject" data-hi="अपना विषय चुनें">Choose Your Subject</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="selectSubject('math')" class="subject-card bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">📊</div>
+                    <div class="font-bold text-lg" data-en="Math" data-hi="गणित">Math</div>
+                    <div class="text-sm opacity-90" data-en="Numbers & Logic" data-hi="संख्या और तर्क">Numbers & Logic</div>
+                </button>
+                <button onclick="selectSubject('english')" class="subject-card bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">📚</div>
+                    <div class="font-bold text-lg" data-en="English" data-hi="अंग्रेजी">English</div>
+                    <div class="text-sm opacity-90" data-en="Reading & Writing" data-hi="पढ़ना और लिखना">Reading & Writing</div>
+                </button>
+                <button onclick="selectSubject('science')" class="subject-card bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">🔬</div>
+                    <div class="font-bold text-lg" data-en="Science" data-hi="विज्ञान">Science</div>
+                    <div class="text-sm opacity-90" data-en="Experiments & Facts" data-hi="प्रयोग और तथ्य">Experiments & Facts</div>
+                </button>
+                <button onclick="selectSubject('social')" class="subject-card bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">🌍</div>
+                    <div class="font-bold text-lg" data-en="Social Studies" data-hi="सामाजिक अध्ययन">Social Studies</div>
+                    <div class="text-sm opacity-90" data-en="History & Geography" data-hi="इतिहास और भूगोल">History & Geography</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Gap Analysis Results -->
+        <div id="gapAnalysisResults" class="hidden">
+            <!-- Recent Mistakes Analysis -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Fredoka One', cursive;" data-en="🤔 What You Got Wrong Recently" data-hi="🤔 हाल ही में आपने क्या गलत किया">🤔 What You Got Wrong Recently</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-500" data-en="AI Analysis" data-hi="AI विश्लेषण">AI Analysis</span>
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-4" id="mistakesList">
+                    <!-- Math Mistake Example -->
+                    <div class="mistake-item bg-red-50 border border-red-200 rounded-2xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">❌</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-900" data-en="Addition with Carrying" data-hi="हासिल के साथ जोड़">Addition with Carrying</h4>
+                                    <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full" data-en="Math" data-hi="गणित">Math</span>
+                                </div>
+                                <p class="text-gray-600 mb-3" data-en="You wrote 47 + 29 = 66, but the correct answer is 76. You forgot to carry the 1!" data-hi="आपने 47 + 29 = 66 लिखा, लेकिन सही उत्तर 76 है। आप 1 का हासिल ले जाना भूल गए!">You wrote 47 + 29 = 66, but the correct answer is 76. You forgot to carry the 1!</p>
+                                <div class="flex items-center space-x-3">
+                                    <button onclick="learnConcept('carrying')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-en="🎯 Fix This Now!" data-hi="🎯 अभी ठीक करें!">🎯 Fix This Now!</button>
+                                    <span class="text-xs text-gray-500" data-en="2 minutes to fix" data-hi="ठीक करने में 2 मिनट">2 minutes to fix</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- English Mistake Example -->
+                    <div class="mistake-item bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">⚠️</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-900" data-en="Past Tense Verbs" data-hi="भूतकाल की क्रिया">Past Tense Verbs</h4>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full" data-en="English" data-hi="अंग्रेजी">English</span>
+                                </div>
+                                <p class="text-gray-600 mb-3" data-en="You wrote 'I goed to school' instead of 'I went to school'. Some verbs change completely in past tense!" data-hi="आपने 'I goed to school' के बजाय 'I went to school' लिखा। कुछ क्रियाएं भूतकाल में पूरी तरह बदल जाती हैं!">You wrote 'I goed to school' instead of 'I went to school'. Some verbs change completely in past tense!</p>
+                                <div class="flex items-center space-x-3">
+                                    <button onclick="learnConcept('irregular-verbs')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-en="📝 Learn Irregular Verbs" data-hi="📝 अनियमित क्रिया सीखें">📝 Learn Irregular Verbs</button>
+                                    <span class="text-xs text-gray-500" data-en="3 minutes to fix" data-hi="ठीक करने में 3 मिनट">3 minutes to fix</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Science Mistake Example -->
+                    <div class="mistake-item bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">🔬</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-bold text-gray-900" data-en="States of Matter" data-hi="पदार्थ की अवस्थाएं">States of Matter</h4>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full" data-en="Science" data-hi="विज्ञान">Science</span>
+                                </div>
+                                <p class="text-gray-600 mb-3" data-en="You said ice is a liquid, but ice is actually solid water! Water can be solid, liquid, or gas." data-hi="आपने कहा बर्फ तरल है, लेकिन बर्फ वास्तव में ठोस पानी है! पानी ठोस, तरल या गैस हो सकता है।">You said ice is a liquid, but ice is actually solid water! Water can be solid, liquid, or gas.</p>
+                                <div class="flex items-center space-x-3">
+                                    <button onclick="learnConcept('states-of-matter')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-en="🧊 Explore States!" data-hi="🧊 अवस्थाएं खोजें!">🧊 Explore States!</button>
+                                    <span class="text-xs text-gray-500" data-en="4 minutes to understand" data-hi="समझने में 4 मिनट">4 minutes to understand</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Recommendations -->
+            <div class="bg-gradient-to-br from-green-400 to-emerald-500 rounded-3xl shadow-xl p-8 mb-8 text-white">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🤖</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="font-family: 'Fredoka One', cursive;" data-en="AI's Smart Suggestion" data-hi="AI का स्मार्ट सुझाव">AI's Smart Suggestion</h3>
+                    <p class="text-green-100 text-lg mb-6" data-en="I think you should focus on 'Addition with Carrying' first because it will help you with multiplication later!" data-hi="मुझे लगता है कि आपको पहले 'हासिल के साथ जोड़' पर ध्यान देना चाहिए क्योंकि यह बाद में गुणा में आपकी मदद करेगा!">I think you should focus on 'Addition with Carrying' first because it will help you with multiplication later!</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="startMiniLesson('carrying')" class="bg-white text-green-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors" data-en="🎯 Start 2-Minute Fix" data-hi="🎯 2-मिनट का समाधान शुरू करें">🎯 Start 2-Minute Fix</button>
+                        <button onclick="skipToNext()" class="bg-white bg-opacity-20 text-white px-6 py-3 rounded-full font-bold hover:bg-opacity-30 transition-colors" data-en="⏭️ Skip to Next" data-hi="⏭️ अगले पर जाएं">⏭️ Skip to Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="bg-white rounded-3xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6" style="font-family: 'Fredoka One', cursive;" data-en="🏆 Your Gap-Fixing Progress" data-hi="🏆 आपकी अंतर-सुधार प्रगति">🏆 Your Gap-Fixing Progress</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-white text-2xl font-bold">7</span>
+                        </div>
+                        <div class="font-bold text-gray-900" data-en="Gaps Fixed" data-hi="अंतर ठीक किए">Gaps Fixed</div>
+                        <div class="text-sm text-gray-600" data-en="This week" data-hi="इस सप्ताह">This week</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-white text-2xl font-bold">3</span>
+                        </div>
+                        <div class="font-bold text-gray-900" data-en="Active Gaps" data-hi="सक्रिय अंतर">Active Gaps</div>
+                        <div class="text-sm text-gray-600" data-en="To work on" data-hi="काम करने के लिए">To work on</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-white text-2xl font-bold">92%</span>
+                        </div>
+                        <div class="font-bold text-gray-900" data-en="Success Rate" data-hi="सफलता दर">Success Rate</div>
+                        <div class="text-sm text-gray-600" data-en="After fixing" data-hi="ठीक करने के बाद">After fixing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mini Lesson Modal -->
+        <div id="miniLessonModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 m-4 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🎯</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Fredoka One', cursive;" data-en="2-Minute Concept Fix" data-hi="2-मिनट अवधारणा समाधान">2-Minute Concept Fix</h3>
+                </div>
+                
+                <div id="lessonContent" class="text-center">
+                    <!-- Lesson content will be inserted here -->
+                </div>
+                
+                <div class="flex justify-center space-x-4 mt-6">
+                    <button onclick="closeMiniLesson()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-full font-semibold transition-colors" data-en="Close" data-hi="बंद करें">Close</button>
+                    <button onclick="practiceMore()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-colors" data-en="Practice More!" data-hi="और अभ्यास करें!">Practice More!</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/concept-gaps.js"></script>
+</body>
+</html>

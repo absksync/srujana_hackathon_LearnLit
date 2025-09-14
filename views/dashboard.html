@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnBuddy - AI Learning Platform for Kids</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 min-h-screen" style="font-family: 'Nunito', sans-serif;">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg bounce-animation">
+                        <span class="text-2xl">🦉</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white" style="font-family: 'Fredoka One', cursive;">LearnBuddy</h1>
+                        <p class="text-purple-100 text-sm" data-en="Your AI Learning Friend!" data-hi="आपका AI शिक्षा मित्र!">Your AI Learning Friend!</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageToggle" class="bg-white hover:bg-gray-100 text-purple-600 px-4 py-2 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+                        🌐 English
+                    </button>
+                    <div class="text-white text-right">
+                        <div class="text-sm opacity-90" data-en="Hello," data-hi="नमस्ते,">Hello,</div>
+                        <div class="font-bold" data-en="Priya!" data-hi="प्रिया!">Priya!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section with Mascot -->
+        <div class="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl shadow-xl p-8 mb-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full transform -translate-x-12 translate-y-12"></div>
+            <div class="flex items-center justify-between relative z-10">
+                <div>
+                    <h2 class="text-4xl font-bold text-white mb-3" style="font-family: 'Fredoka One', cursive;" data-en="Ready to Learn Today?" data-hi="आज सीखने के लिए तैयार हैं?">Ready to Learn Today?</h2>
+                    <p class="text-orange-100 text-lg" data-en="Let's explore amazing concepts together! 🚀" data-hi="आइए साथ में अद्भुत अवधारणाओं की खोज करें! 🚀">Let's explore amazing concepts together! 🚀</p>
+                    <div class="mt-4 flex items-center space-x-4">
+                        <div class="bg-white bg-opacity-20 rounded-full px-4 py-2">
+                            <span class="text-white font-semibold text-sm" data-en="Today's Goal: 5 lessons" data-hi="आज का लक्ष्य: 5 पाठ">Today's Goal: 5 lessons</span>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-full px-4 py-2">
+                            <span class="text-white font-semibold text-sm" data-en="Streak: 7 days! 🔥" data-hi="लगातार: 7 दिन! 🔥">Streak: 7 days! 🔥</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-2xl bounce-animation">
+                        <span class="text-6xl">🦉</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <span class="text-2xl">✅</span>
+                </div>
+                <div class="text-3xl font-bold text-gray-800 mb-1">24</div>
+                <div class="text-sm text-gray-600 font-semibold" data-en="Lessons Done" data-hi="पाठ पूर्ण">Lessons Done</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <span class="text-2xl">⭐</span>
+                </div>
+                <div class="text-3xl font-bold text-gray-800 mb-1">350</div>
+                <div class="text-sm text-gray-600 font-semibold" data-en="Stars Earned" data-hi="सितारे मिले">Stars Earned</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <span class="text-2xl">🎯</span>
+                </div>
+                <div class="text-3xl font-bold text-gray-800 mb-1">89%</div>
+                <div class="text-sm text-gray-600 font-semibold" data-en="Accuracy" data-hi="सटीकता">Accuracy</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <span class="text-2xl">🏆</span>
+                </div>
+                <div class="text-3xl font-bold text-gray-800 mb-1">12</div>
+                <div class="text-sm text-gray-600 font-semibold" data-en="Badges Won" data-hi="बैज जीते">Badges Won</div>
+            </div>
+        </div>
+
+        <!-- AI-Powered Features -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Concept Gap Mapper -->
+            <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105" onclick="navigateToScreen('/concept-gaps')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <span class="text-2xl">🔍</span>
+                        </div>
+                        <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full font-semibold animate-pulse">NEW!</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2" data-en="Concept Gap Mapper" data-hi="अवधारणा अंतर मैपर">Concept Gap Mapper</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Find exactly what you don't understand and fix it instantly!" data-hi="पता करें कि आप वास्तव में क्या नहीं समझते और इसे तुरंत ठीक करें!">Find exactly what you don't understand and fix it instantly!</p>
+                    <div class="flex items-center text-pink-600 text-sm font-bold">
+                        <span data-en="Fix My Gaps!" data-hi="मेरे अंतर ठीक करें!">Fix My Gaps!</span>
+                        <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LearnFlow Motivation Coach -->
+            <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105" onclick="navigateToScreen('/motivation-coach')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <span class="text-2xl">💪</span>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-semibold">SMART</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2" data-en="Motivation Coach" data-hi="प्रेरणा कोच">Motivation Coach</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Get personalized tips on when and how YOU learn best!" data-hi="पाएं व्यक्तिगत सुझाव कि आप कब और कैसे सबसे अच्छा सीखते हैं!">Get personalized tips on when and how YOU learn best!</p>
+                    <div class="flex items-center text-emerald-600 text-sm font-bold">
+                        <span data-en="Boost My Learning!" data-hi="मेरी शिक्षा बढ़ाएं!">Boost My Learning!</span>
+                        <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vernacular Language Engine -->
+            <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105" onclick="navigateToScreen('/vernacular-engine')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <span class="text-2xl">🗣️</span>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-semibold">LOCAL</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2" data-en="Local Language Helper" data-hi="स्थानीय भाषा सहायक">Local Language Helper</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Learn concepts in your mother tongue with fun examples!" data-hi="मजेदार उदाहरणों के साथ अपनी मातृभाषा में अवधारणाएं सीखें!">Learn concepts in your mother tongue with fun examples!</p>
+                    <div class="flex items-center text-indigo-600 text-sm font-bold">
+                        <span data-en="Explore Languages!" data-hi="भाषाएं खोजें!">Explore Languages!</span>
+                        <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Retry Strategy -->
+            <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105" onclick="navigateToScreen('/retry-strategy')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                        <span class="bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full font-semibold">SMART</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2" data-en="Smart Retry Helper" data-hi="स्मार्ट पुनः प्रयास सहायक">Smart Retry Helper</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Know when to try again or switch to a different way of learning!" data-hi="जानें कि कब फिर से कोशिश करें या सीखने का दूसरा तरीका अपनाएं!">Know when to try again or switch to a different way of learning!</p>
+                    <div class="flex items-center text-red-600 text-sm font-bold">
+                        <span data-en="Get Smart Tips!" data-hi="स्मार्ट टिप्स पाएं!">Get Smart Tips!</span>
+                        <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mascot Doubt Buddy -->
+            <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105" onclick="navigateToScreen('/mascot-buddy')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <span class="text-2xl">🦉</span>
+                        </div>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-semibold">FUN!</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2" data-en="Buddy the Owl" data-hi="बडी आउल">Buddy the Owl</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Your friendly AI owl who answers all your questions with fun!" data-hi="आपका मित्र AI उल्लू जो मज़े के साथ आपके सभी सवालों का जवाब देता है!">Your friendly AI owl who answers all your questions with fun!</p>
+                    <div class="flex items-center text-purple-600 text-sm font-bold">
+                        <span data-en="Ask Buddy!" data-hi="बडी से पूछें!">Ask Buddy!</span>
+                        <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue Learning -->
+            <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105" onclick="navigateToScreen('/curriculum')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center shadow-lg">
+                            <span class="text-2xl">📚</span>
+                        </div>
+                        <span class="bg-white bg-opacity-20 text-white text-xs px-3 py-1 rounded-full font-semibold">CONTINUE</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2" data-en="Continue Learning" data-hi="सीखना जारी रखें">Continue Learning</h3>
+                    <p class="text-emerald-100 text-sm mb-4" data-en="Pick up where you left off in your learning journey!" data-hi="अपनी शिक्षा की यात्रा में जहां छोड़ा था वहीं से शुरू करें!">Pick up where you left off in your learning journey!</p>
+                    <div class="flex items-center text-white text-sm font-bold">
+                        <span data-en="Let's Go!" data-hi="चलते हैं!">Let's Go!</span>
+                        <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Learning Games Section -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2" style="font-family: 'Fredoka One', cursive;" data-en="🎮 Fun Learning Games" data-hi="🎮 मजेदार शिक्षा खेल">🎮 Fun Learning Games</h3>
+                <p class="text-gray-600" data-en="Learn while playing exciting games!" data-hi="रोमांचक खेल खेलते हुए सीखें!">Learn while playing exciting games!</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300" onclick="navigateToScreen('/micro-content')">
+                    <div class="text-3xl mb-2">🧩</div>
+                    <div class="text-white font-bold text-sm" data-en="Math Puzzles" data-hi="गणित पहेली">Math Puzzles</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300">
+                    <div class="text-3xl mb-2">🔤</div>
+                    <div class="text-white font-bold text-sm" data-en="Word Builder" data-hi="शब्द निर्माता">Word Builder</div>
+                </div>
+                <div class="bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300">
+                    <div class="text-3xl mb-2">🧪</div>
+                    <div class="text-white font-bold text-sm" data-en="Science Lab" data-hi="विज्ञान प्रयोगशाला">Science Lab</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl p-4 text-center cursor-pointer hover:scale-105 transition-all duration-300">
+                    <div class="text-3xl mb-2">🌍</div>
+                    <div class="text-white font-bold text-sm" data-en="Geography Quest" data-hi="भूगोल खोज">Geography Quest</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+                            <span class="text-xl">🦉</span>
+                        </div>
+                        <h3 class="text-xl font-bold" style="font-family: 'Fredoka One', cursive;">LearnBuddy</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4" data-en="Making learning fun and personalized for every child with the power of AI!" data-hi="AI की शक्ति से हर बच्चे के लिए सीखना मजेदार और व्यक्तिगत बनाना!">Making learning fun and personalized for every child with the power of AI!</p>
+                    <div class="flex space-x-4">
+                        <button class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-sm transition-colors">📧 Contact Us</button>
+                        <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-sm transition-colors">💬 Support</button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4" data-en="Features" data-hi="विशेषताएं">Features</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li data-en="Concept Gap Mapper" data-hi="अवधारणा अंतर मैपर">Concept Gap Mapper</li>
+                        <li data-en="Motivation Coach" data-hi="प्रेरणा कोच">Motivation Coach</li>
+                        <li data-en="Local Language Support" data-hi="स्थानीय भाषा समर्थन">Local Language Support</li>
+                        <li data-en="Smart Retry Helper" data-hi="स्मार्ट पुनः प्रयास सहायक">Smart Retry Helper</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4" data-en="Parents & Teachers" data-hi="माता-पिता और शिक्षक">Parents & Teachers</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li data-en="Progress Reports" data-hi="प्रगति रिपोर्ट">Progress Reports</li>
+                        <li data-en="Learning Analytics" data-hi="शिक्षा विश्लेषण">Learning Analytics</li>
+                        <li data-en="Parent Dashboard" data-hi="माता-पिता डैशबोर्ड">Parent Dashboard</li>
+                        <li data-en="Safe Environment" data-hi="सुरक्षित वातावरण">Safe Environment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p data-en="© 2025 LearnBuddy. Made with ❤️ for young learners in India." data-hi="© 2025 LearnBuddy. भारत के युवा शिक्षार्थियों के लिए ❤️ से बनाया गया।">© 2025 LearnBuddy. Made with ❤️ for young learners in India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2" data-en="Welcome back, Priya!" data-hi="नमस्ते प्रिया, वापसी पर स्वागत है!">Welcome back, Priya!</h2>
+                    <p class="text-gray-600" data-en="Ready to continue your learning journey?" data-hi="अपनी सीखने की यात्रा जारी रखने के लिए तैयार हैं?">Ready to continue your learning journey?</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-bold text-blue-600">85%</div>
+                    <div class="text-sm text-gray-500" data-en="Overall Progress" data-hi="कुल प्रगति">Overall Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100 text-green-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-2xl font-bold text-gray-900">12</div>
+                        <div class="text-sm text-gray-500" data-en="Completed Lessons" data-hi="पूर्ण पाठ">Completed Lessons</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-2xl font-bold text-gray-900">7</div>
+                        <div class="text-sm text-gray-500" data-en="Active Subjects" data-hi="सक्रिय विषय">Active Subjects</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-2xl font-bold text-gray-900">45</div>
+                        <div class="text-sm text-gray-500" data-en="Study Hours" data-hi="अध्ययन घंटे">Study Hours</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-2xl font-bold text-gray-900">89%</div>
+                        <div class="text-sm text-gray-500" data-en="Accuracy Rate" data-hi="सटीकता दर">Accuracy Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Navigation -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Curriculum Path -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onclick="navigateToScreen('/curriculum')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-indigo-100 text-indigo-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-full">Active</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2" data-en="Dynamic Curriculum Path" data-hi="गतिशील पाठ्यक्रम पथ">Dynamic Curriculum Path</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="AI-generated personalized learning path based on your progress and goals." data-hi="आपकी प्रगति और लक्ष्यों के आधार पर AI-जनरेटेड व्यक्तिगत शिक्षण पथ।">AI-generated personalized learning path based on your progress and goals.</p>
+                    <div class="flex items-center text-blue-600 text-sm font-medium">
+                        <span data-en="View Path" data-hi="पथ देखें">View Path</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Micro-Content Study -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onclick="navigateToScreen('/micro-content')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-pink-100 text-pink-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">New</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2" data-en="Micro-Content Study" data-hi="सूक्ष्म-सामग्री अध्ययन">Micro-Content Study</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Bite-sized learning materials including flashcards and quick quizzes." data-hi="फ्लैशकार्ड और त्वरित प्रश्नोत्तरी सहित छोटे शिक्षण सामग्री।">Bite-sized learning materials including flashcards and quick quizzes.</p>
+                    <div class="flex items-center text-blue-600 text-sm font-medium">
+                        <span data-en="Start Learning" data-hi="सीखना शुरू करें">Start Learning</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Predictive Exam Trends -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onclick="navigateToScreen('/exam-trends')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-orange-100 text-orange-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm bg-red-100 text-red-800 px-2 py-1 rounded-full">Hot</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2" data-en="Predictive Exam Trends" data-hi="भविष्यसूचक परीक्षा रुझान">Predictive Exam Trends</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="AI-powered insights on important topics likely to appear in upcoming exams." data-hi="आगामी परीक्षाओं में आने वाले महत्वपूर्ण विषयों पर AI-संचालित अंतर्दृष्टि।">AI-powered insights on important topics likely to appear in upcoming exams.</p>
+                    <div class="flex items-center text-blue-600 text-sm font-medium">
+                        <span data-en="View Trends" data-hi="रुझान देखें">View Trends</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Doubt Resolver -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer" onclick="navigateToScreen('/doubt-resolver')">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-full bg-emerald-100 text-emerald-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded-full">AI</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2" data-en="Smart Doubt Resolver" data-hi="स्मार्ट संदेह समाधानकर्ता">Smart Doubt Resolver</h3>
+                    <p class="text-gray-600 text-sm mb-4" data-en="Get instant AI-powered answers to your academic questions and doubts." data-hi="अपने शैक्षणिक प्रश्नों और संदेहों के तत्काल AI-संचालित उत्तर प्राप्त करें।">Get instant AI-powered answers to your academic questions and doubts.</p>
+                    <div class="flex items-center text-blue-600 text-sm font-medium">
+                        <span data-en="Ask Question" data-hi="प्रश्न पूछें">Ask Question</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Access -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg shadow-md p-6 border-2 border-blue-200">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3" data-en="Quick Access" data-hi="त्वरित पहुंच">Quick Access</h3>
+                <div class="space-y-2">
+                    <button class="w-full text-left p-3 rounded-lg bg-white hover:bg-gray-50 transition-colors border border-gray-200">
+                        <span class="text-sm font-medium text-gray-900" data-en="📚 Continue Last Lesson" data-hi="📚 अंतिम पाठ जारी रखें">📚 Continue Last Lesson</span>
+                    </button>
+                    <button class="w-full text-left p-3 rounded-lg bg-white hover:bg-gray-50 transition-colors border border-gray-200">
+                        <span class="text-sm font-medium text-gray-900" data-en="📝 Take Practice Test" data-hi="📝 अभ्यास परीक्षा लें">📝 Take Practice Test</span>
+                    </button>
+                    <button class="w-full text-left p-3 rounded-lg bg-white hover:bg-gray-50 transition-colors border border-gray-200">
+                        <span class="text-sm font-medium text-gray-900" data-en="📊 View Analytics" data-hi="📊 विश्लेषण देखें">📊 View Analytics</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upcoming Deadlines -->
+            <div class="bg-gradient-to-br from-yellow-50 to-orange-100 rounded-lg shadow-md p-6 border-2 border-yellow-200">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3" data-en="Upcoming Deadlines" data-hi="आगामी समयसीमा">Upcoming Deadlines</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-sm font-medium text-gray-900" data-en="Physics Test" data-hi="भौतिकी परीक्षा">Physics Test</div>
+                            <div class="text-xs text-gray-600" data-en="3 days left" data-hi="3 दिन बचे">3 days left</div>
+                        </div>
+                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-sm font-medium text-gray-900" data-en="Math Assignment" data-hi="गणित असाइनमेंट">Math Assignment</div>
+                            <div class="text-xs text-gray-600" data-en="1 week left" data-hi="1 सप्ताह बचा">1 week left</div>
+                        </div>
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-sm font-medium text-gray-900" data-en="Chemistry Lab" data-hi="रसायन प्रयोगशाला">Chemistry Lab</div>
+                            <div class="text-xs text-gray-600" data-en="2 weeks left" data-hi="2 सप्ताह बचे">2 weeks left</div>
+                        </div>
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

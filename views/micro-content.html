@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-Content Study - AI Learning Platform</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-4">
+                    <button onclick="goBack()" class="text-gray-600 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-900" data-en="📚 Micro-Content Study" data-hi="📚 सूक्ष्म-सामग्री अध्ययन">📚 Micro-Content Study</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageToggle" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        🌐 English
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Study Mode Selection -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4" data-en="Choose Your Study Mode" data-hi="अपना अध्ययन मोड चुनें">Choose Your Study Mode</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button id="flashcardMode" class="study-mode-btn active p-4 rounded-lg border-2 border-blue-500 bg-blue-50 text-blue-700 transition-all">
+                    <div class="text-center">
+                        <div class="text-2xl mb-2">🃏</div>
+                        <div class="font-semibold" data-en="Flashcards" data-hi="फ्लैशकार्ड">Flashcards</div>
+                        <div class="text-sm opacity-75" data-en="Quick review cards" data-hi="त्वरित समीक्षा कार्ड">Quick review cards</div>
+                    </div>
+                </button>
+                <button id="quizMode" class="study-mode-btn p-4 rounded-lg border-2 border-gray-300 bg-white text-gray-700 transition-all">
+                    <div class="text-center">
+                        <div class="text-2xl mb-2">🧩</div>
+                        <div class="font-semibold" data-en="Quick Quiz" data-hi="त्वरित प्रश्नोत्तरी">Quick Quiz</div>
+                        <div class="text-sm opacity-75" data-en="Interactive questions" data-hi="इंटरैक्टिव प्रश्न">Interactive questions</div>
+                    </div>
+                </button>
+                <button id="gameMode" class="study-mode-btn p-4 rounded-lg border-2 border-gray-300 bg-white text-gray-700 transition-all">
+                    <div class="text-center">
+                        <div class="text-2xl mb-2">🎮</div>
+                        <div class="font-semibold" data-en="Study Games" data-hi="अध्ययन खेल">Study Games</div>
+                        <div class="text-sm opacity-75" data-en="Gamified learning" data-hi="गेमिफाइड शिक्षा">Gamified learning</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Flashcard Section -->
+        <div id="flashcardSection" class="study-section">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900" data-en="Trigonometry Flashcards" data-hi="त्रिकोणमिति फ्लैशकार्ड">Trigonometry Flashcards</h3>
+                    <div class="text-sm text-gray-600">
+                        <span data-en="Card" data-hi="कार्ड">Card</span> <span id="currentCard">1</span> <span data-en="of" data-hi="का">of</span> <span id="totalCards">8</span>
+                    </div>
+                </div>
+
+                <!-- Flashcard -->
+                <div class="flashcard-container mb-6">
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="flashcard-front">
+                            <div class="text-center p-8">
+                                <div class="text-lg text-gray-600 mb-4" data-en="Question" data-hi="प्रश्न">Question</div>
+                                <div class="text-2xl font-semibold text-gray-900" data-en="What is sin(30°)?" data-hi="sin(30°) क्या है?">What is sin(30°)?</div>
+                            </div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="text-center p-8">
+                                <div class="text-lg text-gray-600 mb-4" data-en="Answer" data-hi="उत्तर">Answer</div>
+                                <div class="text-3xl font-bold text-blue-600">1/2</div>
+                                <div class="text-sm text-gray-500 mt-2" data-en="or 0.5" data-hi="या 0.5">or 0.5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flashcard Controls -->
+                <div class="flex items-center justify-between">
+                    <button id="prevCard" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors" data-en="Previous" data-hi="पिछला">Previous</button>
+                    <div class="flex space-x-4">
+                        <button class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg transition-colors" data-en="Hard" data-hi="कठिन">Hard</button>
+                        <button class="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-lg transition-colors" data-en="Good" data-hi="अच्छा">Good</button>
+                        <button class="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition-colors" data-en="Easy" data-hi="आसान">Easy</button>
+                    </div>
+                    <button id="nextCard" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors" data-en="Next" data-hi="अगला">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div id="quizSection" class="study-section hidden">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900" data-en="Quick Quiz: Trigonometry" data-hi="त्वरित प्रश्नोत्तरी: त्रिकोणमिति">Quick Quiz: Trigonometry</h3>
+                    <div class="text-sm text-gray-600">
+                        <span data-en="Question" data-hi="प्रश्न">Question</span> <span id="currentQuestion">1</span> <span data-en="of" data-hi="का">of</span> <span id="totalQuestions">5</span>
+                    </div>
+                </div>
+
+                <!-- Question -->
+                <div class="mb-8">
+                    <div class="text-lg font-semibold text-gray-900 mb-6" data-en="Which of the following is equal to cos(60°)?" data-hi="निम्नलिखित में से कौन सा cos(60°) के बराबर है?">Which of the following is equal to cos(60°)?</div>
+                    
+                    <!-- Options -->
+                    <div class="space-y-3">
+                        <label class="quiz-option flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="quizAnswer" value="a" class="mr-3">
+                            <span class="text-gray-900">A) 1/2</span>
+                        </label>
+                        <label class="quiz-option flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="quizAnswer" value="b" class="mr-3">
+                            <span class="text-gray-900">B) √3/2</span>
+                        </label>
+                        <label class="quiz-option flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="quizAnswer" value="c" class="mr-3">
+                            <span class="text-gray-900">C) √2/2</span>
+                        </label>
+                        <label class="quiz-option flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="quizAnswer" value="d" class="mr-3">
+                            <span class="text-gray-900">D) 1</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Quiz Controls -->
+                <div class="flex items-center justify-between">
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors" data-en="Previous Question" data-hi="पिछला प्रश्न">Previous Question</button>
+                    <div class="text-center">
+                        <div class="text-sm text-gray-600" data-en="Score:" data-hi="स्कोर:">Score:</div>
+                        <div class="text-2xl font-bold text-green-600">4/4</div>
+                    </div>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors" data-en="Submit Answer" data-hi="उत्तर जमा करें">Submit Answer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div id="gameSection" class="study-section hidden">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900" data-en="Match the Values" data-hi="मानों का मिलान करें">Match the Values</h3>
+                    <div class="text-sm text-gray-600">
+                        <span data-en="Time:" data-hi="समय:">Time:</span> <span id="gameTimer">2:30</span>
+                    </div>
+                </div>
+
+                <!-- Game Board -->
+                <div class="grid grid-cols-2 gap-8">
+                    <!-- Functions Column -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-gray-700 text-center" data-en="Functions" data-hi="फलन">Functions</h4>
+                        <div class="game-item bg-blue-100 p-4 rounded-lg text-center cursor-pointer hover:bg-blue-200 transition-colors" data-value="sin30">
+                            sin(30°)
+                        </div>
+                        <div class="game-item bg-green-100 p-4 rounded-lg text-center cursor-pointer hover:bg-green-200 transition-colors" data-value="cos60">
+                            cos(60°)
+                        </div>
+                        <div class="game-item bg-purple-100 p-4 rounded-lg text-center cursor-pointer hover:bg-purple-200 transition-colors" data-value="tan45">
+                            tan(45°)
+                        </div>
+                        <div class="game-item bg-orange-100 p-4 rounded-lg text-center cursor-pointer hover:bg-orange-200 transition-colors" data-value="sin90">
+                            sin(90°)
+                        </div>
+                    </div>
+
+                    <!-- Values Column -->
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-gray-700 text-center" data-en="Values" data-hi="मान">Values</h4>
+                        <div class="game-item bg-gray-100 p-4 rounded-lg text-center cursor-pointer hover:bg-gray-200 transition-colors" data-value="sin90">
+                            1
+                        </div>
+                        <div class="game-item bg-gray-100 p-4 rounded-lg text-center cursor-pointer hover:bg-gray-200 transition-colors" data-value="sin30">
+                            1/2
+                        </div>
+                        <div class="game-item bg-gray-100 p-4 rounded-lg text-center cursor-pointer hover:bg-gray-200 transition-colors" data-value="tan45">
+                            1
+                        </div>
+                        <div class="game-item bg-gray-100 p-4 rounded-lg text-center cursor-pointer hover:bg-gray-200 transition-colors" data-value="cos60">
+                            1/2
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Stats -->
+                <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-green-600">3</div>
+                        <div class="text-sm text-gray-600" data-en="Matches" data-hi="मैच">Matches</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-orange-600">1</div>
+                        <div class="text-sm text-gray-600" data-en="Remaining" data-hi="शेष">Remaining</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-blue-600">150</div>
+                        <div class="text-sm text-gray-600" data-en="Points" data-hi="अंक">Points</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Progress -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4" data-en="Today's Study Progress" data-hi="आज की अध्ययन प्रगति">Today's Study Progress</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-600">12</div>
+                    <div class="text-sm text-gray-600" data-en="Flashcards Reviewed" data-hi="फ्लैशकार्ड समीक्षित">Flashcards Reviewed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-600">8</div>
+                    <div class="text-sm text-gray-600" data-en="Quizzes Completed" data-hi="प्रश्नोत्तरी पूर्ण">Quizzes Completed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600">25</div>
+                    <div class="text-sm text-gray-600" data-en="Minutes Studied" data-hi="अध्ययन मिनट">Minutes Studied</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-orange-600">92%</div>
+                    <div class="text-sm text-gray-600" data-en="Accuracy Rate" data-hi="सटीकता दर">Accuracy Rate</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/micro-content.js"></script>
+</body>
+</html>

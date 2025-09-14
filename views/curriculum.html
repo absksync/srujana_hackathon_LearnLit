@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Curriculum Path - AI Learning Platform</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-4">
+                    <button onclick="goBack()" class="text-gray-600 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-900" data-en="🗺️ Dynamic Curriculum Path" data-hi="🗺️ गतिशील पाठ्यक्रम पथ">🗺️ Dynamic Curriculum Path</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageToggle" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        🌐 English
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- AI Recommendation Banner -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-6 mb-8 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2" data-en="AI-Powered Learning Path" data-hi="AI-संचालित शिक्षण पथ">AI-Powered Learning Path</h2>
+                    <p class="text-blue-100" data-en="Your personalized curriculum based on learning style, progress, and goals" data-hi="आपकी सीखने की शैली, प्रगति और लक्ष्यों के आधार पर आपका व्यक्तिगत पाठ्यक्रम">Your personalized curriculum based on learning style, progress, and goals</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-bold">92%</div>
+                    <div class="text-sm text-blue-100" data-en="Path Completion" data-hi="पथ पूर्णता">Path Completion</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Path Timeline -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6" data-en="Your Learning Journey" data-hi="आपकी शिक्षण यात्रा">Your Learning Journey</h3>
+            
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                
+                <!-- Timeline Items -->
+                <div class="space-y-8">
+                    <!-- Completed Item -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-4 border-white shadow">
+                                <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-6 flex-1 bg-green-50 rounded-lg p-4 border border-green-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-semibold text-gray-900" data-en="Algebra Fundamentals" data-hi="बीजगणित मूल सिद्धांत">Algebra Fundamentals</h4>
+                                <span class="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full" data-en="Completed" data-hi="पूर्ण">Completed</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3" data-en="Linear equations, quadratic functions, and polynomial operations" data-hi="रैखिक समीकरण, द्विघात फलन, और बहुपद संक्रियाएं">Linear equations, quadratic functions, and polynomial operations</p>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500" data-en="Duration: 2 weeks" data-hi="अवधि: 2 सप्ताह">Duration: 2 weeks</div>
+                                <div class="text-sm font-medium text-green-600" data-en="Score: 94%" data-hi="स्कोर: 94%">Score: 94%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Item -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center border-4 border-white shadow animate-pulse">
+                                <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-6 flex-1 bg-blue-50 rounded-lg p-4 border border-blue-200 ring-2 ring-blue-300">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-semibold text-gray-900" data-en="Trigonometry Basics" data-hi="त्रिकोणमिति मूल बातें">Trigonometry Basics</h4>
+                                <span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full" data-en="In Progress" data-hi="प्रगति में">In Progress</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3" data-en="Sine, cosine, tangent functions and their applications" data-hi="साइन, कोसाइन, टैंजेंट फलन और उनके अनुप्रयोग">Sine, cosine, tangent functions and their applications</p>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-sm mb-1">
+                                    <span class="text-gray-600" data-en="Progress" data-hi="प्रगति">Progress</span>
+                                    <span class="text-blue-600 font-medium">65%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500" data-en="Estimated time: 5 days left" data-hi="अनुमानित समय: 5 दिन बचे">Estimated time: 5 days left</div>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded transition-colors" data-en="Continue" data-hi="जारी रखें">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Items -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-6 flex-1 bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-semibold text-gray-900" data-en="Calculus Introduction" data-hi="कैलकुलस परिचय">Calculus Introduction</h4>
+                                <span class="bg-gray-100 text-gray-600 text-sm px-2 py-1 rounded-full" data-en="Upcoming" data-hi="आगामी">Upcoming</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3" data-en="Limits, derivatives, and basic integration concepts" data-hi="सीमा, अवकलज, और बुनियादी समाकलन अवधारणाएं">Limits, derivatives, and basic integration concepts</p>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500" data-en="Unlocks after Trigonometry" data-hi="त्रिकोणमिति के बाद अनलॉक">Unlocks after Trigonometry</div>
+                                <div class="text-sm text-gray-400" data-en="Est. 3 weeks" data-hi="अनु. 3 सप्ताह">Est. 3 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-6 flex-1 bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-lg font-semibold text-gray-900" data-en="Statistics & Probability" data-hi="सांख्यिकी और संभावना">Statistics & Probability</h4>
+                                <span class="bg-gray-100 text-gray-600 text-sm px-2 py-1 rounded-full" data-en="Upcoming" data-hi="आगामी">Upcoming</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3" data-en="Data analysis, probability distributions, and hypothesis testing" data-hi="डेटा विश्लेषण, संभावना वितरण, और परिकल्पना परीक्षण">Data analysis, probability distributions, and hypothesis testing</p>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500" data-en="Unlocks after Calculus" data-hi="कैलकुलस के बाद अनलॉक">Unlocks after Calculus</div>
+                                <div class="text-sm text-gray-400" data-en="Est. 4 weeks" data-hi="अनु. 4 सप्ताह">Est. 4 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Math Subject -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-lg font-semibold text-gray-900" data-en="Mathematics" data-hi="गणित">Mathematics</h3>
+                            <p class="text-sm text-gray-600" data-en="Core mathematical concepts" data-hi="मुख्य गणितीय अवधारणाएं">Core mathematical concepts</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-blue-600">85%</div>
+                        <div class="text-xs text-gray-500" data-en="Progress" data-hi="प्रगति">Progress</div>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                    <div class="bg-blue-600 h-2 rounded-full" style="width: 85%"></div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600">
+                    <div class="flex justify-between">
+                        <span data-en="Completed Topics" data-hi="पूर्ण विषय">Completed Topics</span>
+                        <span>12/15</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span data-en="Time Spent" data-hi="व्यतीत समय">Time Spent</span>
+                        <span data-en="45 hours" data-hi="45 घंटे">45 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physics Subject -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 text-green-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-lg font-semibold text-gray-900" data-en="Physics" data-hi="भौतिकी">Physics</h3>
+                            <p class="text-sm text-gray-600" data-en="Natural phenomena & laws" data-hi="प्राकृतिक घटनाएं और नियम">Natural phenomena & laws</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-green-600">72%</div>
+                        <div class="text-xs text-gray-500" data-en="Progress" data-hi="प्रगति">Progress</div>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                    <div class="bg-green-600 h-2 rounded-full" style="width: 72%"></div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600">
+                    <div class="flex justify-between">
+                        <span data-en="Completed Topics" data-hi="पूर्ण विषय">Completed Topics</span>
+                        <span>9/13</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span data-en="Time Spent" data-hi="व्यतीत समय">Time Spent</span>
+                        <span data-en="38 hours" data-hi="38 घंटे">38 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chemistry Subject -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-lg font-semibold text-gray-900" data-en="Chemistry" data-hi="रसायन विज्ञान">Chemistry</h3>
+                            <p class="text-sm text-gray-600" data-en="Atoms, molecules & reactions" data-hi="परमाणु, अणु और अभिक्रियाएं">Atoms, molecules & reactions</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-purple-600">68%</div>
+                        <div class="text-xs text-gray-500" data-en="Progress" data-hi="प्रगति">Progress</div>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                    <div class="bg-purple-600 h-2 rounded-full" style="width: 68%"></div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600">
+                    <div class="flex justify-between">
+                        <span data-en="Completed Topics" data-hi="पूर्ण विषय">Completed Topics</span>
+                        <span>8/12</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span data-en="Time Spent" data-hi="व्यतीत समय">Time Spent</span>
+                        <span data-en="32 hours" data-hi="32 घंटे">32 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

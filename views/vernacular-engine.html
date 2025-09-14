@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vernacular Language Engine - LearnBuddy</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-purple-100 via-indigo-50 to-blue-100 min-h-screen" style="font-family: 'Nunito', sans-serif;">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <button onclick="goHome()" class="text-white hover:text-purple-200 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg bounce-animation">
+                            <span class="text-2xl">🌍</span>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white" style="font-family: 'Fredoka One', cursive;" data-en="Vernacular Language Engine" data-hi="स्थानीय भाषा इंजन" data-kn="ಸ್ಥಳೀಯ ಭಾಷಾ ಇಂಜಿನ್" data-mr="स्थानिक भाषा इंजिन">Vernacular Language Engine</h1>
+                            <p class="text-purple-100 text-sm" data-en="Learn in your mother tongue!" data-hi="अपनी मातृभाषा में सीखें!" data-kn="ನಿಮ್ಮ ಮಾತೃಭಾಷೆಯಲ್ಲಿ ಕಲಿಯಿರಿ!" data-mr="आपल्या मातृभाषेत शिका!">Learn in your mother tongue!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageSelector" class="bg-white hover:bg-gray-100 text-purple-600 px-4 py-2 rounded-full font-semibold transition-all duration-300 shadow-lg">
+                        🌐 English
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Language Selection -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8 slide-in-up">
+            <div class="text-center mb-8">
+                <div class="w-24 h-24 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-6 bounce-animation">
+                    <span class="text-4xl">🗣️</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4" style="font-family: 'Fredoka One', cursive;" data-en="Choose Your Learning Language" data-hi="अपनी सीखने की भाषा चुनें" data-kn="ನಿಮ್ಮ ಕಲಿಕೆಯ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ" data-mr="आपली शिकण्याची भाषा निवडा">Choose Your Learning Language</h2>
+                <p class="text-gray-600 text-lg" data-en="Learn any subject in the language you understand best! AI translates not just words, but entire concepts with local examples." data-hi="जिस भाषा को आप सबसे अच्छे से समझते हैं उसमें कोई भी विषय सीखें! AI सिर्फ शब्दों का नहीं, बल्कि स्थानीय उदाहरणों के साथ पूरी अवधारणाओं का अनुवाद करता है।" data-kn="ನೀವು ಚೆನ್ನಾಗಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವ ಭಾಷೆಯಲ್ಲಿ ಯಾವುದೇ ವಿಷಯವನ್ನು ಕಲಿಯಿರಿ! AI ಕೇವಲ ಪದಗಳನ್ನು ಅಲ್ಲ, ಸ್ಥಳೀಯ ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ಸಂಪೂರ್ಣ ಪರಿಕಲ್ಪನೆಗಳನ್ನು ಅನುವಾದಿಸುತ್ತದೆ." data-mr="तुम्हाला चांगल्या प्रकारे समजणाऱ्या भाषेत कोणताही विषय शिका! AI केवळ शब्दांचे नाही तर स्थानिक उदाहरणांसह संपूर्ण संकल्पनांचे भाषांतर करते.">Learn any subject in the language you understand best! AI translates not just words, but entire concepts with local examples.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="selectLanguage('en')" class="language-card bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">🇺🇸</div>
+                    <div class="font-bold text-lg">English</div>
+                    <div class="text-sm opacity-90">Global Language</div>
+                </button>
+                <button onclick="selectLanguage('hi')" class="language-card bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">🇮🇳</div>
+                    <div class="font-bold text-lg">हिंदी</div>
+                    <div class="text-sm opacity-90">Hindi</div>
+                </button>
+                <button onclick="selectLanguage('kn')" class="language-card bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">🏛️</div>
+                    <div class="font-bold text-lg">ಕನ್ನಡ</div>
+                    <div class="text-sm opacity-90">Kannada</div>
+                </button>
+                <button onclick="selectLanguage('mr')" class="language-card bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+                    <div class="text-4xl mb-3">🕉️</div>
+                    <div class="font-bold text-lg">मराठी</div>
+                    <div class="text-sm opacity-90">Marathi</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Demo Content Section -->
+        <div id="demoContent" class="hidden">
+            <!-- Subject Exploration -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6" style="font-family: 'Fredoka One', cursive;" data-en="🎯 Try Learning: Science Concepts" data-hi="🎯 सीखने की कोशिश करें: विज्ञान अवधारणाएं" data-kn="🎯 ಕಲಿಯಲು ಪ್ರಯತ್ನಿಸಿ: ವಿಜ್ಞಾನ ಪರಿಕಲ್ಪನೆಗಳು" data-mr="🎯 शिकण्याचा प्रयत्न करा: विज्ञान संकल्पना">🎯 Try Learning: Science Concepts</h3>
+                
+                <!-- Concept Card -->
+                <div class="bg-gradient-to-br from-cyan-50 to-blue-50 border border-cyan-200 rounded-2xl p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-bold text-gray-900" data-en="Water Cycle" data-hi="जल चक्र" data-kn="ನೀರಿನ ಚಕ್ರ" data-mr="पाण्याचे चक्र">Water Cycle</h4>
+                        <button onclick="playAudio()" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full transition-colors">
+                            <span class="text-lg">🔊</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Visual Representation -->
+                    <div class="text-center mb-6">
+                        <div class="relative bg-gradient-to-br from-sky-200 to-blue-300 rounded-xl p-8 mb-4">
+                            <div class="flex justify-between items-center">
+                                <div class="text-center">
+                                    <div class="text-4xl mb-2 bounce-animation">☀️</div>
+                                    <p class="text-sm font-semibold" data-en="Sun" data-hi="सूर्य" data-kn="ಸೂರ್ಯ" data-mr="सूर्य">Sun</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-4xl mb-2 float-animation">☁️</div>
+                                    <p class="text-sm font-semibold" data-en="Clouds" data-hi="बादल" data-kn="ಮೋಡಗಳು" data-mr="ढग">Clouds</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-4xl mb-2 pulse-animation">🌧️</div>
+                                    <p class="text-sm font-semibold" data-en="Rain" data-hi="बारिश" data-kn="ಮಳೆ" data-mr="पाऊस">Rain</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-4xl mb-2 wiggle-animation">🌊</div>
+                                    <p class="text-sm font-semibold" data-en="Ocean" data-hi="समुद्र" data-kn="ಸಮುದ್ರ" data-mr="समुद्र">Ocean</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Explanation -->
+                    <div id="explanation" class="space-y-4">
+                        <!-- Content will be inserted based on selected language -->
+                    </div>
+                    
+                    <!-- Local Example -->
+                    <div id="localExample" class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mt-4">
+                        <!-- Local examples will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Interactive Elements -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Voice Narration Controls -->
+                    <div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <span class="text-xl">🎤</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900" data-en="Voice Narration" data-hi="आवाज सुनाना" data-kn="ಧ್ವನಿ ವಿವರಣೆ" data-mr="आवाज वर्णन">Voice Narration</h4>
+                                <p class="text-xs text-purple-600" data-en="Listen in your language" data-hi="अपनी भाषा में सुनें" data-kn="ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಕೇಳಿ" data-mr="आपल्या भाषेत ऐका">Listen in your language</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="playSlowNarration()" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-800 py-3 rounded-xl font-semibold transition-colors" data-en="🐌 Play Slow" data-hi="🐌 धीमे चलाएं" data-kn="🐌 ನಿಧಾನವಾಗಿ ಪ್ಲೇ ಮಾಡಿ" data-mr="🐌 हळू प्ले करा">🐌 Play Slow</button>
+                            <button onclick="playNormalNarration()" class="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-xl font-semibold transition-colors" data-en="▶️ Play Normal" data-hi="▶️ सामान्य चलाएं" data-kn="▶️ ಸಾಮಾನ್ಯ ಪ್ಲೇ ಮಾಡಿ" data-mr="▶️ सामान्य प्ले करा">▶️ Play Normal</button>
+                            <button onclick="repeatKeyWords()" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-800 py-3 rounded-xl font-semibold transition-colors" data-en="🔄 Repeat Key Words" data-hi="🔄 मुख्य शब्दों को दोहराएं" data-kn="🔄 ಮುಖ್ಯ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ" data-mr="🔄 मुख्य शब्द पुन्हा म्हणा">🔄 Repeat Key Words</button>
+                        </div>
+                    </div>
+
+                    <!-- Cultural Context -->
+                    <div class="bg-orange-50 border border-orange-200 rounded-2xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                <span class="text-xl">🏛️</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900" data-en="Cultural Context" data-hi="सांस्कृतिक संदर्भ" data-kn="ಸಾಂಸ್ಕೃತಿಕ ಸಂದರ್ಭ" data-mr="सांस्कृतिक संदर्भ">Cultural Context</h4>
+                                <p class="text-xs text-orange-600" data-en="Real-life connections" data-hi="वास्तविक जीवन संबंध" data-kn="ನೈಜ ಜೀವನ ಸಂಪರ್ಕಗಳು" data-mr="वास्तविक जीवन कनेक्शन">Real-life connections</p>
+                            </div>
+                        </div>
+                        <div id="culturalContext" class="space-y-3">
+                            <!-- Cultural context will be inserted based on language -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Translation Comparison -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6" style="font-family: 'Fredoka One', cursive;" data-en="🔄 Smart Translation Magic" data-hi="🔄 स्मार्ट अनुवाद जादू" data-kn="🔄 ಸ್ಮಾರ್ಟ್ ಅನುವಾದ ಮ್ಯಾಜಿಕ್" data-mr="🔄 स्मार्ट भाषांतर जादू">🔄 Smart Translation Magic</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Normal Translation -->
+                    <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+                        <h4 class="font-bold text-red-700 mb-3" data-en="❌ Normal Translation" data-hi="❌ सामान्य अनुवाद" data-kn="❌ ಸಾಮಾನ್ಯ ಅನುವಾದ" data-mr="❌ सामान्य भाषांतर">❌ Normal Translation</h4>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p data-en="Evaporation = Evaporation" data-hi="Evaporation = वाष्पीकरण" data-kn="Evaporation = ಬಾಷ್ಪೀಕರಣ" data-mr="Evaporation = बाष्पीभवन">Evaporation = Evaporation</p>
+                            <p data-en="Condensation = Condensation" data-hi="Condensation = संघनन" data-kn="Condensation = ಸಾಂದ್ರೀಕರಣ" data-mr="Condensation = संक्षेपण">Condensation = Condensation</p>
+                            <p class="text-red-600 text-xs" data-en="Just word-to-word replacement" data-hi="केवल शब्द-दर-शब्द प्रतिस्थापन" data-kn="ಕೇವಲ ಪದ-ಪದಗಳ ಬದಲಿ" data-mr="फक्त शब्द-दर-शब्द बदल">Just word-to-word replacement</p>
+                        </div>
+                    </div>
+
+                    <!-- AI Smart Translation -->
+                    <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+                        <h4 class="font-bold text-green-700 mb-3" data-en="✅ AI Smart Translation" data-hi="✅ AI स्मार्ट अनुवाद" data-kn="✅ AI ಸ್ಮಾರ್ಟ್ ಅನುವಾದ" data-mr="✅ AI स्मार्ट भाषांतर">✅ AI Smart Translation</h4>
+                        <div id="smartTranslation" class="space-y-2 text-sm text-gray-700">
+                            <!-- Smart translation examples will be inserted here -->
+                        </div>
+                        <p class="text-green-600 text-xs mt-3" data-en="Explains concepts with familiar examples!" data-hi="जाने-पहचाने उदाहरणों के साथ अवधारणाओं को समझाता है!" data-kn="ಪರಿಚಿತ ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ಪರಿಕಲ್ಪನೆಗಳನ್ನು ವಿವರಿಸುತ್ತದೆ!" data-mr="परिचित उदाहरणांसह संकल्पना स्पष्ट करते!">Explains concepts with familiar examples!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Showcase -->
+            <div class="bg-gradient-to-br from-indigo-400 to-purple-500 rounded-3xl shadow-xl p-8 text-white">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🌟</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="font-family: 'Fredoka One', cursive;" data-en="What Makes This Special?" data-hi="यह क्या खास बनाता है?" data-kn="ಇದು ಏಕೆ ವಿಶೇಷವಾಗಿದೆ?" data-mr="हे काय विशेष बनवते?">What Makes This Special?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4">
+                            <div class="text-3xl mb-2">🧠</div>
+                            <div class="font-bold text-lg mb-2" data-en="Concept Translation" data-hi="अवधारणा अनुवाद" data-kn="ಪರಿಕಲ್ಪನೆ ಅನುವಾದ" data-mr="संकल्पना भाषांतर">Concept Translation</div>
+                            <div class="text-sm opacity-90" data-en="Not just words, whole ideas!" data-hi="सिर्फ शब्द नहीं, पूरे विचार!" data-kn="ಕೇವಲ ಪದಗಳಲ್ಲ, ಸಂಪೂರ್ಣ ವಿಚಾರಗಳು!" data-mr="फक्त शब्द नव्हे, संपूर्ण कल्पना!">Not just words, whole ideas!</div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4">
+                            <div class="text-3xl mb-2">🏠</div>
+                            <div class="font-bold text-lg mb-2" data-en="Local Examples" data-hi="स्थानीय उदाहरण" data-kn="ಸ್ಥಳೀಯ ಉದಾಹರಣೆಗಳು" data-mr="स्थानिक उदाहरणे">Local Examples</div>
+                            <div class="text-sm opacity-90" data-en="Examples from your region!" data-hi="आपके क्षेत्र से उदाहरण!" data-kn="ನಿಮ್ಮ ಪ್ರದೇಶದ ಉದಾಹರಣೆಗಳು!" data-mr="तुमच्या प्रदेशातील उदाहरणे!">Examples from your region!</div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4">
+                            <div class="text-3xl mb-2">🎵</div>
+                            <div class="font-bold text-lg mb-2" data-en="Voice Narration" data-hi="आवाज़ कथन" data-kn="ಧ್ವನಿ ಕಥನ" data-mr="आवाज कथन">Voice Narration</div>
+                            <div class="text-sm opacity-90" data-en="Perfect pronunciation!" data-hi="परफेक्ट उच्चारण!" data-kn="ಪರಿಪೂರ್ಣ ಉಚ್ಚಾರಣೆ!" data-mr="परफेक्ट उच्चार!">Perfect pronunciation!</div>
+                        </div>
+                    </div>
+                    <button onclick="exploreMoreLanguages()" class="bg-white text-indigo-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors" data-en="🚀 Explore More Subjects" data-hi="🚀 और विषयों की खोज करें" data-kn="🚀 ಹೆಚ್ಚಿನ ವಿಷಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ" data-mr="🚀 अधिक विषयांचा शोध घ्या">🚀 Explore More Subjects</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/vernacular-engine.js"></script>
+</body>
+</html>

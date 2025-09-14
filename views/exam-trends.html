@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Exam Trends - AI Learning Platform</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-4">
+                    <button onclick="goBack()" class="text-gray-600 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold text-gray-900" data-en="📈 Predictive Exam Trends" data-hi="📈 भविष्यसूचक परीक्षा रुझान">📈 Predictive Exam Trends</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="languageToggle" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        🌐 English
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- AI Insights Banner -->
+        <div class="bg-gradient-to-r from-orange-500 to-red-600 rounded-lg shadow-lg p-6 mb-8 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2" data-en="AI-Powered Exam Predictions" data-hi="AI-संचालित परीक्षा भविष्यवाणियां">AI-Powered Exam Predictions</h2>
+                    <p class="text-orange-100" data-en="Based on historical data, current syllabus, and trending topics" data-hi="ऐतिहासिक डेटा, वर्तमान पाठ्यक्रम और ट्रेंडिंग विषयों के आधार पर">Based on historical data, current syllabus, and trending topics</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-bold">94%</div>
+                    <div class="text-sm text-orange-100" data-en="Prediction Accuracy" data-hi="भविष्यवाणी सटीकता">Prediction Accuracy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Exams -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6" data-en="Upcoming Exams" data-hi="आगामी परीक्षाएं">Upcoming Exams</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="exam-card bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-gray-900" data-en="Physics Final" data-hi="भौतिकी अंतिम">Physics Final</h4>
+                        <span class="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full" data-en="3 days" data-hi="3 दिन">3 days</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-2" data-en="Date: September 17, 2025" data-hi="दिनांक: 17 सितंबर, 2025">Date: September 17, 2025</div>
+                    <div class="text-sm text-gray-600" data-en="Duration: 3 hours" data-hi="अवधि: 3 घंटे">Duration: 3 hours</div>
+                </div>
+                <div class="exam-card bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-gray-900" data-en="Math Test" data-hi="गणित परीक्षा">Math Test</h4>
+                        <span class="bg-yellow-100 text-yellow-800 text-sm px-2 py-1 rounded-full" data-en="1 week" data-hi="1 सप्ताह">1 week</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-2" data-en="Date: September 21, 2025" data-hi="दिनांक: 21 सितंबर, 2025">Date: September 21, 2025</div>
+                    <div class="text-sm text-gray-600" data-en="Duration: 2 hours" data-hi="अवधि: 2 घंटे">Duration: 2 hours</div>
+                </div>
+                <div class="exam-card bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-gray-900" data-en="Chemistry Lab" data-hi="रसायन प्रयोगशाला">Chemistry Lab</h4>
+                        <span class="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full" data-en="2 weeks" data-hi="2 सप्ताह">2 weeks</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-2" data-en="Date: September 28, 2025" data-hi="दिनांक: 28 सितंबर, 2025">Date: September 28, 2025</div>
+                    <div class="text-sm text-gray-600" data-en="Duration: 4 hours" data-hi="अवधि: 4 घंटे">Duration: 4 hours</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Priority Topics -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-semibold text-gray-900" data-en="High Priority Topics" data-hi="उच्च प्राथमिकता विषय">High Priority Topics</h3>
+                <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                    <option data-en="All Subjects" data-hi="सभी विषय">All Subjects</option>
+                    <option data-en="Physics" data-hi="भौतिकी">Physics</option>
+                    <option data-en="Mathematics" data-hi="गणित">Mathematics</option>
+                    <option data-en="Chemistry" data-hi="रसायन विज्ञान">Chemistry</option>
+                </select>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Physics Topics -->
+                <div class="priority-topic border border-red-200 bg-red-50 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
+                            <h4 class="font-semibold text-gray-900" data-en="Electromagnetic Induction" data-hi="विद्युत चुम्बकीय प्रेरण">Electromagnetic Induction</h4>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full" data-en="Physics" data-hi="भौतिकी">Physics</span>
+                            <span class="text-sm font-medium text-red-600">95%</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3" data-en="Frequently appears in final exams. Focus on Faraday's law and Lenz's law." data-hi="अंतिम परीक्षाओं में अक्सर आता है। फैराडे के नियम और लेंज़ के नियम पर ध्यान दें।">Frequently appears in final exams. Focus on Faraday's law and Lenz's law.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500" data-en="Expected weightage: 15-20 marks" data-hi="अपेक्षित भार: 15-20 अंक">Expected weightage: 15-20 marks</span>
+                        <button class="text-blue-600 hover:text-blue-800 font-medium" data-en="Study Now" data-hi="अभी अध्ययन करें">Study Now</button>
+                    </div>
+                </div>
+
+                <div class="priority-topic border border-orange-200 bg-orange-50 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
+                            <h4 class="font-semibold text-gray-900" data-en="Limits and Derivatives" data-hi="सीमा और अवकलज">Limits and Derivatives</h4>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full" data-en="Mathematics" data-hi="गणित">Mathematics</span>
+                            <span class="text-sm font-medium text-orange-600">88%</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3" data-en="Core calculus concepts with high probability of appearance in upcoming test." data-hi="आगामी परीक्षा में उपस्थिति की उच्च संभावना के साथ मुख्य कैलकुलस अवधारणाएं।">Core calculus concepts with high probability of appearance in upcoming test.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500" data-en="Expected weightage: 25-30 marks" data-hi="अपेक्षित भार: 25-30 अंक">Expected weightage: 25-30 marks</span>
+                        <button class="text-blue-600 hover:text-blue-800 font-medium" data-en="Study Now" data-hi="अभी अध्ययन करें">Study Now</button>
+                    </div>
+                </div>
+
+                <div class="priority-topic border border-yellow-200 bg-yellow-50 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
+                            <h4 class="font-semibold text-gray-900" data-en="Chemical Equilibrium" data-hi="रासायनिक संतुलन">Chemical Equilibrium</h4>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-purple-100 text-purple-800 text-sm px-2 py-1 rounded-full" data-en="Chemistry" data-hi="रसायन विज्ञान">Chemistry</span>
+                            <span class="text-sm font-medium text-yellow-600">82%</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3" data-en="Le Chatelier's principle and equilibrium constants are trending topics." data-hi="ले चैटेलियर का सिद्धांत और संतुलन स्थिरांक ट्रेंडिंग विषय हैं।">Le Chatelier's principle and equilibrium constants are trending topics.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500" data-en="Expected weightage: 12-15 marks" data-hi="अपेक्षित भार: 12-15 अंक">Expected weightage: 12-15 marks</span>
+                        <button class="text-blue-600 hover:text-blue-800 font-medium" data-en="Study Now" data-hi="अभी अध्ययन करें">Study Now</button>
+                    </div>
+                </div>
+
+                <div class="priority-topic border border-green-200 bg-green-50 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                            <h4 class="font-semibold text-gray-900" data-en="Trigonometric Identities" data-hi="त्रिकोणमितीय सर्वसमिकाएं">Trigonometric Identities</h4>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full" data-en="Mathematics" data-hi="गणित">Mathematics</span>
+                            <span class="text-sm font-medium text-green-600">75%</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3" data-en="Essential for problem-solving in geometry and calculus sections." data-hi="ज्यामिति और कैलकुलस अनुभागों में समस्या समाधान के लिए आवश्यक।">Essential for problem-solving in geometry and calculus sections.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500" data-en="Expected weightage: 10-15 marks" data-hi="अपेक्षित भार: 10-15 अंक">Expected weightage: 10-15 marks</span>
+                        <button class="text-blue-600 hover:text-blue-800 font-medium" data-en="Study Now" data-hi="अभी अध्ययन करें">Study Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trending Question Types -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Question Types -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6" data-en="Trending Question Types" data-hi="ट्रेंडिंग प्रश्न प्रकार">Trending Question Types</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-medium text-gray-900" data-en="Numerical Problems" data-hi="संख्यात्मक समस्याएं">Numerical Problems</div>
+                            <div class="text-sm text-gray-600" data-en="Physics & Chemistry" data-hi="भौतिकी और रसायन विज्ञान">Physics & Chemistry</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-blue-600">65%</div>
+                            <div class="text-xs text-gray-500" data-en="Probability" data-hi="संभावना">Probability</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-medium text-gray-900" data-en="Theorem Proofs" data-hi="प्रमेय सिद्ध">Theorem Proofs</div>
+                            <div class="text-sm text-gray-600" data-en="Mathematics" data-hi="गणित">Mathematics</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-green-600">58%</div>
+                            <div class="text-xs text-gray-500" data-en="Probability" data-hi="संभावना">Probability</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-medium text-gray-900" data-en="Application Problems" data-hi="अनुप्रयोग समस्याएं">Application Problems</div>
+                            <div class="text-sm text-gray-600" data-en="All Subjects" data-hi="सभी विषय">All Subjects</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-purple-600">72%</div>
+                            <div class="text-xs text-gray-500" data-en="Probability" data-hi="संभावना">Probability</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-medium text-gray-900" data-en="Multiple Choice" data-hi="बहुविकल्पीय">Multiple Choice</div>
+                            <div class="text-sm text-gray-600" data-en="Quick Assessment" data-hi="त्वरित मूल्यांकन">Quick Assessment</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-orange-600">45%</div>
+                            <div class="text-xs text-gray-500" data-en="Probability" data-hi="संभावना">Probability</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Recommendations -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6" data-en="AI Study Recommendations" data-hi="AI अध्ययन सुझाव">AI Study Recommendations</h3>
+                <div class="space-y-4">
+                    <div class="recommendation-item p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-gray-900" data-en="Focus on Weak Areas" data-hi="कमजोर क्षेत्रों पर ध्यान दें">Focus on Weak Areas</h4>
+                                <p class="text-sm text-gray-600" data-en="Spend 60% of study time on electromagnetic induction and limits." data-hi="अध्ययन समय का 60% विद्युत चुम्बकीय प्रेरण और सीमाओं पर व्यतीत करें।">Spend 60% of study time on electromagnetic induction and limits.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-item p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-gray-900" data-en="Practice Numerical Problems" data-hi="संख्यात्मक समस्याओं का अभ्यास">Practice Numerical Problems</h4>
+                                <p class="text-sm text-gray-600" data-en="Solve at least 10 numerical problems daily for physics and chemistry." data-hi="भौतिकी और रसायन विज्ञान के लिए दैनिक कम से कम 10 संख्यात्मक समस्याओं को हल करें।">Solve at least 10 numerical problems daily for physics and chemistry.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-item p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-gray-900" data-en="Review Previous Years" data-hi="पिछले वर्षों की समीक्षा">Review Previous Years</h4>
+                                <p class="text-sm text-gray-600" data-en="Analyze last 3 years' question papers for pattern recognition." data-hi="पैटर्न पहचान के लिए पिछले 3 वर्षों के प्रश्न पत्रों का विश्लेषण करें।">Analyze last 3 years' question papers for pattern recognition.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-item p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-gray-900" data-en="Take Mock Tests" data-hi="मॉक टेस्ट लें">Take Mock Tests</h4>
+                                <p class="text-sm text-gray-600" data-en="Schedule weekly mock tests to track improvement and time management." data-hi="सुधार और समय प्रबंधन को ट्रैक करने के लिए साप्ताहिक मॉक टेस्ट शेड्यूल करें।">Schedule weekly mock tests to track improvement and time management.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Prediction -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6" data-en="Predicted Performance" data-hi="भविष्यवाणी प्रदर्शन">Predicted Performance</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-100 rounded-lg border border-green-200">
+                    <div class="text-3xl font-bold text-green-600 mb-2">85-92%</div>
+                    <div class="text-sm font-medium text-gray-900 mb-1" data-en="Physics Final" data-hi="भौतिकी अंतिम">Physics Final</div>
+                    <div class="text-xs text-gray-600" data-en="Based on current preparation" data-hi="वर्तमान तैयारी के आधार पर">Based on current preparation</div>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-cyan-100 rounded-lg border border-blue-200">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">78-86%</div>
+                    <div class="text-sm font-medium text-gray-900 mb-1" data-en="Math Test" data-hi="गणित परीक्षा">Math Test</div>
+                    <div class="text-xs text-gray-600" data-en="Improve limits & derivatives" data-hi="सीमा और अवकलज में सुधार">Improve limits & derivatives</div>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-violet-100 rounded-lg border border-purple-200">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">82-89%</div>
+                    <div class="text-sm font-medium text-gray-900 mb-1" data-en="Chemistry Lab" data-hi="रसायन प्रयोगशाला">Chemistry Lab</div>
+                    <div class="text-xs text-gray-600" data-en="Strong in practical skills" data-hi="व्यावहारिक कौशल में मजबूत">Strong in practical skills</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
