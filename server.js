@@ -1,10 +1,47 @@
+/**
+ * =================================================================
+ * 🎓 LEARNBUDDY - AI-POWERED LEARNING PLATFORM SERVER
+ * =================================================================
+ * Srujana Hackathon - Educational Technology Category
+ * Main server application with environment configuration support
+ */
+
 const express = require('express');
 const path = require('path');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// Conditional config loading for serverless environments
+let config, getSummary;
+try {
+  const configModule = require('./config');
+  config = configModule.config;
+  getSummary = configModule.getSummary;
+} catch (error) {
+  // Fallback for serverless environments
+  config = {
+    server: {
+      port: process.env.PORT || 3000,
+      env: process.env.NODE_ENV || 'production'
+    }
+  };
+  getSummary = () => ({ enabledFeatures: 6, totalFeatures: 6, languages: ['en', 'hi', 'kn', 'mr'] });
+}
 
-// Set up static files
+const app = express();
+
+// Load configuration
+const PORT = config.server.port;
+const ENV = config.server.env;
+
+// Only log startup info in development
+if (ENV === 'development') {
+  console.log(`🎓 Starting LearnBuddy Platform in ${ENV} mode on port ${PORT}`);
+  
+  // Display configuration summary
+  const summary = getSummary();
+  console.log(`📊 Features: ${summary.enabledFeatures}/${summary.totalFeatures} enabled`);
+  console.log(`🌍 Languages: ${summary.languages.join(', ')}`);
+}
+// Set up middleware
 app.use(express.static('public'));
 app.use(express.json());
 
@@ -45,6 +82,16 @@ app.get('/vernacular-engine', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'vernacular-engine.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`AI Learning Platform server running on http://localhost:${PORT}`);
-});
+// Start server (for local development)
+if (ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 LearnBuddy Platform is running!`);
+    console.log(`📍 URL: http://localhost:${PORT}`);
+    console.log(`🎯 Environment: ${ENV}`);
+    console.log(`✨ Ready to help students learn better!`);
+    console.log(`🎓 Open your browser and visit the dashboard`);
+  });
+}
+
+// Export for Vercel serverless functions
+module.exports = app;

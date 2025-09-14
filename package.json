@@ -2,18 +2,23 @@
   "name": "srujana-hackathon",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "build-css": "npx tailwindcss -i ./src/styles.css -o ./public/css/styles.css",
+    "dev": "node scripts/validate-env.js && node server.js",
+    "build": "npm run build-css",
+    "build-css": "npx tailwindcss -i ./src/styles.css -o ./public/css/styles.css --minify",
     "build-css-watch": "npx tailwindcss -i ./src/styles.css -o ./public/css/styles.css --watch",
+    "validate-env": "node scripts/validate-env.js",
+    "setup": "npm install && node scripts/validate-env.js",
+    "vercel-build": "npm run build-css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.6.1",
     "express": "^5.1.0"
   },
   "devDependencies": {
