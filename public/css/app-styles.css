@@ -1,0 +1,160 @@
+/* App-specific styles */
+.btn-primary {
+    @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-xl hover:from-purple-600 hover:to-blue-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1;
+}
+
+.btn-secondary {
+    @apply bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl;
+}
+
+.btn-warning {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl;
+}
+
+.btn-danger {
+    @apply bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-xl hover:from-red-600 hover:to-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl;
+}
+
+.feature-card {
+    @apply transform transition-all duration-300;
+}
+
+.feature-card:hover {
+    @apply -translate-y-2 shadow-2xl;
+}
+
+.nav-link.active {
+    @apply text-purple-600;
+}
+
+.nav-link.active .nav-underline {
+    @apply w-full;
+}
+
+.section-content {
+    @apply opacity-0 transform translate-y-4 transition-all duration-500;
+}
+
+.section-content.active {
+    @apply opacity-100 transform translate-y-0;
+}
+
+.study-task {
+    @apply bg-gray-50 border border-gray-200 rounded-2xl p-4 transition-all duration-300;
+}
+
+.study-task.completed {
+    @apply bg-green-50 border-green-200;
+}
+
+.study-task-time {
+    @apply text-sm font-medium text-gray-600;
+}
+
+.study-task-subject {
+    @apply font-semibold text-gray-800;
+}
+
+.study-task.completed .study-task-subject {
+    @apply text-green-800 line-through;
+}
+
+.question-card {
+    @apply bg-gray-50 border border-gray-200 rounded-2xl p-6 mb-6;
+}
+
+.answer-input {
+    @apply w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent;
+}
+
+.feedback-success {
+    @apply bg-green-50 border border-green-200 rounded-2xl p-6 text-green-800;
+}
+
+.feedback-error {
+    @apply bg-red-50 border border-red-200 rounded-2xl p-6 text-red-800;
+}
+
+.feedback-explanation {
+    @apply bg-blue-50 border border-blue-200 rounded-2xl p-6 text-blue-800 mt-4;
+}
+
+.language-content {
+    @apply bg-gray-50 border border-gray-200 rounded-2xl p-6;
+}
+
+.chat-user {
+    @apply bg-blue-500 text-white rounded-2xl rounded-br-sm px-4 py-3 max-w-md ml-auto;
+}
+
+.chat-bot {
+    @apply bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 max-w-md;
+}
+
+.retry-indicator {
+    @apply bg-orange-50 border border-orange-200 rounded-2xl p-4 text-orange-800;
+}
+
+.attempts-counter {
+    @apply flex space-x-1;
+}
+
+.attempt-dot {
+    @apply w-3 h-3 rounded-full;
+}
+
+.attempt-dot.failed {
+    @apply bg-red-400;
+}
+
+.attempt-dot.unused {
+    @apply bg-gray-200;
+}
+
+/* Animation classes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .feature-card {
+        @apply transform-none hover:transform-none hover:shadow-xl;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-warning, .btn-danger {
+        @apply w-full text-center;
+    }
+    
+    .study-task {
+        @apply p-3;
+    }
+    
+    .question-card {
+        @apply p-4;
+    }
+}

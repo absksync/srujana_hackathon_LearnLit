@@ -4,63 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concept Gap Mapper - LearnBuddy</title>
-    <link href="/css/styles.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enhanced-styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gradient-to-br from-red-100 via-pink-50 to-orange-100 min-h-screen" style="font-family: 'Nunito', sans-serif;">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 shadow-lg">
+<body class="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 min-h-screen font-['Plus_Jakarta_Sans',sans-serif] relative overflow-x-hidden">
+    <!-- Enhanced Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-xl border-b border-white/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+            <div class="flex items-center justify-between h-20">
+                <!-- Back Button & Logo -->
                 <div class="flex items-center space-x-4">
-                    <button onclick="goHome()" class="text-white hover:text-pink-200 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
+                    <button onclick="goHome()" class="p-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/20">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg bounce-animation">
-                            <span class="text-2xl">🔍</span>
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+                            <i data-lucide="map" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
-                            <h1 class="text-2xl font-bold text-white" style="font-family: 'Fredoka One', cursive;" data-en="Concept Gap Mapper" data-hi="अवधारणा अंतर मैपर">Concept Gap Mapper</h1>
-                            <p class="text-pink-100 text-sm" data-en="Find what you don't understand!" data-hi="पता करें कि आप क्या नहीं समझते!">Find what you don't understand!</p>
+                            <h1 class="text-xl font-bold text-white">Concept Gap Mapper</h1>
+                            <p class="text-xs text-white/80">Identify & Bridge Knowledge Gaps</p>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <button id="languageToggle" class="bg-white hover:bg-gray-100 text-red-600 px-4 py-2 rounded-full font-semibold transition-all duration-300 shadow-lg">
-                        🌐 English
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Dashboard</a>
+                    <div class="flex items-center space-x-2 text-white/80">
+                        <a href="/dashboard" class="hover:text-white transition-colors">Dashboard</a>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        <span class="text-yellow-400 font-semibold">Concept Gaps</span>
+                    </div>
+
+                    <!-- Language Toggle -->
+                    <div class="flex items-center space-x-4">
+                        <button id="languageToggle" class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 text-sm rounded-full hover:bg-white/30 transition-all duration-300 border border-white/20">
+                            🌐 English
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
+            <!-- Hero Section -->
+            <div class="mb-12">
+                <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-12 text-center">
+                    <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 animate-float border border-white/20">
+                        <i data-lucide="brain" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h2 class="text-4xl font-bold text-white mb-4">
+                        Discover Your <span class="text-yellow-400">Knowledge Gaps</span>
+                    </h2>
+                    <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+                        Identify exactly what concepts you need to strengthen and get personalized learning paths to master them. Let's turn your gaps into strengths! 🚀
+                    </p>
+                    <button onclick="startGapAnalysis()" class="bg-white/20 backdrop-blur-sm text-white text-lg px-8 py-4 rounded-full hover:bg-white/30 transition-all duration-300 border border-white/20 inline-flex items-center space-x-2">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                        <span>Start Gap Analysis</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subject Selection -->
+            <div id="subjectSelection" class="mb-12 hidden">
+                <h3 class="text-2xl font-bold text-white mb-8 text-center">Choose Your Subject</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <button onclick="selectSubject('math')" class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 text-center hover:bg-white/20 transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-blue-500/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform border border-white/20">
+                            <i data-lucide="calculator" class="w-8 h-8 text-blue-400"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-white mb-2">Mathematics</h4>
+                        <p class="text-white/80 text-sm">Numbers & Logic</p>
+                    </button>
+                    
+                    <button onclick="selectSubject('english')" class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 text-center hover:bg-white/20 transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-green-500/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform border border-white/20">
+                            <i data-lucide="book-open" class="w-8 h-8 text-green-400"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-white mb-2">English</h4>
+                        <p class="text-white/80 text-sm">Language & Literature</p>
+                </button>
+                
+                <button onclick="selectSubject('science')" class="modern-card p-8 text-center hover-lift group animate-bounce-in" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="atom" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">Science</h4>
+                    <p class="text-gray-600 text-sm">Physics & Chemistry</p>
+                </button>
+                
+                <button onclick="selectSubject('social')" class="modern-card p-8 text-center hover-lift group animate-bounce-in" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="globe" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">Social Studies</h4>
+                    <p class="text-gray-600 text-sm">History & Geography</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Gap Analysis Results -->
+        <div id="gapResults" class="hidden">
+            <!-- Analysis Progress -->
+            <div class="modern-card p-8 mb-8 animate-fade-in">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Analyzing Your Knowledge...</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                        <div id="analysisProgress" class="progress-modern h-3 rounded-full" style="--progress: 0%"></div>
+                    </div>
+                    <p class="text-gray-600" id="analysisText">Scanning your learning patterns...</p>
+                </div>
+            </div>
+
+            <!-- Results Grid -->
+            <div id="resultsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 hidden">
+                <!-- Identified Gaps -->
+                <div class="modern-card p-8 animate-slide-in-up">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg flex items-center justify-center mr-4">
+                            <i data-lucide="alert-triangle" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Knowledge Gaps Found</h3>
+                    </div>
+                    <div id="gapsList" class="space-y-4">
+                        <!-- Dynamic gap items will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Recommended Actions -->
+                <div class="modern-card p-8 animate-slide-in-up" style="animation-delay: 0.2s">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mr-4">
+                            <i data-lucide="lightbulb" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Recommended Actions</h3>
+                    </div>
+                    <div id="actionsList" class="space-y-4">
+                        <!-- Dynamic action items will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Path -->
+            <div id="learningPath" class="modern-card p-8 mt-8 hidden animate-fade-in">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Your Personalized Learning Path</h3>
+                <div class="space-y-6" id="pathSteps">
+                    <!-- Dynamic learning path steps will be inserted here -->
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="startLearning()" class="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2">
+                        <i data-lucide="play" class="w-5 h-5"></i>
+                        <span>Start Learning Journey</span>
                     </button>
                 </div>
             </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Introduction Section -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8 slide-in-up">
-            <div class="text-center">
-                <div class="w-24 h-24 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 bounce-animation">
-                    <span class="text-4xl">🧠</span>
-                </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4" style="font-family: 'Fredoka One', cursive;" data-en="Let's Find Your Knowledge Gaps!" data-hi="आइए आपके ज्ञान के अंतर खोजें!">Let's Find Your Knowledge Gaps!</h2>
-                <p class="text-gray-600 text-lg mb-6" data-en="Don't worry! Even superheroes have things they don't know yet. Let's discover yours and fix them together! 🦸‍♀️" data-hi="चिंता न करें! सुपरहीरो के पास भी ऐसी चीजें हैं जो वे अभी तक नहीं जानते। आइए आपकी खोजें और उन्हें एक साथ ठीक करें! 🦸‍♀️">Don't worry! Even superheroes have things they don't know yet. Let's discover yours and fix them together! 🦸‍♀️</p>
-                <button onclick="startGapAnalysis()" class="fun-button text-lg px-8 py-3" data-en="🔍 Start Gap Analysis" data-hi="🔍 अंतर विश्लेषण शुरू करें">🔍 Start Gap Analysis</button>
-            </div>
-        </div>
-
-        <!-- Subject Selection -->
-        <div id="subjectSelection" class="bg-white rounded-3xl shadow-xl p-8 mb-8 hidden">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center" style="font-family: 'Fredoka One', cursive;" data-en="Choose Your Subject" data-hi="अपना विषय चुनें">Choose Your Subject</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <button onclick="selectSubject('math')" class="subject-card bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
-                    <div class="text-4xl mb-3">📊</div>
-                    <div class="font-bold text-lg" data-en="Math" data-hi="गणित">Math</div>
-                    <div class="text-sm opacity-90" data-en="Numbers & Logic" data-hi="संख्या और तर्क">Numbers & Logic</div>
-                </button>
-                <button onclick="selectSubject('english')" class="subject-card bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-6 text-white text-center hover:scale-105 transition-all duration-300 interactive-card">
+    </main>
                     <div class="text-4xl mb-3">📚</div>
                     <div class="font-bold text-lg" data-en="English" data-hi="अंग्रेजी">English</div>
                     <div class="text-sm opacity-90" data-en="Reading & Writing" data-hi="पढ़ना और लिखना">Reading & Writing</div>
@@ -78,75 +196,285 @@
             </div>
         </div>
 
-        <!-- Gap Analysis Results -->
-        <div id="gapAnalysisResults" class="hidden">
-            <!-- Recent Mistakes Analysis -->
-            <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Fredoka One', cursive;" data-en="🤔 What You Got Wrong Recently" data-hi="🤔 हाल ही में आपने क्या गलत किया">🤔 What You Got Wrong Recently</h3>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-sm text-gray-500" data-en="AI Analysis" data-hi="AI विश्लेषण">AI Analysis</span>
-                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+    <!-- Background Decorations -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="floating-element w-32 h-32 bg-blue-100 top-20 left-10 animate-float-slow"></div>
+        <div class="floating-element w-20 h-20 bg-purple-100 top-40 right-20 animate-float-delayed"></div>
+        <div class="floating-element w-24 h-24 bg-green-100 bottom-40 left-1/4 animate-float"></div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        let currentSubject = '';
+        
+        function goHome() {
+            window.location.href = '/dashboard';
+        }
+
+        function startGapAnalysis() {
+            document.getElementById('subjectSelection').classList.remove('hidden');
+            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectSubject(subject) {
+            currentSubject = subject;
+            document.getElementById('subjectSelection').classList.add('hidden');
+            document.getElementById('gapResults').classList.remove('hidden');
+            
+            // Start analysis animation
+            simulateAnalysis();
+        }
+
+        function simulateAnalysis() {
+            const progressBar = document.getElementById('analysisProgress');
+            const analysisText = document.getElementById('analysisText');
+            
+            const steps = [
+                { progress: 20, text: 'Reviewing your recent answers...' },
+                { progress: 40, text: 'Identifying pattern mistakes...' },
+                { progress: 60, text: 'Analyzing concept understanding...' },
+                { progress: 80, text: 'Generating personalized insights...' },
+                { progress: 100, text: 'Analysis complete!' }
+            ];
+
+            let currentStep = 0;
+            
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    const step = steps[currentStep];
+                    progressBar.style.setProperty('--progress', step.progress + '%');
+                    analysisText.textContent = step.text;
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        showResults();
+                    }, 1000);
+                }
+            }, 800);
+        }
+
+        function showResults() {
+            document.getElementById('resultsGrid').classList.remove('hidden');
+            document.getElementById('learningPath').classList.remove('hidden');
+            
+            // Generate gaps based on subject
+            generateGaps();
+            generateActions();
+            generateLearningPath();
+        }
+
+        function generateGaps() {
+            const gapsList = document.getElementById('gapsList');
+            const gaps = getGapsForSubject(currentSubject);
+            
+            gapsList.innerHTML = gaps.map((gap, index) => `
+                <div class="flex items-start space-x-4 p-4 bg-red-50 rounded-lg border border-red-100 animate-slide-in-up" style="animation-delay: ${index * 0.1}s">
+                    <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="x" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-gray-900 mb-1">${gap.concept}</h4>
+                        <p class="text-gray-600 text-sm mb-2">${gap.description}</p>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">${gap.difficulty}</span>
+                            <span class="text-xs text-gray-500">${gap.timeToFix} to master</span>
+                        </div>
                     </div>
                 </div>
+            `).join('');
+            
+            // Reinitialize icons
+            lucide.createIcons();
+        }
 
-                <div class="space-y-4" id="mistakesList">
-                    <!-- Math Mistake Example -->
-                    <div class="mistake-item bg-red-50 border border-red-200 rounded-2xl p-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                                    <span class="text-xl">❌</span>
-                                </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h4 class="font-bold text-gray-900" data-en="Addition with Carrying" data-hi="हासिल के साथ जोड़">Addition with Carrying</h4>
-                                    <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full" data-en="Math" data-hi="गणित">Math</span>
-                                </div>
-                                <p class="text-gray-600 mb-3" data-en="You wrote 47 + 29 = 66, but the correct answer is 76. You forgot to carry the 1!" data-hi="आपने 47 + 29 = 66 लिखा, लेकिन सही उत्तर 76 है। आप 1 का हासिल ले जाना भूल गए!">You wrote 47 + 29 = 66, but the correct answer is 76. You forgot to carry the 1!</p>
-                                <div class="flex items-center space-x-3">
-                                    <button onclick="learnConcept('carrying')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-en="🎯 Fix This Now!" data-hi="🎯 अभी ठीक करें!">🎯 Fix This Now!</button>
-                                    <span class="text-xs text-gray-500" data-en="2 minutes to fix" data-hi="ठीक करने में 2 मिनट">2 minutes to fix</span>
-                                </div>
-                            </div>
+        function generateActions() {
+            const actionsList = document.getElementById('actionsList');
+            const actions = getActionsForSubject(currentSubject);
+            
+            actionsList.innerHTML = actions.map((action, index) => `
+                <div class="flex items-start space-x-4 p-4 bg-green-50 rounded-lg border border-green-100 animate-slide-in-up" style="animation-delay: ${index * 0.1}s">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-gray-900 mb-1">${action.title}</h4>
+                        <p class="text-gray-600 text-sm mb-2">${action.description}</p>
+                        <button onclick="startAction('${action.id}')" class="bg-green-500 hover:bg-green-600 text-white text-xs px-3 py-1 rounded-full transition-colors">
+                            Start Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+
+        function generateLearningPath() {
+            const pathSteps = document.getElementById('pathSteps');
+            const steps = getPathForSubject(currentSubject);
+            
+            pathSteps.innerHTML = steps.map((step, index) => `
+                <div class="flex items-center space-x-4 animate-slide-in-up" style="animation-delay: ${index * 0.15}s">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        ${index + 1}
+                    </div>
+                    <div class="flex-1 modern-card p-4">
+                        <h4 class="font-semibold text-gray-900 mb-1">${step.title}</h4>
+                        <p class="text-gray-600 text-sm mb-2">${step.description}</p>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">${step.duration}</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">${step.type}</span>
                         </div>
                     </div>
+                </div>
+            `).join('');
+        }
 
-                    <!-- English Mistake Example -->
-                    <div class="mistake-item bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                                    <span class="text-xl">⚠️</span>
-                                </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h4 class="font-bold text-gray-900" data-en="Past Tense Verbs" data-hi="भूतकाल की क्रिया">Past Tense Verbs</h4>
-                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full" data-en="English" data-hi="अंग्रेजी">English</span>
-                                </div>
-                                <p class="text-gray-600 mb-3" data-en="You wrote 'I goed to school' instead of 'I went to school'. Some verbs change completely in past tense!" data-hi="आपने 'I goed to school' के बजाय 'I went to school' लिखा। कुछ क्रियाएं भूतकाल में पूरी तरह बदल जाती हैं!">You wrote 'I goed to school' instead of 'I went to school'. Some verbs change completely in past tense!</p>
-                                <div class="flex items-center space-x-3">
-                                    <button onclick="learnConcept('irregular-verbs')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-en="📝 Learn Irregular Verbs" data-hi="📝 अनियमित क्रिया सीखें">📝 Learn Irregular Verbs</button>
-                                    <span class="text-xs text-gray-500" data-en="3 minutes to fix" data-hi="ठीक करने में 3 मिनट">3 minutes to fix</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        function getGapsForSubject(subject) {
+            const gaps = {
+                math: [
+                    { concept: 'Addition with Carrying', description: 'Forgetting to carry over when adding multi-digit numbers', difficulty: 'Easy', timeToFix: '5 minutes' },
+                    { concept: 'Multiplication Tables', description: 'Inconsistent recall of 7x and 8x multiplication tables', difficulty: 'Medium', timeToFix: '15 minutes' },
+                    { concept: 'Word Problems', description: 'Difficulty identifying which operation to use in story problems', difficulty: 'Hard', timeToFix: '25 minutes' }
+                ],
+                english: [
+                    { concept: 'Irregular Verbs', description: 'Using regular past tense rules for irregular verbs', difficulty: 'Medium', timeToFix: '10 minutes' },
+                    { concept: 'Punctuation', description: 'Missing commas in compound sentences', difficulty: 'Easy', timeToFix: '5 minutes' },
+                    { concept: 'Reading Comprehension', description: 'Difficulty identifying main ideas in longer passages', difficulty: 'Hard', timeToFix: '20 minutes' }
+                ],
+                science: [
+                    { concept: 'States of Matter', description: 'Confusing the properties of liquids and gases', difficulty: 'Medium', timeToFix: '8 minutes' },
+                    { concept: 'Plant Life Cycle', description: 'Mixing up the order of seed germination stages', difficulty: 'Easy', timeToFix: '6 minutes' },
+                    { concept: 'Simple Machines', description: 'Difficulty categorizing everyday objects as simple machines', difficulty: 'Hard', timeToFix: '18 minutes' }
+                ],
+                social: [
+                    { concept: 'Map Reading', description: 'Trouble using compass directions and map symbols', difficulty: 'Medium', timeToFix: '12 minutes' },
+                    { concept: 'Historical Timeline', description: 'Confusing the order of historical events', difficulty: 'Hard', timeToFix: '22 minutes' },
+                    { concept: 'Government Branches', description: 'Mixing up the roles of executive, legislative, and judicial branches', difficulty: 'Medium', timeToFix: '15 minutes' }
+                ]
+            };
+            return gaps[subject] || [];
+        }
 
-                    <!-- Science Mistake Example -->
-                    <div class="mistake-item bg-blue-50 border border-blue-200 rounded-2xl p-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <span class="text-xl">🔬</span>
-                                </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h4 class="font-bold text-gray-900" data-en="States of Matter" data-hi="पदार्थ की अवस्थाएं">States of Matter</h4>
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full" data-en="Science" data-hi="विज्ञान">Science</span>
+        function getActionsForSubject(subject) {
+            const actions = {
+                math: [
+                    { id: 'practice-carrying', title: 'Interactive Carrying Practice', description: 'Practice addition with carrying using visual step-by-step guides' },
+                    { id: 'multiplication-games', title: 'Multiplication Table Games', description: 'Fun games to memorize challenging multiplication facts' },
+                    { id: 'word-problem-strategy', title: 'Word Problem Strategy Guide', description: 'Learn keywords and strategies for solving story problems' }
+                ],
+                english: [
+                    { id: 'irregular-verb-practice', title: 'Irregular Verb Flashcards', description: 'Practice common irregular verbs with interactive flashcards' },
+                    { id: 'punctuation-rules', title: 'Punctuation Mini-Course', description: 'Learn comma rules with examples and practice exercises' },
+                    { id: 'reading-strategies', title: 'Reading Comprehension Strategies', description: 'Techniques for finding main ideas and key details' }
+                ],
+                science: [
+                    { id: 'states-experiment', title: 'Virtual States of Matter Lab', description: 'Interactive experiments to understand solid, liquid, and gas properties' },
+                    { id: 'plant-lifecycle', title: 'Plant Growth Simulation', description: 'Watch and interact with plant growth from seed to flower' },
+                    { id: 'simple-machines-hunt', title: 'Simple Machines Scavenger Hunt', description: 'Find and categorize simple machines in everyday life' }
+                ],
+                social: [
+                    { id: 'map-skills', title: 'Interactive Map Skills Course', description: 'Practice using compass roses, scales, and map symbols' },
+                    { id: 'timeline-builder', title: 'Historical Timeline Builder', description: 'Create and organize historical events in chronological order' },
+                    { id: 'government-game', title: 'Branches of Government Game', description: 'Learn government roles through interactive scenarios' }
+                ]
+            };
+            return actions[subject] || [];
+        }
+
+        function getPathForSubject(subject) {
+            const paths = {
+                math: [
+                    { title: 'Master Addition with Carrying', description: 'Start with single-digit carrying, then move to multi-digit problems', duration: '5 min', type: 'Practice' },
+                    { title: 'Strengthen Multiplication Facts', description: 'Focus on 7x and 8x tables with memory techniques', duration: '10 min', type: 'Drill' },
+                    { title: 'Solve Word Problems', description: 'Apply your improved skills to real-world story problems', duration: '15 min', type: 'Application' },
+                    { title: 'Review and Test', description: 'Take a practice quiz to confirm your understanding', duration: '8 min', type: 'Assessment' }
+                ],
+                english: [
+                    { title: 'Learn Irregular Verbs', description: 'Study common irregular verb patterns and exceptions', duration: '8 min', type: 'Study' },
+                    { title: 'Practice Punctuation', description: 'Complete exercises on comma usage in compound sentences', duration: '6 min', type: 'Practice' },
+                    { title: 'Reading Strategy Training', description: 'Learn techniques for identifying main ideas', duration: '12 min', type: 'Skill Building' },
+                    { title: 'Comprehensive Review', description: 'Apply all skills in a mixed practice session', duration: '10 min', type: 'Review' }
+                ],
+                science: [
+                    { title: 'Explore States of Matter', description: 'Interactive simulations of solid, liquid, and gas behavior', duration: '10 min', type: 'Exploration' },
+                    { title: 'Study Plant Life Cycles', description: 'Visual guide through seed to flower development', duration: '8 min', type: 'Study' },
+                    { title: 'Identify Simple Machines', description: 'Practice categorizing tools and objects', duration: '12 min', type: 'Practice' },
+                    { title: 'Science Quiz Challenge', description: 'Test your understanding with fun science questions', duration: '7 min', type: 'Assessment' }
+                ],
+                social: [
+                    { title: 'Map Skills Workshop', description: 'Practice reading maps with compass directions and symbols', duration: '10 min', type: 'Workshop' },
+                    { title: 'Build Historical Timelines', description: 'Organize important historical events in order', duration: '15 min', type: 'Activity' },
+                    { title: 'Government Roles Game', description: 'Learn about different branches of government', duration: '12 min', type: 'Game' },
+                    { title: 'Social Studies Review', description: 'Comprehensive review of all concepts', duration: '8 min', type: 'Review' }
+                ]
+            };
+            return paths[subject] || [];
+        }
+
+        function startAction(actionId) {
+            alert(`Starting ${actionId}! This would launch the specific learning activity.`);
+        }
+
+        function startLearning() {
+            alert(`Starting your personalized learning journey for ${currentSubject}!`);
+        }
+
+        // Language toggle functionality
+        document.getElementById('languageToggle')?.addEventListener('click', function() {
+            // Language toggle implementation would go here
+            console.log('Language toggle clicked');
+        });
+
+        // Add ripple effect to buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-primary')) {
+                createRipple(e);
+            }
+        });
+
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+    </script>
+
+    <style>
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</body>
+</html>
                                 </div>
                                 <p class="text-gray-600 mb-3" data-en="You said ice is a liquid, but ice is actually solid water! Water can be solid, liquid, or gas." data-hi="आपने कहा बर्फ तरल है, लेकिन बर्फ वास्तव में ठोस पानी है! पानी ठोस, तरल या गैस हो सकता है।">You said ice is a liquid, but ice is actually solid water! Water can be solid, liquid, or gas.</p>
                                 <div class="flex items-center space-x-3">

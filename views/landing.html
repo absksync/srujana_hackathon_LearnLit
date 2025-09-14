@@ -3,392 +3,727 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnBuddy - AI-Powered Learning Platform for Class 6-10</title>
-    <link href="/css/styles.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka+One:wght@400&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <title>LearnBuddy - Best AI Learning Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        'purple': {
+                            '900': '#2D1B69',
+                            '800': '#3B2A87',
+                            '700': '#4C3BAF',
+                            '600': '#6B46C1',
+                            '500': '#8B5CF6',
+                            '400': '#A78BFA',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-white font-inter" style="font-family: 'Inter', sans-serif;">
-    <!-- Progress Bar -->
-    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 transition-all duration-300 z-50" style="width: 0%;"></div>
-
+<body class="bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 min-h-screen font-sans text-white overflow-x-hidden">
+    
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-100 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+    <nav class="fixed top-0 left-0 right-0 bg-gradient-to-r from-purple-900/95 via-purple-800/95 to-purple-700/95 backdrop-blur-xl border-b border-white/10 z-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center py-5">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">L</span>
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl">
+                        <span class="text-white text-2xl font-bold">🎓</span>
                     </div>
-                    <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent" style="font-family: 'Fredoka One', cursive;">LearnBuddy</h1>
+                    <span class="text-white text-2xl font-bold tracking-tight">LearnBuddy</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden lg:flex items-center space-x-10">
+                    <a href="#" class="text-white hover:text-purple-300 transition-all duration-300 text-base font-medium relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#features" class="text-white/80 hover:text-purple-300 transition-all duration-300 text-base font-medium relative group">
+                        Features
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#about" class="text-white/80 hover:text-purple-300 transition-all duration-300 text-base font-medium relative group">
+                        About
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="text-white/80 hover:text-purple-300 transition-all duration-300 text-base font-medium relative group">
+                        Contact
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                 </div>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">Features</a>
-                    <a href="#how-it-works" class="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">How It Works</a>
-                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">About</a>
-                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200">
-                        Get Started
+                <!-- Auth Toggle Buttons -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="showLoginModal()" class="text-white/80 hover:text-white transition-all duration-300 text-base font-medium px-4 py-2 rounded-lg hover:bg-white/10">
+                        Login
+                    </button>
+                    <button onclick="showSignupModal()" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-8 py-3 rounded-full hover:from-purple-400 hover:to-purple-500 transition-all duration-300 text-base font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transform">
+                        Sign Up
                     </button>
                 </div>
-
-                <!-- Owl Mascot -->
-                <div class="hidden md:block relative">
-                    <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-110">
-                        <span class="text-2xl">🦉</span>
-                    </div>
-                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-4 py-4 space-y-3">
-                <a href="#features" class="block text-gray-600 hover:text-blue-600 transition-colors py-2">Features</a>
-                <a href="#how-it-works" class="block text-gray-600 hover:text-blue-600 transition-colors py-2">How It Works</a>
-                <a href="#about" class="block text-gray-600 hover:text-blue-600 transition-colors py-2">About</a>
-                <button class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold mt-4">
-                    Get Started
-                </button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center">
-                <!-- Hero Badge -->
-                <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-bounce">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                    <span>AI-Powered Learning for Smart Students</span>
+    <section class="relative min-h-screen flex items-center justify-center px-6 lg:px-8 pt-24">
+        <!-- Background Decorations -->
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- Animated Gradient Circles -->
+            <div class="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full opacity-20 blur-xl animate-pulse"></div>
+            <div class="absolute top-60 right-32 w-24 h-24 bg-gradient-to-r from-purple-500 to-purple-700 rounded-full opacity-30 blur-lg animate-bounce"></div>
+            <div class="absolute bottom-40 left-40 w-40 h-40 bg-gradient-to-r from-purple-300 to-purple-500 rounded-full opacity-15 blur-2xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-r from-purple-600 to-purple-800 rounded-full opacity-25 blur-xl animate-bounce"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            <!-- Left Content -->
+            <div class="text-center lg:text-left">
+                <!-- Badge -->
+                <div class="inline-flex items-center space-x-3 bg-gradient-to-r from-purple-500/20 to-purple-600/20 backdrop-blur-xl text-white px-6 py-3 rounded-full text-base font-medium mb-8 border border-purple-400/30 shadow-xl">
+                    <span class="w-3 h-3 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full animate-pulse"></span>
+                    <span>Learn from AI-Powered Experts</span>
                 </div>
-
-                <!-- Hero Headline -->
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-                    Master Concepts,
-                    <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">Plan Smart</span>,
-                    <br>Solve Doubts
+                
+                <!-- Main Heading -->
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8">
+                    Learn Anywhere,
+                    <span class="block bg-gradient-to-r from-purple-300 via-purple-400 to-purple-500 bg-clip-text text-transparent animate-pulse">
+                        Anytime
+                    </span>
+                    <span class="block text-4xl md:text-5xl lg:text-6xl mt-2">Empower Your Future</span>
                 </h1>
-
-                <!-- Hero Subheadline -->
-                <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                    AI-powered study planner, instant doubt resolution, concept gap fixes, and regional language support for smarter learning.
+                
+                <!-- Subtitle -->
+                <p class="text-xl md:text-2xl text-purple-100 mb-10 leading-relaxed max-w-2xl font-medium">
+                    Join thousands of learners gaining new skills with AI-powered personalized learning. Advance your career and shape a better tomorrow—one lesson at a time.
                 </p>
-
-                <!-- Hero CTA -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                    <button onclick="window.location.href='/dashboard'" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 min-w-48">
-                        Get Started Free
+                
+                <!-- Search Bar -->
+                <div class="relative mb-10 max-w-xl mx-auto lg:mx-0">
+                    <div class="relative">
+                        <input type="text" placeholder="Search your Course..." class="w-full px-8 py-5 rounded-2xl bg-white/10 backdrop-blur-xl border border-purple-400/30 text-white placeholder-purple-200 focus:outline-none focus:ring-4 focus:ring-purple-400/50 text-lg shadow-xl">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-500 to-purple-600 p-3 rounded-xl hover:from-purple-400 hover:to-purple-500 transition-all duration-300 shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+                    <button onclick="window.location.href='/dashboard'" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:from-purple-400 hover:to-purple-500 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25">
+                        Start Learning Today
                     </button>
-                    <button class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-blue-500 hover:text-blue-600 transition-all duration-300 min-w-48">
+                    <button class="border-2 border-purple-400/50 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-purple-500/20 hover:border-purple-300 transition-all duration-300 backdrop-blur-xl">
                         Watch Demo
                     </button>
                 </div>
+            </div>
+            
+            <!-- Right Content - Hero Visual -->
+            <div class="relative lg:mt-0 mt-16 px-4 lg:px-8">
+                <!-- Main Hero Visual -->
+                <div class="relative flex justify-center">
+                    <div class="w-80 h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
+                        <!-- Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-purple-600/50 to-transparent rounded-full"></div>
+                        <!-- Student Avatar -->
+                        <div class="w-64 h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-purple-300 to-purple-400 rounded-full flex items-center justify-center text-white text-6xl lg:text-7xl z-10 shadow-inner">
+                            👩‍🎓
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Stats Card -->
+                    <div class="hidden lg:block absolute -left-24 top-20 bg-white/95 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-purple-200/50 animate-pulse w-80 z-20">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <!-- Achievement Icons -->
+                            <div class="flex items-center space-x-1">
+                                <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-white text-lg">⭐</span>
+                                </div>
+                                <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-white text-lg">🏆</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Stats -->
+                        <div class="mb-3">
+                            <div class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-2">60K+</div>
+                            <p class="text-gray-600 text-sm leading-relaxed font-medium">
+                                students worldwide for<br>
+                                quality AI-powered learning.<br>
+                                Growing with expert guidance<br>
+                                from trusted mentors.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Achievement Card -->
+                    <div class="hidden lg:block absolute -right-24 top-8 bg-white/95 backdrop-blur-xl rounded-3xl p-5 shadow-2xl border border-purple-200/30 animate-pulse z-20">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-white text-xl">🏆</span>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">98%</div>
+                                <p class="text-gray-600 text-xs font-medium">Success Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Progress Card -->
+                    <div class="hidden lg:block absolute -right-32 bottom-24 bg-white/95 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-purple-200/30 animate-pulse z-20">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full border-2 border-white shadow-lg"></div>
+                                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full border-2 border-white shadow-lg"></div>
+                                <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full border-2 border-white shadow-lg"></div>
+                                <div class="w-8 h-8 bg-gradient-to-r from-purple-300 to-purple-400 rounded-full border-2 border-white shadow-lg"></div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">2.5K</div>
+                                <p class="text-gray-600 text-xs font-medium">Active Today</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Hero Stats -->
-                <div class="grid grid-cols-3 gap-8 max-w-md mx-auto text-center">
-                    <div class="transform hover:scale-105 transition-all duration-300">
-                        <div class="text-2xl md:text-3xl font-bold text-gray-900">5+</div>
-                        <div class="text-sm text-gray-600">AI Features</div>
+    <!-- Mobile Stats Section -->
+    <section class="lg:hidden py-16 bg-gradient-to-r from-purple-50 to-purple-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Rating Card -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 text-center border border-blue-100">
+                    <div class="flex justify-center items-center space-x-1 mb-2">
+                        <div class="flex text-yellow-400 text-lg">
+                            ★★★★★
+                        </div>
                     </div>
-                    <div class="transform hover:scale-105 transition-all duration-300">
-                        <div class="text-2xl md:text-3xl font-bold text-gray-900">4</div>
-                        <div class="text-sm text-gray-600">Languages</div>
+                    <div class="text-2xl font-bold text-gray-900 mb-1">4.8</div>
+                    <p class="text-gray-600 text-sm">Student Rating</p>
+                </div>
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Success Rate Card -->
+                <div class="bg-white rounded-3xl p-8 text-center shadow-xl border border-purple-100">
+                    <div class="flex justify-center items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                            <span class="text-white text-3xl">🏆</span>
+                        </div>
                     </div>
-                    <div class="transform hover:scale-105 transition-all duration-300">
-                        <div class="text-2xl md:text-3xl font-bold text-gray-900">∞</div>
-                        <div class="text-sm text-gray-600">Learning</div>
+                    <div class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-2">98%</div>
+                    <p class="text-gray-600 text-lg font-medium">Success Rate</p>
+                </div>
+                
+                <!-- Learners Card -->
+                <div class="bg-white rounded-3xl p-8 text-center shadow-xl border border-purple-100">
+                    <div class="flex justify-center -space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full border-3 border-white shadow-lg"></div>
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full border-3 border-white shadow-lg"></div>
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full border-3 border-white shadow-lg"></div>
+                        <div class="w-8 h-8 bg-gradient-to-r from-purple-300 to-purple-400 rounded-full border-3 border-white shadow-lg"></div>
                     </div>
+                    <div class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-2">60K+</div>
+                    <p class="text-gray-600 text-lg font-medium">Active Learners</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
+    <section id="features" class="py-24 bg-gradient-to-br from-purple-50 via-white to-purple-50 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                    Powerful AI Features Built for
-                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Smart Learning</span>
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center space-x-3 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 px-6 py-3 rounded-full text-base font-medium mb-8 shadow-lg">
+                    <span class="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></span>
+                    <span>AI-Powered Features</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                    Revolutionizing Education with 
+                    <span class="block bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800 bg-clip-text text-transparent">Artificial Intelligence</span>
                 </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Experience learning like never before with our suite of AI-powered tools designed specifically for Class 6-10 students.
+                <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium">
+                    Our advanced AI features personalize your learning journey, making education more effective, engaging, and accessible for students from Class 6-10.
                 </p>
             </div>
 
-            <!-- Features Carousel -->
-            <div class="relative overflow-hidden">
-                <div id="features-carousel" class="flex transition-transform duration-500 ease-in-out gap-6">
-                    <!-- Feature Card 1: Concept Gap Fixer -->
-                    <div class="min-w-80 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 border border-blue-200 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="zap" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Concept Gap Fixer</h3>
-                        <p class="text-gray-600 mb-6">Fix what you don't know with intelligent gap analysis and personalized micro-lessons.</p>
-                        <button onclick="window.location.href='/concept-gaps'" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors group-hover:translate-x-2 transform duration-300">
-                            Learn More →
-                        </button>
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+                <!-- Feature 1 - Knowledge Gap Mapper -->
+                <div class="group bg-white rounded-3xl p-10 shadow-xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 hover:-translate-y-3 hover:scale-105">
+                    <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                        <span class="text-white text-3xl">🎯</span>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Knowledge Gap Mapper</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">AI identifies your knowledge gaps and creates personalized learning paths to fill them effectively.</p>
+                    <button onclick="window.location.href='/knowledge-gap-mapper'" class="text-purple-600 font-bold hover:text-purple-700 transition-colors text-lg group-hover:translate-x-2 transition-transform duration-300">
+                        Explore Feature →
+                    </button>
+                </div>
 
-                    <!-- Feature Card 2: Dynamic Study Planner -->
-                    <div class="min-w-80 bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-8 border border-green-200 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="calendar" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Dynamic Study Planner</h3>
-                        <p class="text-gray-600 mb-6">Study at your best time with AI-powered scheduling and personalized motivation.</p>
-                        <button onclick="window.location.href='/motivation-coach'" class="text-green-600 font-semibold hover:text-green-700 transition-colors group-hover:translate-x-2 transform duration-300">
-                            Learn More →
-                        </button>
+                <!-- Feature 2 - Dynamic Study Planner -->
+                <div class="group bg-white rounded-3xl p-10 shadow-xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 hover:-translate-y-3 hover:scale-105">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                        <span class="text-white text-3xl">📅</span>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Dynamic Study Planner</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">AI creates personalized study schedules that adapt to your learning pace and optimize retention.</p>
+                    <button onclick="window.location.href='/study-planner'" class="text-purple-600 font-bold hover:text-purple-700 transition-colors text-lg group-hover:translate-x-2 transition-transform duration-300">
+                        Explore Feature →
+                    </button>
+                </div>
 
-                    <!-- Feature Card 3: Vernacular Support -->
-                    <div class="min-w-80 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-8 border border-purple-200 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="globe" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Vernacular Language Support</h3>
-                        <p class="text-gray-600 mb-6">Learn in your language with support for Hindi, Kannada, Marathi, and more.</p>
-                        <button onclick="window.location.href='/vernacular-engine'" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors group-hover:translate-x-2 transform duration-300">
-                            Learn More →
-                        </button>
+                <!-- Feature 3 - Language Support -->
+                <div class="group bg-white rounded-3xl p-10 shadow-xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 hover:-translate-y-3 hover:scale-105">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                        <span class="text-white text-3xl">🌍</span>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Vernacular Engine</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">Learn in your native language with AI-powered translation and cultural context adaptation.</p>
+                    <button onclick="window.location.href='/language-support'" class="text-purple-600 font-bold hover:text-purple-700 transition-colors text-lg group-hover:translate-x-2 transition-transform duration-300">
+                        Explore Feature →
+                    </button>
+                </div>
 
-                    <!-- Feature Card 4: Retry Predictor -->
-                    <div class="min-w-80 bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-8 border border-orange-200 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="refresh-cw" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Retry Predictor</h3>
-                        <p class="text-gray-600 mb-6">Smart retry when you need it with optimal timing predictions and spaced repetition.</p>
-                        <button class="text-orange-600 font-semibold hover:text-orange-700 transition-colors group-hover:translate-x-2 transform duration-300">
-                            Coming Soon →
-                        </button>
+                <!-- Feature 4 - Mascot Doubt Buddy -->
+                <div class="group bg-white rounded-3xl p-10 shadow-xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 hover:-translate-y-3 hover:scale-105">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-500 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                        <span class="text-3xl">🦸‍♀️</span>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Ollie - Doubt Buddy</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">Your friendly AI mascot answers questions with fun animations and kid-friendly explanations.</p>
+                    <button onclick="window.location.href='/doubt-buddy'" class="text-purple-600 font-bold hover:text-purple-700 transition-colors text-lg group-hover:translate-x-2 transition-transform duration-300">
+                        Meet Ollie →
+                    </button>
+                </div>
 
-                    <!-- Feature Card 5: Mascot Doubt Buddy -->
-                    <div class="min-w-80 bg-gradient-to-br from-pink-50 to-pink-100 rounded-3xl p-8 border border-pink-200 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-2xl">🦉</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Mascot Doubt Buddy</h3>
-                        <p class="text-gray-600 mb-6">Ask your Owl Buddy anytime with interactive animations and instant doubt resolution.</p>
-                        <button class="text-pink-600 font-semibold hover:text-pink-700 transition-colors group-hover:translate-x-2 transform duration-300">
-                            Coming Soon →
+                <!-- Feature 5 - Smart Retry Predictor -->
+                <div class="group bg-white rounded-3xl p-10 shadow-xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 hover:-translate-y-3 hover:scale-105 md:col-span-2 lg:col-span-1">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-xl mx-auto lg:mx-0">
+                        <span class="text-white text-3xl">🔄</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center lg:text-left">Smart Retry Predictor</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed text-center lg:text-left">AI predicts optimal retry timing using spaced repetition for maximum learning retention.</p>
+                    <div class="text-center lg:text-left">
+                        <button onclick="window.location.href='/smart-retry'" class="text-purple-600 font-bold hover:text-purple-700 transition-colors text-lg group-hover:translate-x-2 transition-transform duration-300">
+                            Explore Feature →
                         </button>
                     </div>
                 </div>
-
-                <!-- Carousel Navigation -->
-                <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 border border-gray-200">
-                    <i data-lucide="chevron-left" class="w-6 h-6 text-gray-600"></i>
-                </button>
-                <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center hover:shadow-xl transition-all duration-300 border border-gray-200">
-                    <i data-lucide="chevron-right" class="w-6 h-6 text-gray-600"></i>
-                </button>
-            </div>
-
-            <!-- Carousel Dots -->
-            <div class="flex justify-center mt-8 space-x-2">
-                <button class="carousel-dot w-3 h-3 rounded-full bg-blue-600 transition-all duration-300"></button>
-                <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300"></button>
-                <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300"></button>
-                <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300"></button>
-                <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300"></button>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div class="max-w-6xl mx-auto">
-            <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                    How It Works
-                </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Get started in 4 simple steps and transform your learning experience forever.
-                </p>
-            </div>
-
-            <!-- Steps Flow -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Step 1 -->
-                <div class="text-center group">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i data-lucide="user-plus" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <div class="text-sm font-semibold text-blue-600 mb-2">STEP 1</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Personalize Your Study Plan</h3>
-                    <p class="text-gray-600">Tell us your grade, subjects, and learning goals to create your personalized AI study plan.</p>
+    <!-- Stats Section -->
+    <section class="py-24 bg-gradient-to-r from-purple-50 via-white to-purple-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="text-center">
+                    <div class="text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-3" data-count="60000">60K+</div>
+                    <div class="text-gray-600 font-semibold text-lg">Active Learners</div>
                 </div>
-
-                <!-- Step 2 -->
-                <div class="text-center group">
-                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i data-lucide="book-open" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <div class="text-sm font-semibold text-green-600 mb-2">STEP 2</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Solve Practice Problems</h3>
-                    <p class="text-gray-600">Practice with AI-generated problems that adapt to your skill level and learning pace.</p>
+                <div class="text-center">
+                    <div class="text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-3" data-count="500">500+</div>
+                    <div class="text-gray-600 font-semibold text-lg">Expert Mentors</div>
                 </div>
-
-                <!-- Step 3 -->
-                <div class="text-center group">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i data-lucide="message-circle" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <div class="text-sm font-semibold text-purple-600 mb-2">STEP 3</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Clear Doubts Instantly</h3>
-                    <p class="text-gray-600">Ask your AI buddy any question and get instant, personalized explanations in your language.</p>
+                <div class="text-center">
+                    <div class="text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-3" data-count="98">98%</div>
+                    <div class="text-gray-600 font-semibold text-lg">Success Rate</div>
                 </div>
-
-                <!-- Step 4 -->
-                <div class="text-center group">
-                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <i data-lucide="trophy" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <div class="text-sm font-semibold text-orange-600 mb-2">STEP 4</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">See Progress & Earn Badges</h3>
-                    <p class="text-gray-600">Track your improvement, celebrate milestones, and earn badges as you master concepts.</p>
-                </div>
-            </div>
-
-            <!-- Flow Connector (Hidden on mobile) -->
-            <div class="hidden lg:flex justify-center mt-8">
-                <div class="flex items-center space-x-8">
-                    <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-green-500 rounded-full"></div>
-                    <div class="w-16 h-1 bg-gradient-to-r from-green-500 to-purple-500 rounded-full"></div>
-                    <div class="w-16 h-1 bg-gradient-to-r from-purple-500 to-orange-500 rounded-full"></div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent mb-3" data-count="24">24/7</div>
+                    <div class="text-gray-600 font-semibold text-lg">Support</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
-                Start Learning Smarter Today
+    <section class="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 relative overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-48 h-48 bg-purple-300/15 rounded-full blur-3xl animate-bounce"></div>
+            <div class="absolute top-1/2 left-1/3 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl animate-pulse"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto text-center px-6 lg:px-8 relative z-10">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+                Ready to Transform Your 
+                <span class="block bg-gradient-to-r from-purple-300 to-purple-400 bg-clip-text text-transparent">Learning Journey?</span>
             </h2>
-            <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Join thousands of students who are already improving their grades with AI-powered learning.
+            <p class="text-xl md:text-2xl text-purple-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+                Join thousands of students who are already using LearnBuddy's AI-powered platform to excel in their studies and build a brighter future.
             </p>
-
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                <button onclick="window.location.href='/dashboard'" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 min-w-48">
-                    Sign Up for Free
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button onclick="window.location.href='/dashboard'" class="bg-gradient-to-r from-purple-400 to-purple-500 text-white px-12 py-5 rounded-2xl font-bold text-xl hover:from-purple-300 hover:to-purple-400 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25">
+                    Start Your Free Journey
                 </button>
-                <button class="border-2 border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/10 transition-all duration-300 min-w-48">
-                    Watch Demo
+                <button class="border-2 border-purple-400/50 text-white px-12 py-5 rounded-2xl font-bold text-xl hover:bg-purple-500/20 hover:border-purple-300 transition-all duration-300 backdrop-blur-xl">
+                    Schedule a Demo
                 </button>
-            </div>
-
-            <!-- Social Proof -->
-            <div class="flex items-center justify-center space-x-6 text-blue-100">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                    <span>Free to start</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                    <span>No credit card required</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="check-circle" class="w-5 h-5"></i>
-                    <span>Cancel anytime</span>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">L</span>
+    <footer class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Logo & Description -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <span class="text-white text-xl font-bold">🎓</span>
                         </div>
-                        <h3 class="text-2xl font-bold" style="font-family: 'Fredoka One', cursive;">LearnBuddy</h3>
+                        <span class="text-white text-xl font-bold">LearnBuddy</span>
                     </div>
-                    <p class="text-gray-400 mb-6 max-w-md">
-                        Empowering Class 6-10 students with AI-powered learning tools that make education personalized, engaging, and effective.
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Empowering students with AI-driven learning experiences. Making education accessible, engaging, and effective for everyone.
                     </p>
                     <div class="flex space-x-4">
-                        <button class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
-                        </button>
-                        <button class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
-                            <i data-lucide="facebook" class="w-5 h-5"></i>
-                        </button>
-                        <button class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
-                            <i data-lucide="instagram" class="w-5 h-5"></i>
-                        </button>
+                        <a href="#" class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors shadow-lg">
+                            <span class="text-white text-xl">🐦</span>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors shadow-lg">
+                            <span class="text-white text-xl">💼</span>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-500 transition-colors shadow-lg">
+                            <span class="text-white text-xl">📧</span>
+                        </a>
                     </div>
                 </div>
-
+                
                 <!-- Quick Links -->
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <div class="space-y-2">
-                        <a href="#features" class="block text-gray-400 hover:text-white transition-colors">Features</a>
-                        <a href="#how-it-works" class="block text-gray-400 hover:text-white transition-colors">How It Works</a>
-                        <a href="/dashboard" class="block text-gray-400 hover:text-white transition-colors">Dashboard</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition-colors">Pricing</a>
-                    </div>
+                    <h3 class="font-bold text-lg mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="/dashboard" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Dashboard</a></li>
+                        <li><a href="#features" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Features</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Pricing</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Contact</a></li>
+                    </ul>
                 </div>
-
+                
                 <!-- Support -->
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Support</h4>
-                    <div class="space-y-2">
-                        <a href="#" class="block text-gray-400 hover:text-white transition-colors">Help Center</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition-colors">Contact Us</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" class="block text-gray-400 hover:text-white transition-colors">Terms of Service</a>
-                    </div>
+                    <h3 class="font-bold text-lg mb-6">Support</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Documentation</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-purple-400 transition-colors text-base">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Bottom Footer -->
-            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">
-                    © 2025 LearnBuddy. All rights reserved. Made with ❤️ for students.
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2025 LearnBuddy. Made with ❤️ for students worldwide. All rights reserved.
                 </p>
-                
-                <!-- Owl Mascot in Footer -->
-                <div class="mt-4 md:mt-0 flex items-center space-x-2">
-                    <span class="text-gray-400 text-sm">Your AI Learning Friend</span>
-                    <div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-                        <span class="text-lg">🦉</span>
-                    </div>
-                </div>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="/js/landing.js"></script>
+    
+    <style>
+        /* Enhanced Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+            animation: float-delayed 4s ease-in-out infinite 2s;
+        }
+        
+        .animate-float-slow {
+            animation: float-slow 8s ease-in-out infinite 1s;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom blur effects */
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+        }
+        
+        /* Gradient text animation */
+        .bg-gradient-to-r.from-yellow-300.to-orange-300 {
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Enhanced hover effects */
+        .group:hover .group-hover\:scale-110 {
+            transform: scale(1.1);
+        }
+        
+        /* Loading animation for stats */
+        [data-count] {
+            transition: all 0.5s ease;
+        }
+    </style>
+    
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+        
+        // Animate counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60 FPS
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString() + (target === 24 ? '/7' : target === 95 ? '%' : '');
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.querySelector('[data-count]')) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Observe stats section
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('[data-count]')?.closest('section');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+        
+        // Modal functions
+        function showSignupModal() {
+            document.getElementById('signup-modal').classList.remove('hidden');
+        }
+        
+        function showLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+        
+        function closeModal() {
+            document.getElementById('signup-modal').classList.add('hidden');
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+        
+        function switchToLogin() {
+            document.getElementById('signup-modal').classList.add('hidden');
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+        
+        function switchToSignup() {
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('signup-modal').classList.remove('hidden');
+        }
+        
+        function handleSignup() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            
+            if (name && email && password) {
+                alert('🎉 Welcome to LearnBuddy! Your account has been created successfully!');
+                closeModal();
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+        
+        function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (email && password) {
+                alert('👋 Welcome back to LearnBuddy! You are now logged in.');
+                closeModal();
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const signupModal = document.getElementById('signup-modal');
+            const loginModal = document.getElementById('login-modal');
+            if (event.target == signupModal) {
+                signupModal.classList.add('hidden');
+            }
+            if (event.target == loginModal) {
+                loginModal.classList.add('hidden');
+            }
+        }
     </script>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all duration-300">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                    <span class="text-white text-3xl">🎓</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Join LearnBuddy</h2>
+                <p class="text-gray-600">Start your AI-powered learning journey today!</p>
+            </div>
+            
+            <form onsubmit="event.preventDefault(); handleSignup();" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name" 
+                           class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" 
+                           class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a strong password" 
+                           class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300">
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-4 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
+                    Create Account 🚀
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">Already have an account? 
+                    <button onclick="switchToLogin()" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+                        Log in here
+                    </button>
+                </p>
+            </div>
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <span class="text-2xl">×</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all duration-300">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                    <span class="text-white text-3xl">🎓</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
+                <p class="text-gray-600">Continue your learning journey with LearnBuddy</p>
+            </div>
+            
+            <form onsubmit="event.preventDefault(); handleLogin();" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" 
+                           class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" 
+                           class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300">
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    </label>
+                    <button type="button" class="text-sm text-purple-600 hover:text-purple-700 transition-colors">
+                        Forgot password?
+                    </button>
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-4 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
+                    Log In 👋
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">Don't have an account? 
+                    <button onclick="switchToSignup()" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+                        Sign up here
+                    </button>
+                </p>
+            </div>
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <span class="text-2xl">×</span>
+            </button>
+        </div>
+    </div>
 </body>
 </html>

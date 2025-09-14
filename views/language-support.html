@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Support - LearnBuddy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 50%, #6d28d9 100%);
+        }
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .language-fade {
+            transition: all 0.5s ease-in-out;
+        }
+        .translate-enter {
+            animation: translateIn 0.8s ease-out;
+        }
+        @keyframes translateIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <nav class="gradient-bg text-white py-6 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="window.location.href='/'" class="flex items-center space-x-2 hover:bg-white/10 px-4 py-2 rounded-xl transition-all duration-300">
+                        <span class="text-2xl">←</span>
+                        <span class="font-semibold">Back to Home</span>
+                    </button>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold">🌍 Vernacular Engine</h1>
+                    <p class="text-purple-200 mt-2">Learn in Your Native Language</p>
+                </div>
+                <div class="w-32"></div> <!-- Spacer for center alignment -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="floating-card absolute -left-24 top-20 w-64 h-64 bg-gradient-to-br from-green-400/20 to-green-600/20 rounded-full blur-3xl"></div>
+        <div class="floating-card absolute -right-24 top-8 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-full blur-3xl" style="animation-delay: -2s;"></div>
+        <div class="floating-card absolute -right-32 bottom-24 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-blue-600/20 rounded-full blur-3xl" style="animation-delay: -4s;"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-16 relative z-10">
+        
+        <!-- Language Selector -->
+        <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100 mb-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Choose Your Language</h2>
+                <p class="text-gray-600 text-lg">Select your preferred language for learning</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <button onclick="changeLanguage('english')" class="language-btn bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 text-center hover:bg-blue-100 hover:border-blue-300 transition-all duration-300 transform hover:scale-105" data-lang="english">
+                    <div class="text-4xl mb-3">🇺🇸</div>
+                    <div class="font-bold text-blue-800">English</div>
+                    <div class="text-sm text-blue-600">Learn in English</div>
+                </button>
+                
+                <button onclick="changeLanguage('hindi')" class="language-btn bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 text-center hover:bg-orange-100 hover:border-orange-300 transition-all duration-300 transform hover:scale-105" data-lang="hindi">
+                    <div class="text-4xl mb-3">🇮🇳</div>
+                    <div class="font-bold text-orange-800">हिंदी</div>
+                    <div class="text-sm text-orange-600">हिंदी में सीखें</div>
+                </button>
+                
+                <button onclick="changeLanguage('kannada')" class="language-btn bg-green-50 border-2 border-green-200 rounded-2xl p-6 text-center hover:bg-green-100 hover:border-green-300 transition-all duration-300 transform hover:scale-105" data-lang="kannada">
+                    <div class="text-4xl mb-3">🇮🇳</div>
+                    <div class="font-bold text-green-800">ಕನ್ನಡ</div>
+                    <div class="text-sm text-green-600">ಕನ್ನಡದಲ್ಲಿ ಕಲಿಯಿರಿ</div>
+                </button>
+                
+                <button onclick="changeLanguage('marathi')" class="language-btn bg-purple-50 border-2 border-purple-200 rounded-2xl p-6 text-center hover:bg-purple-100 hover:border-purple-300 transition-all duration-300 transform hover:scale-105" data-lang="marathi">
+                    <div class="text-4xl mb-3">🇮🇳</div>
+                    <div class="font-bold text-purple-800">मराठी</div>
+                    <div class="text-sm text-purple-600">मराठीत शिका</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Interactive Learning Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Science Lesson -->
+            <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center">
+                        <span class="text-white text-2xl">🌱</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800" id="science-title">Photosynthesis</h3>
+                        <div class="text-green-600 font-semibold" id="science-subject">Science - Grade 6</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+                        <h4 class="font-bold text-green-800 mb-3" id="science-concept">🔬 Key Concept</h4>
+                        <p class="text-green-700 leading-relaxed translate-enter" id="science-text">
+                            Plants use sunlight, water, and carbon dioxide to make food through photosynthesis. This process also produces oxygen that we breathe.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                        <h4 class="font-bold text-blue-800 mb-3" id="science-formula">⚗️ Chemical Equation</h4>
+                        <div class="font-mono text-blue-700 text-lg text-center py-4 bg-white rounded-xl" id="science-equation">
+                            6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂
+                        </div>
+                    </div>
+                    
+                    <button onclick="playAudio('science')" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-2xl hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
+                        🔊 Listen to Pronunciation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Math Lesson -->
+            <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
+                        <span class="text-white text-2xl">🔢</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800" id="math-title">Linear Equations</h3>
+                        <div class="text-blue-600 font-semibold" id="math-subject">Mathematics - Grade 7</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                        <h4 class="font-bold text-blue-800 mb-3" id="math-concept">📐 Problem Solving</h4>
+                        <p class="text-blue-700 leading-relaxed translate-enter" id="math-text">
+                            To solve 3x + 5 = 14, subtract 5 from both sides to get 3x = 9, then divide by 3 to find x = 3.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-2xl p-6">
+                        <h4 class="font-bold text-purple-800 mb-3" id="math-steps">🔍 Step by Step</h4>
+                        <div class="space-y-2" id="math-solution">
+                            <div class="font-mono text-purple-700 bg-white rounded-lg p-3">1. 3x + 5 = 14</div>
+                            <div class="font-mono text-purple-700 bg-white rounded-lg p-3">2. 3x = 14 - 5 = 9</div>
+                            <div class="font-mono text-purple-700 bg-white rounded-lg p-3">3. x = 9 ÷ 3 = 3</div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="playAudio('math')" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-2xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
+                        🔊 Listen to Explanation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cultural Context Section -->
+        <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100 mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">🏛️ Cultural Context & Examples</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6">
+                    <h3 class="font-bold text-yellow-800 mb-4" id="context-title">🎭 Local Examples</h3>
+                    <p class="text-yellow-700 leading-relaxed" id="context-text">
+                        Understanding concepts through familiar examples from your culture and surroundings makes learning more meaningful and memorable.
+                    </p>
+                </div>
+                
+                <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-6">
+                    <h3 class="font-bold text-indigo-800 mb-4" id="practice-title">📝 Practice in Your Language</h3>
+                    <p class="text-indigo-700 leading-relaxed" id="practice-text">
+                        Practice problems and exercises adapted to your language and cultural context for better understanding and retention.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Translation Tool -->
+        <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100 mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">🔄 Live Translation Tool</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">Enter text in English:</label>
+                    <textarea id="input-text" placeholder="Type here to translate..." 
+                              class="w-full h-32 border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none text-lg"></textarea>
+                    <button onclick="translateText()" class="mt-4 w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-2xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                        🔄 Translate Now
+                    </button>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">Translation:</label>
+                    <div id="output-text" class="w-full h-32 bg-gray-50 border border-gray-300 rounded-2xl px-4 py-3 text-lg overflow-auto">
+                        <div class="text-gray-500 italic">Translation will appear here...</div>
+                    </div>
+                    <button onclick="copyTranslation()" class="mt-4 w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-2xl hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                        📋 Copy Translation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let currentLanguage = 'english';
+        
+        const content = {
+            english: {
+                scienceTitle: "Photosynthesis",
+                scienceSubject: "Science - Grade 6",
+                scienceConcept: "🔬 Key Concept",
+                scienceText: "Plants use sunlight, water, and carbon dioxide to make food through photosynthesis. This process also produces oxygen that we breathe.",
+                scienceFormula: "⚗️ Chemical Equation",
+                mathTitle: "Linear Equations",
+                mathSubject: "Mathematics - Grade 7",
+                mathConcept: "📐 Problem Solving",
+                mathText: "To solve 3x + 5 = 14, subtract 5 from both sides to get 3x = 9, then divide by 3 to find x = 3.",
+                mathSteps: "🔍 Step by Step",
+                contextTitle: "🎭 Local Examples",
+                contextText: "Understanding concepts through familiar examples from your culture and surroundings makes learning more meaningful and memorable.",
+                practiceTitle: "📝 Practice in Your Language",
+                practiceText: "Practice problems and exercises adapted to your language and cultural context for better understanding and retention."
+            },
+            hindi: {
+                scienceTitle: "प्रकाश संश्लेषण",
+                scienceSubject: "विज्ञान - कक्षा 6",
+                scienceConcept: "🔬 मुख्य अवधारणा",
+                scienceText: "पौधे सूर्य की रोशनी, पानी और कार्बन डाइऑक्साइड का उपयोग करके प्रकाश संश्लेषण के माध्यम से भोजन बनाते हैं। यह प्रक्रिया ऑक्सीजन भी बनाती है जिसे हम सांस लेते हैं।",
+                scienceFormula: "⚗️ रासायनिक समीकरण",
+                mathTitle: "रैखिक समीकरण",
+                mathSubject: "गणित - कक्षा 7",
+                mathConcept: "📐 समस्या समाधान",
+                mathText: "3x + 5 = 14 को हल करने के लिए, दोनों तरफ से 5 घटाकर 3x = 9 प्राप्त करें, फिर 3 से भाग देकर x = 3 निकालें।",
+                mathSteps: "🔍 चरणबद्ध हल",
+                contextTitle: "🎭 स्थानीय उदाहरण",
+                contextText: "आपकी संस्कृति और परिवेश के परिचित उदाहरणों के माध्यम से अवधारणाओं को समझना सीखने को अधिक अर्थपूर्ण और यादगार बनाता है।",
+                practiceTitle: "📝 अपनी भाषा में अभ्यास",
+                practiceText: "बेहतर समझ और स्मृति के लिए आपकी भाषा और सांस्कृतिक संदर्भ के अनुकूल अभ्यास समस्याएं और व्यायाम।"
+            },
+            kannada: {
+                scienceTitle: "ಪ್ರಕಾಶಸಂಶ್ಲೇಷಣೆ",
+                scienceSubject: "ವಿಜ್ಞಾನ - ತರಗತಿ 6",
+                scienceConcept: "🔬 ಮುಖ್ಯ ಪರಿಕಲ್ಪನೆ",
+                scienceText: "ಸಸ್ಯಗಳು ಸೂರ್ಯನ ಬೆಳಕು, ನೀರು ಮತ್ತು ಕಾರ್ಬನ್ ಡೈಆಕ್ಸೈಡ್ ಬಳಸಿ ಪ್ರಕಾಶಸಂಶ್ಲೇಷಣೆಯ ಮೂಲಕ ಆಹಾರ ತಯಾರಿಸುತ್ತವೆ। ಈ ಪ್ರಕ್ರಿಯೆಯು ನಾವು ಉಸಿರಾಡುವ ಆಮ್ಲಜನಕವನ್ನು ಸಹ ಉತ್ಪಾದಿಸುತ್ತದೆ।",
+                scienceFormula: "⚗️ ರಾಸಾಯನಿಕ ಸಮೀಕರಣ",
+                mathTitle: "ರೇಖೀಯ ಸಮೀಕರಣಗಳು",
+                mathSubject: "ಗಣಿತ - ತರಗತಿ 7",
+                mathConcept: "📐 ಸಮಸ್ಯೆ ಪರಿಹಾರ",
+                mathText: "3x + 5 = 14 ಅನ್ನು ಪರಿಹರಿಸಲು, ಎರಡೂ ಬದಿಗಳಿಂದ 5 ಅನ್ನು ಕಳೆದು 3x = 9 ಪಡೆದುಕೊಳ್ಳಿ, ನಂತರ 3 ರಿಂದ ಭಾಗಿಸಿ x = 3 ಕಂಡುಹಿಡಿಯಿರಿ।",
+                mathSteps: "🔍 ಹಂತ ಹಂತವಾಗಿ",
+                contextTitle: "🎭 ಸ್ಥಳೀಯ ಉದಾಹರಣೆಗಳು",
+                contextText: "ನಿಮ್ಮ ಸಂಸ್ಕೃತಿ ಮತ್ತು ಪರಿಸರದ ಪರಿಚಿತ ಉದಾಹರಣೆಗಳ ಮೂಲಕ ಪರಿಕಲ್ಪನೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು ಕಲಿಕೆಯನ್ನು ಹೆಚ್ಚು ಅರ್ಥಪೂರ್ಣ ಮತ್ತು ಸ್ಮರಣೀಯವನ್ನಾಗಿ ಮಾಡುತ್ತದೆ।",
+                practiceTitle: "📝ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ ಅಭ್ಯಾಸ",
+                practiceText: "ಉತ್ತಮ ತಿಳುವಳಿಕೆ ಮತ್ತು ಧಾರಣೆಗಾಗಿ ನಿಮ್ಮ ಭಾಷೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಸಂದರ್ಭಕ್ಕೆ ಅನುಗುಣವಾಗಿ ಅಭ್ಯಾಸ ಸಮಸ್ಯೆಗಳು ಮತ್ತು ವ್ಯಾಯಾಮಗಳು।"
+            },
+            marathi: {
+                scienceTitle: "प्रकाशसंश्लेषण",
+                scienceSubject: "विज्ञान - इयत्ता 6",
+                scienceConcept: "🔬 मुख्य संकल्पना",
+                scienceText: "झाडे सूर्यप्रकाश, पाणी आणि कार्बन डायऑक्साइड वापरून प्रकाशसंश्लेषणाद्वारे अन्न तयार करतात. ही प्रक्रिया आपण श्वास घेत असलेला ऑक्सिजन देखील तयार करते.",
+                scienceFormula: "⚗️ रासायनिक समीकरण",
+                mathTitle: "रेषीय समीकरणे",
+                mathSubject: "गणित - इयत्ता 7",
+                mathConcept: "📐 समस्या सोडवणे",
+                mathText: "3x + 5 = 14 सोडवण्यासाठी, दोन्ही बाजूंनी 5 वजा करून 3x = 9 मिळवा, नंतर 3 ने भागून x = 3 शोधा.",
+                mathSteps: "🔍 टप्प्याटप्प्याने",
+                contextTitle: "🎭 स्थानिक उदाहरणे",
+                contextText: "तुमच्या संस्कृती आणि परिसरातील परिचित उदाहरणांद्वारे संकल्पना समजून घेणे शिकणे अधिक अर्थपूर्ण आणि संस्मरणीय बनवते.",
+                practiceTitle: "📝 तुमच्या भाषेत सराव",
+                practiceText: "चांगल्या समजूती आणि स्मरणशक्तीसाठी तुमच्या भाषेत आणि सांस्कृतिक संदर्भात रूपांतरित सराव समस्या आणि व्यायाम."
+            }
+        };
+        
+        const simpleTranslations = {
+            english: {
+                "hello": "hello",
+                "photosynthesis": "photosynthesis",
+                "mathematics": "mathematics",
+                "science": "science",
+                "learning": "learning"
+            },
+            hindi: {
+                "hello": "नमस्ते",
+                "photosynthesis": "प्रकाश संश्लेषण",
+                "mathematics": "गणित",
+                "science": "विज्ञान",
+                "learning": "शिक्षा"
+            },
+            kannada: {
+                "hello": "ನಮಸ್ಕಾರ",
+                "photosynthesis": "ಪ್ರಕಾಶಸಂಶ್ಲೇಷಣೆ",
+                "mathematics": "ಗಣಿತ",
+                "science": "ವಿಜ್ಞಾನ",
+                "learning": "ಕಲಿಕೆ"
+            },
+            marathi: {
+                "hello": "नमस्कार",
+                "photosynthesis": "प्रकाशसंश्लेषण",
+                "mathematics": "गणित",
+                "science": "विज्ञान",
+                "learning": "शिक्षण"
+            }
+        };
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active language button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('border-4', 'bg-opacity-100');
+                btn.classList.add('border-2');
+            });
+            
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('border-4', 'bg-opacity-100');
+            document.querySelector(`[data-lang="${lang}"]`).classList.remove('border-2');
+            
+            // Update content with animation
+            const elements = [
+                'science-title', 'science-subject', 'science-concept', 'science-text', 'science-formula',
+                'math-title', 'math-subject', 'math-concept', 'math-text', 'math-steps',
+                'context-title', 'context-text', 'practice-title', 'practice-text'
+            ];
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element && content[lang] && content[lang][id.replace('-', '')]) {
+                    element.classList.remove('translate-enter');
+                    element.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        element.textContent = content[lang][id.replace('-', '')];
+                        element.style.opacity = '1';
+                        element.classList.add('translate-enter');
+                    }, 200);
+                }
+            });
+        }
+        
+        function playAudio(type) {
+            // Simulate audio playback
+            const messages = {
+                science: {
+                    english: "Playing pronunciation guide for photosynthesis in English",
+                    hindi: "प्रकाश संश्लेषण का हिंदी उच्चारण चला रहे हैं",
+                    kannada: "ಪ್ರಕಾಶಸಂಶ್ಲೇಷಣೆಯ ಕನ್ನಡ ಉಚ್ಚಾರಣೆ ಪ್ಲೇ ಮಾಡುತ್ತಿದ್ದೇವೆ",
+                    marathi: "प्रकाशसंश्लेषणाचा मराठी उच्चार चालवत आहे"
+                },
+                math: {
+                    english: "Playing step-by-step explanation in English",
+                    hindi: "चरणबद्ध व्याख्या हिंदी में चला रहे हैं",
+                    kannada: "ಹಂತ ಹಂತದ ವಿವರಣೆಯನ್ನು ಕನ್ನಡದಲ್ಲಿ ಪ್ಲೇ ಮಾಡುತ್ತಿದ್ದೇವೆ",
+                    marathi: "टप्प्याटप्प्याने स्पष्टीकरण मराठीत चालवत आहे"
+                }
+            };
+            
+            alert('🔊 ' + messages[type][currentLanguage]);
+        }
+        
+        function translateText() {
+            const inputText = document.getElementById('input-text').value.trim().toLowerCase();
+            const outputDiv = document.getElementById('output-text');
+            
+            if (!inputText) {
+                outputDiv.innerHTML = '<div class="text-gray-500 italic">Please enter some text to translate...</div>';
+                return;
+            }
+            
+            // Simple word-by-word translation for demo
+            let translation = inputText;
+            const translations = simpleTranslations[currentLanguage];
+            
+            if (translations) {
+                Object.keys(translations).forEach(word => {
+                    translation = translation.replace(new RegExp(word, 'g'), translations[word]);
+                });
+            }
+            
+            outputDiv.innerHTML = `<div class="text-gray-800">${translation}</div>`;
+        }
+        
+        function copyTranslation() {
+            const outputText = document.getElementById('output-text').textContent;
+            if (outputText && !outputText.includes('Translation will appear here')) {
+                navigator.clipboard.writeText(outputText).then(() => {
+                    alert('✅ Translation copied to clipboard!');
+                });
+            } else {
+                alert('❌ No translation to copy. Please translate some text first.');
+            }
+        }
+        
+        // Initialize with English
+        changeLanguage('english');
+    </script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Study Planner - LearnBuddy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 50%, #6d28d9 100%);
+        }
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .task-slide-in {
+            animation: slideInFromLeft 0.5s ease-out;
+        }
+        @keyframes slideInFromLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .progress-fill {
+            transition: width 0.8s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <nav class="gradient-bg text-white py-6 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="window.location.href='/'" class="flex items-center space-x-2 hover:bg-white/10 px-4 py-2 rounded-xl transition-all duration-300">
+                        <span class="text-2xl">←</span>
+                        <span class="font-semibold">Back to Home</span>
+                    </button>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold">📅 Dynamic Study Planner</h1>
+                    <p class="text-purple-200 mt-2">AI-Powered Personalized Scheduling</p>
+                </div>
+                <div class="w-32"></div> <!-- Spacer for center alignment -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="floating-card absolute -left-24 top-20 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-blue-600/20 rounded-full blur-3xl"></div>
+        <div class="floating-card absolute -right-24 top-8 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-full blur-3xl" style="animation-delay: -2s;"></div>
+        <div class="floating-card absolute -right-32 bottom-24 w-96 h-96 bg-gradient-to-br from-green-400/20 to-green-600/20 rounded-full blur-3xl" style="animation-delay: -4s;"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-16 relative z-10">
+        
+        <!-- Progress Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-purple-100 text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-3xl">📊</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Weekly Progress</h3>
+                <div class="text-3xl font-bold text-blue-600 mb-2" id="weekly-progress">0%</div>
+                <div class="w-full bg-blue-100 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full progress-fill" id="weekly-bar" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-purple-100 text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-3xl">🔥</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Study Streak</h3>
+                <div class="text-3xl font-bold text-green-600" id="study-streak">3 days</div>
+                <div class="text-sm text-gray-600 mt-2">Keep it up!</div>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-purple-100 text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-white text-3xl">⏱️</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Today's Goal</h3>
+                <div class="text-3xl font-bold text-purple-600" id="daily-goal">2h 30m</div>
+                <div class="text-sm text-gray-600 mt-2" id="time-left">1h 45m left</div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-3xl p-8 shadow-xl border border-purple-100 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">🎯 Quick Actions</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="addCustomTask()" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-2xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="text-2xl mb-2">➕</div>
+                    Add Task
+                </button>
+                
+                <button onclick="generateWeeklyPlan()" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-2xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="text-2xl mb-2">📅</div>
+                    Generate Plan
+                </button>
+                
+                <button onclick="startStudySession()" class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-2xl hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="text-2xl mb-2">▶️</div>
+                    Start Session
+                </button>
+                
+                <button onclick="viewAnalytics()" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-2xl hover:from-orange-600 hover:to-orange-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="text-2xl mb-2">📈</div>
+                    Analytics
+                </button>
+            </div>
+        </div>
+
+        <!-- Today's Schedule -->
+        <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100 mb-12">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">📝 Today's Schedule</h2>
+                <div class="text-right">
+                    <div class="text-sm text-gray-600">Today</div>
+                    <div class="font-semibold text-lg" id="current-date"></div>
+                </div>
+            </div>
+            
+            <div class="space-y-4" id="today-tasks">
+                <!-- Tasks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Weekly Overview -->
+        <div class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100">
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">📅 Weekly Overview</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-7 gap-4" id="weekly-calendar">
+                <!-- Calendar will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Add New Task</h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Task Name</label>
+                    <input type="text" id="task-name" placeholder="e.g., Math Practice" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
+                    <select id="task-subject" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="Math">Math</option>
+                        <option value="Science">Science</option>
+                        <option value="English">English</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Duration</label>
+                    <select id="task-duration" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="15">15 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="90">1.5 hours</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Priority</label>
+                    <select id="task-priority" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 mt-8">
+                <button onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-xl hover:bg-gray-400 transition-colors font-semibold">
+                    Cancel
+                </button>
+                <button onclick="saveTask()" class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all font-semibold">
+                    Add Task
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let tasks = [
+            { id: 1, name: "Math Practice", subject: "Math", time: "5:00-5:30 PM", duration: 30, completed: false, priority: "High", day: "Monday" },
+            { id: 2, name: "Science Quiz Prep", subject: "Science", time: "6:00-6:45 PM", duration: 45, completed: false, priority: "Medium", day: "Monday" },
+            { id: 3, name: "English Reading", subject: "English", time: "7:00-7:30 PM", duration: 30, completed: true, priority: "Low", day: "Monday" },
+            { id: 4, name: "History Notes", subject: "History", time: "5:30-6:15 PM", duration: 45, completed: false, priority: "High", day: "Tuesday" },
+            { id: 5, name: "Geography Maps", subject: "Geography", time: "4:00-4:30 PM", duration: 30, completed: false, priority: "Medium", day: "Wednesday" }
+        ];
+        
+        let completedTasksCount = tasks.filter(t => t.completed).length;
+        let totalTasksCount = tasks.length;
+        
+        function updateProgress() {
+            const weeklyProgress = Math.round((completedTasksCount / totalTasksCount) * 100);
+            document.getElementById('weekly-progress').textContent = weeklyProgress + '%';
+            document.getElementById('weekly-bar').style.width = weeklyProgress + '%';
+        }
+        
+        function setCurrentDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', options);
+        }
+        
+        function renderTodayTasks() {
+            const todayTasks = tasks.filter(task => task.day === "Monday"); // Assuming today is Monday
+            const container = document.getElementById('today-tasks');
+            
+            container.innerHTML = todayTasks.map(task => `
+                <div class="study-task bg-gray-50 border border-gray-200 rounded-2xl p-6 task-slide-in ${task.completed ? 'bg-green-50 border-green-200' : ''}" data-task="${task.id}">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-${getSubjectColor(task.subject)}-500 to-${getSubjectColor(task.subject)}-600 rounded-xl flex items-center justify-center">
+                                <span class="text-white text-lg">${getSubjectEmoji(task.subject)}</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-800">${task.name}</div>
+                                <div class="text-gray-600 text-sm">${task.time} • ${task.duration} min • ${task.priority} Priority</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${getPriorityColor(task.priority)}">${task.priority}</span>
+                            <button onclick="toggleTask(${task.id})" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${task.completed ? 'bg-green-500 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'}">
+                                ${task.completed ? '✓ Done' : 'Mark Done'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderWeeklyCalendar() {
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const dayTasks = {
+                'Monday': tasks.filter(t => t.day === 'Monday'),
+                'Tuesday': tasks.filter(t => t.day === 'Tuesday'),
+                'Wednesday': tasks.filter(t => t.day === 'Wednesday'),
+                'Thursday': [],
+                'Friday': [],
+                'Saturday': [],
+                'Sunday': []
+            };
+            
+            const container = document.getElementById('weekly-calendar');
+            
+            container.innerHTML = days.map((day, index) => {
+                const fullDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][index];
+                const dayTaskList = dayTasks[fullDay] || [];
+                const completed = dayTaskList.filter(t => t.completed).length;
+                const total = dayTaskList.length;
+                const progress = total > 0 ? (completed / total) * 100 : 0;
+                
+                return `
+                    <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                        <div class="text-center mb-3">
+                            <div class="font-bold text-gray-800">${day}</div>
+                            <div class="text-xs text-gray-600">${total} tasks</div>
+                        </div>
+                        <div class="space-y-2">
+                            ${dayTaskList.slice(0, 3).map(task => `
+                                <div class="text-xs p-2 rounded-lg ${task.completed ? 'bg-green-100 text-green-800' : 'bg-white border'}">
+                                    ${task.name}
+                                </div>
+                            `).join('')}
+                            ${dayTaskList.length > 3 ? `<div class="text-xs text-gray-500 text-center">+${dayTaskList.length - 3} more</div>` : ''}
+                        </div>
+                        <div class="mt-3">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full progress-fill" style="width: ${progress}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function getSubjectColor(subject) {
+            const colors = {
+                'Math': 'blue',
+                'Science': 'green',
+                'English': 'purple',
+                'History': 'orange',
+                'Geography': 'indigo'
+            };
+            return colors[subject] || 'gray';
+        }
+        
+        function getSubjectEmoji(subject) {
+            const emojis = {
+                'Math': '🔢',
+                'Science': '🧪',
+                'English': '📚',
+                'History': '🏛️',
+                'Geography': '🌍'
+            };
+            return emojis[subject] || '📖';
+        }
+        
+        function getPriorityColor(priority) {
+            const colors = {
+                'High': 'bg-red-100 text-red-800',
+                'Medium': 'bg-yellow-100 text-yellow-800',
+                'Low': 'bg-green-100 text-green-800'
+            };
+            return colors[priority] || 'bg-gray-100 text-gray-800';
+        }
+        
+        function toggleTask(taskId) {
+            const task = tasks.find(t => t.id === taskId);
+            if (task) {
+                task.completed = !task.completed;
+                completedTasksCount = tasks.filter(t => t.completed).length;
+                updateProgress();
+                renderTodayTasks();
+                renderWeeklyCalendar();
+            }
+        }
+        
+        function addCustomTask() {
+            document.getElementById('task-modal').classList.remove('hidden');
+        }
+        
+        function closeModal() {
+            document.getElementById('task-modal').classList.add('hidden');
+        }
+        
+        function saveTask() {
+            const name = document.getElementById('task-name').value;
+            const subject = document.getElementById('task-subject').value;
+            const duration = parseInt(document.getElementById('task-duration').value);
+            const priority = document.getElementById('task-priority').value;
+            
+            if (name.trim()) {
+                const newTask = {
+                    id: tasks.length + 1,
+                    name: name.trim(),
+                    subject: subject,
+                    time: "TBD",
+                    duration: duration,
+                    completed: false,
+                    priority: priority,
+                    day: "Monday" // Add to today for demo
+                };
+                
+                tasks.push(newTask);
+                totalTasksCount = tasks.length;
+                updateProgress();
+                renderTodayTasks();
+                renderWeeklyCalendar();
+                closeModal();
+                
+                // Clear form
+                document.getElementById('task-name').value = '';
+            }
+        }
+        
+        function generateWeeklyPlan() {
+            alert('🎯 Weekly Plan Generated!\n\nBased on your learning goals and available time, I\'ve optimized your study schedule for maximum efficiency and retention.\n\n📚 Key Features:\n• Spaced repetition for better memory\n• Balanced subject distribution\n• Break times included\n• Difficulty progression\n\nCheck your calendar for the updated plan!');
+        }
+        
+        function startStudySession() {
+            alert('▶️ Study Session Started!\n\n🎯 Current Task: Math Practice\n⏱️ Duration: 30 minutes\n🎵 Focus music: Enabled\n📱 Distractions: Blocked\n\nGood luck with your studies! 🌟');
+        }
+        
+        function viewAnalytics() {
+            alert('📈 Study Analytics\n\n📊 This Week:\n• Study time: 8h 45m\n• Tasks completed: 12/18\n• Accuracy rate: 87%\n• Favorite subject: Math\n\n🔥 Achievements:\n• 7-day study streak\n• 90% weekly goal achieved\n• Improvement in Science (+15%)\n\nKeep up the excellent work! 🏆');
+        }
+        
+        // Initialize
+        setCurrentDate();
+        updateProgress();
+        renderTodayTasks();
+        renderWeeklyCalendar();
+    </script>
+</body>
+</html>

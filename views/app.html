@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnBuddy - AI Education Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/app-styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        'purple': {
+                            '900': '#2D1B69',
+                            '800': '#3B2A87',
+                            '700': '#4C3BAF',
+                            '600': '#6B46C1',
+                            '500': '#8B5CF6',
+                            '400': '#A78BFA',
+                        },
+                        'blue': {
+                            '600': '#2563EB',
+                            '500': '#3B82F6',
+                            '400': '#60A5FA'
+                        },
+                        'green': {
+                            '600': '#059669',
+                            '500': '#10B981',
+                            '400': '#34D399'
+                        },
+                        'orange': {
+                            '600': '#EA580C',
+                            '500': '#F59E0B',
+                            '400': '#FBBF24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-white to-blue-50 min-h-screen font-sans">
+    
+    <!-- Fixed Header Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <span class="text-white text-2xl font-bold">🎓</span>
+                    </div>
+                    <span class="text-gray-800 text-2xl font-bold tracking-tight">LearnBuddy</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" onclick="showSection('home')" class="nav-link text-gray-700 hover:text-purple-600 transition-all duration-300 text-base font-medium relative group">
+                        Home
+                        <span class="nav-underline absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" onclick="showSection('study-planner')" class="nav-link text-gray-700 hover:text-purple-600 transition-all duration-300 text-base font-medium relative group">
+                        Study Plan
+                        <span class="nav-underline absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" onclick="showSection('concept-fixer')" class="nav-link text-gray-700 hover:text-purple-600 transition-all duration-300 text-base font-medium relative group">
+                        Concept Fixer
+                        <span class="nav-underline absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" onclick="showSection('language-support')" class="nav-link text-gray-700 hover:text-purple-600 transition-all duration-300 text-base font-medium relative group">
+                        Language Support
+                        <span class="nav-underline absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" onclick="showSection('doubt-buddy')" class="nav-link text-gray-700 hover:text-purple-600 transition-all duration-300 text-base font-medium relative group">
+                        Doubt Buddy
+                        <span class="nav-underline absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#" onclick="showSection('home')" class="block text-gray-700 hover:text-purple-600 transition-colors">Home</a>
+                <a href="#" onclick="showSection('study-planner')" class="block text-gray-700 hover:text-purple-600 transition-colors">Study Plan</a>
+                <a href="#" onclick="showSection('concept-fixer')" class="block text-gray-700 hover:text-purple-600 transition-colors">Concept Fixer</a>
+                <a href="#" onclick="showSection('language-support')" class="block text-gray-700 hover:text-purple-600 transition-colors">Language Support</a>
+                <a href="#" onclick="showSection('doubt-buddy')" class="block text-gray-700 hover:text-purple-600 transition-colors">Doubt Buddy</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mascot Avatar (Fixed Position) -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center shadow-xl cursor-pointer transform hover:scale-110 transition-all duration-300 animate-bounce" onclick="showSection('doubt-buddy')">
+            <span class="text-2xl">🦸‍♀️</span>
+        </div>
+        <div class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold animate-pulse" id="mascot-badge">
+            2
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-20 min-h-screen">
+        
+        <!-- Home Section -->
+        <section id="home-section" class="section-content max-w-7xl mx-auto px-6 py-12">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                    Welcome to <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">LearnBuddy</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Your AI-powered learning companion for Grades 6-8. Master concepts, get personalized help, and learn in your language!
+                </p>
+            </div>
+
+            <!-- Feature Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Concept Fixer Card -->
+                <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showSection('concept-fixer')">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-400 to-red-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <span class="text-white text-3xl">🎯</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Concept Fixer</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">AI detects your knowledge gaps and provides step-by-step explanations to fix them instantly.</p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+
+                <!-- Study Planner Card -->
+                <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showSection('study-planner')">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <span class="text-white text-3xl">📅</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Study Planner</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">Personalized study schedules that adapt to your learning patterns and goals.</p>
+                    <button class="btn-primary w-full">View Plan</button>
+                </div>
+
+                <!-- Language Support Card -->
+                <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showSection('language-support')">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-green-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <span class="text-white text-3xl">🌍</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Language Support</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">Learn in your native language with support for Hindi, Kannada, Marathi, and more.</p>
+                    <button class="btn-primary w-full">Explore</button>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl p-8 text-white shadow-xl">
+                    <div class="text-4xl font-bold mb-2">60K+</div>
+                    <p class="text-purple-100">Students Learning</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-8 text-white shadow-xl">
+                    <div class="text-4xl font-bold mb-2">98%</div>
+                    <p class="text-blue-100">Success Rate</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-3xl p-8 text-white shadow-xl">
+                    <div class="text-4xl font-bold mb-2">2.5K</div>
+                    <p class="text-green-100">Active Today</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Planner Section -->
+        <section id="study-planner-section" class="section-content hidden max-w-7xl mx-auto px-6 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Your Study Plan</h2>
+                <p class="text-xl text-gray-600">Personalized schedule based on your learning patterns</p>
+            </div>
+
+            <!-- Study Plan Dashboard -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Weekly Overview -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">This Week's Schedule</h3>
+                        <div class="space-y-4" id="study-schedule">
+                            <!-- Schedule items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Progress This Week</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Completed</span>
+                                <span class="font-bold text-green-600" id="completed-count">0/7</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4">
+                                <div class="bg-gradient-to-r from-green-400 to-green-500 h-4 rounded-full transition-all duration-500" id="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl p-6 text-white shadow-xl">
+                        <h4 class="text-xl font-bold mb-2">Study Streak</h4>
+                        <div class="text-3xl font-bold mb-2">7 Days 🔥</div>
+                        <p class="text-purple-100 text-sm">Keep it up!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept Fixer Section -->
+        <section id="concept-fixer-section" class="section-content hidden max-w-7xl mx-auto px-6 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Concept Gap Fixer</h2>
+                <p class="text-xl text-gray-600">AI detects gaps in your understanding and helps fix them</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Question Interface -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Practice Question</h3>
+                    <div id="question-container">
+                        <!-- Question will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedback-container" class="hidden">
+                    <!-- Feedback will be shown here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Language Support Section -->
+        <section id="language-support-section" class="section-content hidden max-w-7xl mx-auto px-6 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Language Support</h2>
+                <p class="text-xl text-gray-600">Learn in your preferred language</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Language Selector -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Choose Your Language</h3>
+                    <select id="language-selector" class="w-full md:w-auto bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <option value="english">English</option>
+                        <option value="hindi">हिंदी (Hindi)</option>
+                        <option value="kannada">ಕನ್ನಡ (Kannada)</option>
+                        <option value="marathi">मराठी (Marathi)</option>
+                    </select>
+                </div>
+
+                <!-- Content Display -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Learning Content</h3>
+                    <div id="translated-content">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doubt Buddy Section -->
+        <section id="doubt-buddy-section" class="section-content hidden max-w-7xl mx-auto px-6 py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Doubt Buddy</h2>
+                <p class="text-xl text-gray-600">Ask me anything about your studies!</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Chat Interface -->
+                <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                    <!-- Chat Messages -->
+                    <div class="h-96 overflow-y-auto p-6" id="chat-messages">
+                        <!-- Initial message -->
+                        <div class="flex items-start space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-lg">🦸‍♀️</span>
+                            </div>
+                            <div class="bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 max-w-md">
+                                <p class="text-gray-800">Hi! I'm your learning buddy. Ask me any question about your studies and I'll help you understand it better! 😊</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="border-t border-gray-200 p-6">
+                        <div class="flex space-x-3">
+                            <input type="text" id="doubt-input" placeholder="Type your question here..." class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <button onclick="askDoubt()" class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-2xl hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold">
+                                Ask
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/learn-app.js"></script>
+</body>
+</html>

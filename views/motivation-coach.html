@@ -3,128 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LearnFlow Motivation Coach - LearnBuddy</title>
-    <link href="/css/styles.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Motivation Coach - LearnBuddy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/enhanced-styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100 min-h-screen" style="font-family: 'Nunito', sans-serif;">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 shadow-lg">
+<body class="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 min-h-screen font-['Plus_Jakarta_Sans',sans-serif] relative overflow-x-hidden">
+    <!-- Enhanced Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-xl border-b border-white/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+            <div class="flex items-center justify-between h-20">
+                <!-- Back Button & Logo -->
                 <div class="flex items-center space-x-4">
-                    <button onclick="goHome()" class="text-white hover:text-green-200 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
+                    <button onclick="goHome()" class="p-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/20">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg bounce-animation">
-                            <span class="text-2xl">💪</span>
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
-                            <h1 class="text-2xl font-bold text-white" style="font-family: 'Fredoka One', cursive;" data-en="LearnFlow Motivation Coach" data-hi="लर्नफ्लो प्रेरणा कोच">LearnFlow Motivation Coach</h1>
-                            <p class="text-green-100 text-sm" data-en="Your personal cheerleader!" data-hi="आपका व्यक्तिगत चीयरलीडर!">Your personal cheerleader!</p>
+                            <h1 class="text-xl font-bold text-white">Motivation Coach</h1>
+                            <p class="text-xs text-white/80">Your Personal Cheerleader</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Breadcrumb -->
+                <div class="flex items-center space-x-2 text-white/80">
+                    <a href="/dashboard" class="hover:text-white transition-colors">Dashboard</a>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    <span class="text-yellow-400 font-semibold">Motivation Coach</span>
+                </div>
+
+                <!-- Language Toggle -->
                 <div class="flex items-center space-x-4">
-                    <button id="languageToggle" class="bg-white hover:bg-gray-100 text-green-600 px-4 py-2 rounded-full font-semibold transition-all duration-300 shadow-lg">
+                    <button id="languageToggle" class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 text-sm rounded-full hover:bg-white/30 transition-all duration-300 border border-white/20">
                         🌐 English
                     </button>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
         <!-- Today's Motivation -->
-        <div class="bg-gradient-to-br from-emerald-400 to-green-500 rounded-3xl shadow-xl p-8 mb-8 text-white slide-in-up">
+        <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 mb-8 text-white">
             <div class="text-center">
-                <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6 bounce-animation">
-                    <span class="text-4xl">🌟</span>
+                <div class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 animate-float border border-white/20">
+                    <i data-lucide="star" class="w-12 h-12 text-yellow-400"></i>
                 </div>
-                <h2 class="text-3xl font-bold mb-4" style="font-family: 'Fredoka One', cursive;" data-en="Today's Personal Message" data-hi="आज का व्यक्तिगत संदेश">Today's Personal Message</h2>
-                <div id="todaysMotivation" class="bg-white bg-opacity-10 rounded-2xl p-6 mb-6">
-                    <p class="text-xl font-semibold mb-2" data-en="Hey Champion! 🏆" data-hi="अरे चैंपियन! 🏆">Hey Champion! 🏆</p>
-                    <p class="text-green-100 text-lg" data-en="I noticed you're getting better at Math every day! You solved 8 more problems correctly than last week. Keep going - you're building an amazing math brain! 🧠✨" data-hi="मैंने देखा है कि आप रोज गणित में बेहतर हो रहे हैं! आपने पिछले सप्ताह से 8 और सवाल सही किए हैं। आगे बढ़ते रहें - आप एक अद्भुत गणित मस्तिष्क बना रहे हैं! 🧠✨">I noticed you're getting better at Math every day! You solved 8 more problems correctly than last week. Keep going - you're building an amazing math brain! 🧠✨</p>
+                <h2 class="text-3xl font-bold mb-4 text-white">Today's Personal Message</h2>
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 mb-6">
+                    <p class="text-xl font-semibold mb-2 text-white">Hey Champion! 🏆</p>
+                    <p class="text-white/80 text-lg">I noticed you're getting better at Math every day! You solved 8 more problems correctly than last week. Keep going - you're building an amazing math brain! 🧠✨</p>
                 </div>
-                <button onclick="getNewMotivation()" class="bg-white text-green-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors" data-en="🎲 Get New Message" data-hi="🎲 नया संदेश पाएं">🎲 Get New Message</button>
+                <button onclick="getNewMotivation()" class="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full font-bold hover:bg-white/30 transition-all duration-300 border border-white/20">🎲 Get New Message</button>
             </div>
         </div>
 
         <!-- Behavior Analysis -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+        <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 mb-8">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-2xl font-bold text-gray-900" style="font-family: 'Fredoka One', cursive;" data-en="🔍 What I Notice About You" data-hi="🔍 मैं आपके बारे में क्या देखता हूं">🔍 What I Notice About You</h3>
+                <h3 class="text-2xl font-bold text-white">🔍 What I Notice About You</h3>
                 <div class="flex items-center space-x-2">
-                    <span class="text-sm text-gray-500" data-en="AI Analysis" data-hi="AI विश्लेषण">AI Analysis</span>
+                    <span class="text-sm text-white/80">AI Analysis</span>
                     <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Learning Pattern Analysis -->
-                <div class="behavior-card bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                            <span class="text-xl">📊</span>
+                        <div class="w-12 h-12 bg-blue-500/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                            <i data-lucide="bar-chart" class="w-6 h-6 text-blue-400"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-900" data-en="Learning Pattern" data-hi="सीखने का पैटर्न">Learning Pattern</h4>
-                            <p class="text-xs text-blue-600" data-en="Last 7 days" data-hi="पिछले 7 दिन">Last 7 days</p>
+                            <h4 class="font-bold text-white">Learning Pattern</h4>
+                            <p class="text-xs text-white/80">Last 7 days</p>
                         </div>
                     </div>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600" data-en="Best study time" data-hi="सबसे अच्छा अध्ययन समय">Best study time</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full" data-en="4:00 PM - 6:00 PM" data-hi="शाम 4:00 - 6:00">4:00 PM - 6:00 PM</span>
+                            <span class="text-sm text-white/80">Best study time</span>
+                            <span class="bg-white/20 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20">4:00 PM - 6:00 PM</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600" data-en="Favorite subject" data-hi="पसंदीदा विषय">Favorite subject</span>
-                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full" data-en="Science" data-hi="विज्ञान">Science</span>
+                            <span class="text-sm text-white/80">Favorite subject</span>
+                            <span class="bg-white/20 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full border border-white/20">Science</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600" data-en="Attention span" data-hi="ध्यान अवधि">Attention span</span>
-                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full" data-en="25 minutes" data-hi="25 मिनट">25 minutes</span>
+                            <span class="text-sm text-white/80">Attention span</span>
+                            <span class="bg-green-500/20 backdrop-blur-sm text-green-400 text-xs px-2 py-1 rounded-full border border-white/20">25 minutes</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Motivation Triggers -->
-                <div class="behavior-card bg-purple-50 border border-purple-200 rounded-2xl p-6">
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                            <span class="text-xl">🎯</span>
+                        <div class="w-12 h-12 bg-purple-500/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                            <i data-lucide="target" class="w-6 h-6 text-purple-400"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-900" data-en="What Motivates You" data-hi="आपको क्या प्रेरित करता है">What Motivates You</h4>
-                            <p class="text-xs text-purple-600" data-en="AI detected" data-hi="AI द्वारा पाया गया">AI detected</p>
+                            <h4 class="font-bold text-white">What Motivates You</h4>
+                            <p class="text-xs text-white/80">AI detected</p>
                         </div>
                     </div>
                     <div class="space-y-2">
                         <div class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span class="text-sm text-gray-700" data-en="Visual learning with colorful examples" data-hi="रंगीन उदाहरणों के साथ दृश्य सीखना">Visual learning with colorful examples</span>
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span class="text-sm text-white/80">Visual learning with colorful examples</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span class="text-sm text-gray-700" data-en="Short success celebrations" data-hi="छोटी सफलता का जश्न">Short success celebrations</span>
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span class="text-sm text-white/80">Short success celebrations</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span class="text-sm text-gray-700" data-en="Friendly competition with yourself" data-hi="अपने साथ मैत्रीपूर्ण प्रतिस्पर्धा">Friendly competition with yourself</span>
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span class="text-sm text-white/80">Friendly competition with yourself</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <span class="text-green-500">✓</span>
-                            <span class="text-sm text-gray-700" data-en="Story-based problems" data-hi="कहानी आधारित समस्याएं">Story-based problems</span>
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            <span class="text-sm text-white/80">Story-based problems</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Energy Levels -->
-                <div class="behavior-card bg-orange-50 border border-orange-200 rounded-2xl p-6">
+        <!-- Action Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300">
+                <div class="w-16 h-16 bg-green-500/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                    <i data-lucide="trophy" class="w-8 h-8 text-green-400"></i>
+                </div>
+                <h4 class="font-bold text-white mb-2">Celebrate Wins</h4>
+                <p class="text-white/80 text-sm mb-4">Acknowledge your progress and achievements</p>
+                <button class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-white/30 transition-all duration-300 border border-white/20 text-sm">🎉 Celebrate</button>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300">
+                <div class="w-16 h-16 bg-blue-500/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                    <i data-lucide="zap" class="w-8 h-8 text-blue-400"></i>
+                </div>
+                <h4 class="font-bold text-white mb-2">Quick Boost</h4>
+                <p class="text-white/80 text-sm mb-4">Get instant motivation when you need it</p>
+                <button class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-white/30 transition-all duration-300 border border-white/20 text-sm">⚡ Boost Me</button>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300">
+                <div class="w-16 h-16 bg-purple-500/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                    <i data-lucide="calendar" class="w-8 h-8 text-purple-400"></i>
+                </div>
+                <h4 class="font-bold text-white mb-2">Set Goals</h4>
+                <p class="text-white/80 text-sm mb-4">Create achievable learning objectives</p>
+                <button class="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-white/30 transition-all duration-300 border border-white/20 text-sm">🎯 Set Goal</button>
+            </div>
+        </div>
+    </main>
                     <div class="flex items-center space-x-3 mb-4">
                         <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
                             <span class="text-xl">⚡</span>
@@ -224,43 +277,97 @@
                             <h4 class="font-bold text-gray-900" data-en="Confidence Booster" data-hi="आत्मविश्वास बूस्टर">Confidence Booster</h4>
                             <p class="text-xs text-green-600" data-en="You deserve this!" data-hi="आप इसके हकदार हैं!">You deserve this!</p>
                         </div>
-                    </div>
-                    <p class="text-gray-700 mb-4" data-en="You're doing amazing! Last week you improved in 3 different subjects. That's like being a learning superhero! 🦸‍♀️ Keep being awesome!" data-hi="आप बहुत अच्छा कर रहे हैं! पिछले हफ्ते आपने 3 अलग-अलग विषयों में सुधार किया। यह एक सीखने के सुपरहीरो होने जैसा है! 🦸‍♀️ बेहतरीन बने रहें!">You're doing amazing! Last week you improved in 3 different subjects. That's like being a learning superhero! 🦸‍♀️ Keep being awesome!</p>
-                    <button onclick="shareAchievement()" class="text-green-600 hover:text-green-800 text-sm font-semibold" data-en="📢 Share this win!" data-hi="📢 इस जीत को साझा करें!">📢 Share this win!</button>
-                </div>
-
-                <!-- Study Strategy -->
-                <div class="advice-card bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-6">
+    <!-- Footer -->
+    <footer class="bg-white/10 backdrop-blur-xl border-t border-white/20 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                            <span class="text-xl">📚</span>
+                        <div class="w-10 h-10 bg-yellow-400/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                            <span class="text-xl">🦉</span>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900" data-en="Study Strategy" data-hi="अध्ययन रणनीति">Study Strategy</h4>
-                            <p class="text-xs text-purple-600" data-en="Perfect for you" data-hi="आपके लिए एकदम सही">Perfect for you</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">LearnBuddy</h3>
                     </div>
-                    <p class="text-gray-700 mb-4" data-en="Try the 'Story Method' for your next English lesson! Since you love stories, create a mini-story using new vocabulary words. It'll stick in your brain like magic! ✨" data-hi="अपने अगले अंग्रेजी पाठ के लिए 'कहानी विधि' का प्रयास करें! चूंकि आप कहानियों से प्यार करते हैं, नए शब्दावली शब्दों का उपयोग करके एक मिनी-कहानी बनाएं। यह जादू की तरह आपके दिमाग में चिपक जाएगा! ✨">Try the 'Story Method' for your next English lesson! Since you love stories, create a mini-story using new vocabulary words. It'll stick in your brain like magic! ✨</p>
-                    <button onclick="tryStrategy()" class="text-purple-600 hover:text-purple-800 text-sm font-semibold" data-en="🚀 Try this now!" data-hi="🚀 अभी कोशिश करें!">🚀 Try this now!</button>
+                    <p class="text-white/80 mb-4">Making learning fun and personalized for every child with the power of AI!</p>
+                    <div class="flex space-x-4">
+                        <button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 px-4 py-2 rounded-lg text-sm transition-colors border border-white/20 text-white">📧 Contact Us</button>
+                        <button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 px-4 py-2 rounded-lg text-sm transition-colors border border-white/20 text-white">💬 Support</button>
+                    </div>
                 </div>
-
-                <!-- Challenge -->
-                <div class="advice-card bg-gradient-to-br from-orange-50 to-yellow-50 border border-orange-200 rounded-2xl p-6">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                            <span class="text-xl">🏆</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900" data-en="Fun Challenge" data-hi="मजेदार चुनौती">Fun Challenge</h4>
-                            <p class="text-xs text-orange-600" data-en="Stretch your brain!" data-hi="अपने दिमाग को स्ट्रेच करें!">Stretch your brain!</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-4" data-en="Can you solve 5 Science questions in a row without any mistakes? I believe you can do it! Your Science power is growing stronger every day! 🔬⚡" data-hi="क्या आप लगातार 5 विज्ञान के सवाल बिना किसी गलती के हल कर सकते हैं? मुझे विश्वास है कि आप यह कर सकते हैं! आपकी विज्ञान शक्ति हर दिन मजबूत होती जा रही है! 🔬⚡">Can you solve 5 Science questions in a row without any mistakes? I believe you can do it! Your Science power is growing stronger every day! 🔬⚡</p>
-                    <button onclick="acceptChallenge()" class="text-orange-600 hover:text-orange-800 text-sm font-semibold" data-en="💪 Accept Challenge!" data-hi="💪 चुनौती स्वीकार करें!">💪 Accept Challenge!</button>
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Features</h4>
+                    <ul class="space-y-2 text-sm text-white/80">
+                        <li>Concept Gap Mapper</li>
+                        <li>Motivation Coach</li>
+                        <li>Local Language Support</li>
+                        <li>Smart Retry Helper</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-white">Parents & Teachers</h4>
+                    <ul class="space-y-2 text-sm text-white/80">
+                        <li>Progress Reports</li>
+                        <li>Learning Analytics</li>
+                        <li>Parent Dashboard</li>
+                        <li>Safe Environment</li>
+                    </ul>
                 </div>
             </div>
+            <div class="border-t border-white/20 mt-8 pt-8 text-center text-sm text-white/60">
+                <p>© 2025 LearnBuddy. Made with ❤️ for young learners in India.</p>
+            </div>
         </div>
+    </footer>
 
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // Simple navigation function
+        function goHome() {
+            window.location.href = '/dashboard';
+        }
+        
+        // Motivation functions (simplified for theme demo)
+        function getNewMotivation() {
+            const messages = [
+                "You're crushing it! Keep up the amazing work! 🌟",
+                "Every mistake is a step closer to mastery! �",
+                "Your dedication is inspiring! 🚀",
+                "Learning is an adventure, and you're the hero! 🦸‍♀️"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            document.querySelector('#todaysMotivation p:last-child').textContent = randomMessage;
+        }
+    </script>
+
+    <style>
+        /* Floating animation for icons and cards */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Mobile responsive enhancements */
+        @media (max-width: 768px) {
+            .grid-cols-1.md\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-1.md\\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/motivation-coach.js"></script>
+</body>
+</html>
         <!-- Progress Celebration -->
         <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl shadow-xl p-8 text-white">
             <div class="text-center">

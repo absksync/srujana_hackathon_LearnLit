@@ -102,6 +102,32 @@ app.get('/mascot-buddy', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'mascot-buddy.html'));
 });
 
+// New AI Feature Pages
+app.get('/knowledge-gap-mapper', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'knowledge-gap-mapper.html'));
+});
+
+app.get('/study-planner', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'study-planner.html'));
+});
+
+app.get('/language-support', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'language-support.html'));
+});
+
+app.get('/doubt-buddy', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'doubt-buddy.html'));
+});
+
+// Legacy routes for compatibility
+app.get('/vernacular-engine', (req, res) => {
+    res.redirect('/language-support');
+});
+
+app.get('/concept-gaps', (req, res) => {
+    res.redirect('/knowledge-gap-mapper');
+});
+
 // Start server (for local development)
 if (ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
