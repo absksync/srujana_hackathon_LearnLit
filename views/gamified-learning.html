@@ -1,3 +1,46 @@
+<!-- Sample Quiz for Class 6 Students -->
+<section class="bg-white rounded-3xl p-10 shadow-xl border border-purple-100 mb-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Class 6 Quiz: Math & Science</h2>
+    <form id="class6-quiz">
+        <div class="mb-6">
+            <label class="block text-lg font-semibold mb-2">1. What is the value of 7 × 8?</label>
+            <input type="number" name="q1" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+        </div>
+        <div class="mb-6">
+            <label class="block text-lg font-semibold mb-2">2. Which planet is known as the Red Planet?</label>
+            <input type="text" name="q2" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+        </div>
+        <div class="mb-6">
+            <label class="block text-lg font-semibold mb-2">3. What is the perimeter of a rectangle with length 5 cm and width 3 cm?</label>
+            <input type="number" name="q3" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+        </div>
+        <div class="mb-6">
+            <label class="block text-lg font-semibold mb-2">4. Water boils at what temperature (in °C)?</label>
+            <input type="number" name="q4" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+        </div>
+        <button type="submit" class="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-3 rounded-2xl font-bold text-lg shadow-lg hover:scale-105 transition-all duration-300">Submit Quiz</button>
+    </form>
+    <div id="quiz-result" class="mt-8 text-xl font-bold text-green-700"></div>
+</section>
+
+<script>
+document.getElementById('class6-quiz').onsubmit = function(e) {
+    e.preventDefault();
+    const answers = {
+        q1: '56',
+        q2: 'Mars',
+        q3: '16',
+        q4: '100'
+    };
+    let score = 0;
+    const form = e.target;
+    if (form.q1.value == answers.q1) score++;
+    if (form.q2.value.trim().toLowerCase() === answers.q2.toLowerCase()) score++;
+    if (form.q3.value == answers.q3) score++;
+    if (form.q4.value == answers.q4) score++;
+    document.getElementById('quiz-result').textContent = `You scored ${score}/4!`;
+};
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -422,6 +465,9 @@
             
             try {
                 switch(gameType) {
+                    case 'quiz':
+                        showLocalQuizModal();
+                        break;
                     case 'mario':
                         await gamingService.launchMarioQuest();
                         break;
@@ -434,9 +480,6 @@
                     case 'duolingo':
                         await gamingService.launchDuolingoStyle();
                         break;
-                    case 'quiz':
-                        await startQuizChallenge();
-                        break;
                     case 'ai-tutor':
                         await startAITutorChallenge();
                         break;
@@ -447,6 +490,55 @@
             } finally {
                 hideLoading();
             }
+// Local Quiz Modal for Quiz Challenge Arena
+function showLocalQuizModal() {
+    const modal = document.createElement('div');
+    modal.id = 'localQuizModal';
+    modal.className = 'fixed inset-0 bg-black/80 z-50 flex items-center justify-center';
+    modal.innerHTML = `
+        <div class="bg-white rounded-3xl p-10 shadow-xl w-full max-w-lg text-gray-900 relative">
+            <button onclick="document.body.removeChild(document.getElementById('localQuizModal'))" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-500">×</button>
+            <h2 class="text-3xl font-bold mb-6 text-center">Class 6 Quiz: Math & Science</h2>
+            <form id="class6-quiz-modal">
+                <div class="mb-6">
+                    <label class="block text-lg font-semibold mb-2">1. What is the value of 7 × 8?</label>
+                    <input type="number" name="q1" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-lg font-semibold mb-2">2. Which planet is known as the Red Planet?</label>
+                    <input type="text" name="q2" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-lg font-semibold mb-2">3. What is the perimeter of a rectangle with length 5 cm and width 3 cm?</label>
+                    <input type="number" name="q3" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-lg font-semibold mb-2">4. Water boils at what temperature (in °C)?</label>
+                    <input type="number" name="q4" class="w-full border-2 border-gray-300 rounded-2xl px-6 py-3 text-lg" required>
+                </div>
+                <button type="submit" class="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-3 rounded-2xl font-bold text-lg shadow-lg hover:scale-105 transition-all duration-300">Submit Quiz</button>
+            </form>
+            <div id="quiz-result-modal" class="mt-8 text-xl font-bold text-green-700 text-center"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    document.getElementById('class6-quiz-modal').onsubmit = function(e) {
+        e.preventDefault();
+        const answers = {
+            q1: '56',
+            q2: 'Mars',
+            q3: '16',
+            q4: '100'
+        };
+        let score = 0;
+        const form = e.target;
+        if (form.q1.value == answers.q1) score++;
+        if (form.q2.value.trim().toLowerCase() === answers.q2.toLowerCase()) score++;
+        if (form.q3.value == answers.q3) score++;
+        if (form.q4.value == answers.q4) score++;
+        document.getElementById('quiz-result-modal').textContent = `You scored ${score}/4!`;
+    };
+}
         }
 
         async function startQuizChallenge() {

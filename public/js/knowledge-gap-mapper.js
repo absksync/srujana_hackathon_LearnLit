@@ -1,49 +1,51 @@
 // Knowledge Gap Mapper Logic
 // Theme: Friendly, purple, rounded, Poppins/Open Sans
 
+
+// --- Agentic Knowledge Gap Mapper Integration ---
 document.addEventListener('DOMContentLoaded', function() {
-  const answerInput = document.getElementById('answerInput');
-  const submitBtn = document.getElementById('submitBtn');
-  const feedback = document.getElementById('feedback');
-  const mistakeBox = document.getElementById('mistakeBox');
-  const starCount = document.getElementById('starCount');
+  const questionEl = document.getElementById('current-question');
+  const answerInput = document.getElementById('gap-answer');
+  const submitBtn = document.querySelector('button[onclick="checkGapAnswer()"]');
+  const feedbackEl = document.getElementById('gap-feedback');
+  const starCountEl = document.getElementById('streak');
+  let currentQuestionId = null;
+  let stars = 0;
 
-  let stars = parseInt(localStorage.getItem('kgmStars') || '0');
-  starCount.textContent = `⭐ ${stars}`;
-
-  const correctAnswer = 56;
-  const mistakeSteps = [
-    'Step 1: 7 × 8 means adding 7 eight times.',
-    'Step 2: 7 + 7 = 14, 14 + 7 = 21, 21 + 7 = 28, 28 + 7 = 35, 35 + 7 = 42, 42 + 7 = 49, 49 + 7 = 56.',
-    'Step 3: The answer is 56. If you got a different result, check your multiplication steps.'
-  ];
-
-  function showStarAnimation() {
-    feedback.innerHTML = '<span class="star-anim">⭐</span> Great job! You earned a star!';
-    feedback.className = 'feedback success';
-    setTimeout(() => {
-      feedback.innerHTML = '';
-      feedback.className = 'feedback';
-    }, 2000);
+  async function fetchQuestion() {
+    const res = await fetch('/api/knowledge-gap/question');
+    const data = await res.json();
+    currentQuestionId = data.id;
+    questionEl.textContent = data.question;
+    answerInput.value = '';
+    feedbackEl.innerHTML = '';
+    feedbackEl.classList.add('hidden');
   }
 
-  function showMistakeExplanation() {
-    mistakeBox.innerHTML = mistakeSteps.map(s => `<div>${s}</div>`).join('');
-    mistakeBox.className = 'mistake-box';
-  }
-
-  submitBtn.addEventListener('click', function() {
-    const userAns = parseInt(answerInput.value);
-    mistakeBox.className = 'mistake-box hidden';
-    if (userAns === correctAnswer) {
-      stars++;
-      localStorage.setItem('kgmStars', stars);
-      starCount.textContent = `⭐ ${stars}`;
-      showStarAnimation();
+  async function submitAnswer() {
+    const answer = answerInput.value.trim();
+    if (!answer) return;
+    // For agentic workflow, treat answer as solution steps array
+    const res = await fetch('/api/knowledge-gap/answer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question_id: currentQuestionId, steps: [answer] })
+    });
+    const data = await res.json();
+    feedbackEl.classList.remove('hidden');
+    if (data.is_correct) {
+      stars = data.correct_question_counter;
+      starCountEl.textContent = stars;
+      feedbackEl.innerHTML = `<div class='bg-green-50 p-4 rounded-lg'>🎉 Correct! ${data.feedback}</div>`;
+      setTimeout(fetchQuestion, 2000);
     } else {
-      feedback.textContent = 'Oops! That’s not quite right.';
-      feedback.className = 'feedback error';
-      showMistakeExplanation();
+      feedbackEl.innerHTML = `<div class='bg-red-50 p-4 rounded-lg'>❌ Incorrect.<br>${data.error_analysis}<br>${data.feedback}</div>`;
     }
+  }
+
+  submitBtn.onclick = submitAnswer;
+  answerInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') submitAnswer();
   });
+  fetchQuestion();
 });
