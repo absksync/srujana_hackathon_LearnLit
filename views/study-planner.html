@@ -203,31 +203,260 @@
 
     <!-- JavaScript -->
     <script>
-        let tasks = [
-            { id: 1, name: "Math Practice", subject: "Math", time: "5:00-5:30 PM", duration: 30, completed: false, priority: "High", day: "Monday" },
-            { id: 2, name: "Science Quiz Prep", subject: "Science", time: "6:00-6:45 PM", duration: 45, completed: false, priority: "Medium", day: "Monday" },
-            { id: 3, name: "English Reading", subject: "English", time: "7:00-7:30 PM", duration: 30, completed: true, priority: "Low", day: "Monday" },
-            { id: 4, name: "History Notes", subject: "History", time: "5:30-6:15 PM", duration: 45, completed: false, priority: "High", day: "Tuesday" },
-            { id: 5, name: "Geography Maps", subject: "Geography", time: "4:00-4:30 PM", duration: 30, completed: false, priority: "Medium", day: "Wednesday" }
-        ];
+        // 📅 ENHANCED DYNAMIC STUDY PLANNER WITH ADAPTIVE SCHEDULING
         
-        let completedTasksCount = tasks.filter(t => t.completed).length;
-        let totalTasksCount = tasks.length;
-        
-        function updateProgress() {
-            const weeklyProgress = Math.round((completedTasksCount / totalTasksCount) * 100);
-            document.getElementById('weekly-progress').textContent = weeklyProgress + '%';
-            document.getElementById('weekly-bar').style.width = weeklyProgress + '%';
+        // Study Activity Types
+        const ACTIVITY_TYPES = {
+            'concept-fixer': { name: 'Concept Fixer', icon: '🧠', color: 'blue', duration: 30 },
+            'doubt-buddy': { name: 'Doubt Buddy', icon: '🤖', color: 'purple', duration: 20 },
+            'quiz-practice': { name: 'Quiz Practice', icon: '📝', color: 'green', duration: 25 },
+            'language-support': { name: 'Language Support', icon: '🌍', color: 'orange', duration: 15 },
+            'knowledge-gap': { name: 'Knowledge Gap Mapper', icon: '🎯', color: 'red', duration: 35 }
+        };
+
+        // Subjects
+        const SUBJECTS = ['Math', 'Science', 'English', 'History', 'Geography'];
+
+        // Global State Management
+        let studyState = {
+            currentSession: null,
+            weeklyPlan: {},
+            userBehavior: {},
+            progressData: {},
+            streakCount: 0,
+            totalStudyTime: 0,
+            completedTasks: 0,
+            preferredTimes: {},
+            subjectPreferences: {}
+        };
+
+        // 🎯 STEP 1: Initialize Personalized Study Schedule
+        function initializeStudyPlanner() {
+            loadUserBehaviorData();
+            trackCurrentSession();
+            generateAdaptivePlan();
+            updateProgressDisplay();
+            renderTodayTasks();
+            renderWeeklyCalendar();
+            setCurrentDate();
         }
-        
-        function setCurrentDate() {
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', options);
+
+        // 🎯 STEP 2: Track User Behavior (Local Storage)
+        function trackCurrentSession() {
+            const now = new Date();
+            const timeSlot = getTimeSlot(now);
+            const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' });
+            
+            studyState.currentSession = {
+                startTime: now.toISOString(),
+                timeSlot: timeSlot,
+                dayOfWeek: dayOfWeek,
+                activities: []
+            };
+
+            // Track login time patterns
+            if (!studyState.preferredTimes[timeSlot]) {
+                studyState.preferredTimes[timeSlot] = 0;
+            }
+            studyState.preferredTimes[timeSlot]++;
+
+            // Save session start
+            saveUserBehaviorData();
+            
+            console.log(`📊 Session tracked: ${dayOfWeek} at ${timeSlot}`);
         }
-        
+
+        function trackActivity(activityType, subject, duration) {
+            const activity = {
+                type: activityType,
+                subject: subject,
+                duration: duration,
+                timestamp: new Date().toISOString(),
+                completed: false
+            };
+
+            if (studyState.currentSession) {
+                studyState.currentSession.activities.push(activity);
+            }
+            
+            // Update subject preferences
+            if (!studyState.subjectPreferences[subject]) {
+                studyState.subjectPreferences[subject] = 0;
+            }
+            studyState.subjectPreferences[subject] += duration;
+
+            saveUserBehaviorData();
+            console.log(`📚 Activity tracked: ${activityType} - ${subject} (${duration}min)`);
+        }
+
+        // 🎯 STEP 3: Adaptive Plan Generation (Smart Logic)
+        function generateAdaptivePlan() {
+            const now = new Date();
+            
+            // Generate plan for today and upcoming days
+            studyState.weeklyPlan = {};
+            
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(now);
+                date.setDate(date.getDate() + i);
+                const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+
+                studyState.weeklyPlan[dayName] = generateDayPlan(dayName, i === 0);
+            }
+
+            console.log('🧠 Adaptive plan generated based on user behavior');
+        }
+
+        function generateDayPlan(dayName, isToday) {
+            const preferredTime = getMostPreferredTime() || '17:00';
+            const preferredSubjects = getTopPreferredSubjects();
+            
+            const plans = [];
+            const sessionCount = isToday ? 3 : Math.floor(Math.random() * 2) + 2;
+            
+            for (let i = 0; i < sessionCount; i++) {
+                const startTime = calculateSessionTime(preferredTime, i);
+                const activity = selectOptimalActivity(dayName, i, preferredSubjects);
+                const duration = ACTIVITY_TYPES[activity.type].duration;
+                
+                plans.push({
+                    id: `${dayName}-${i}`,
+                    name: `${ACTIVITY_TYPES[activity.type].name}: ${activity.subject}`,
+                    subject: activity.subject,
+                    time: `${startTime} - ${addMinutes(startTime, duration)}`,
+                    duration: duration,
+                    completed: false,
+                    priority: i === 0 ? 'High' : i === 1 ? 'Medium' : 'Low',
+                    day: dayName,
+                    activityType: activity.type,
+                    recommended: true
+                });
+            }
+
+            return plans;
+        }
+
+        function selectOptimalActivity(dayName, sessionIndex, preferredSubjects) {
+            const activityTypes = Object.keys(ACTIVITY_TYPES);
+            let selectedType, selectedSubject;
+
+            // Smart activity selection based on user behavior
+            if (sessionIndex === 0) {
+                selectedType = 'knowledge-gap'; // Start with gap analysis
+            } else if (sessionIndex === 1) {
+                selectedType = Math.random() > 0.5 ? 'concept-fixer' : 'quiz-practice';
+            } else {
+                selectedType = Math.random() > 0.5 ? 'doubt-buddy' : 'language-support';
+            }
+
+            // Select subject based on preferences
+            if (preferredSubjects.length > 0) {
+                selectedSubject = preferredSubjects[sessionIndex % preferredSubjects.length];
+            } else {
+                selectedSubject = SUBJECTS[Math.floor(Math.random() * SUBJECTS.length)];
+            }
+
+            return { type: selectedType, subject: selectedSubject };
+        }
+
+        // 🎯 STEP 4: Progress Tracking System
+        function toggleTask(taskId) {
+            // Find the task in weekly plan
+            let task = null;
+            Object.values(studyState.weeklyPlan).forEach(dayTasks => {
+                const foundTask = dayTasks.find(t => t.id === taskId);
+                if (foundTask) task = foundTask;
+            });
+
+            if (task) {
+                task.completed = !task.completed;
+                
+                if (task.completed) {
+                    // Update progress stats
+                    studyState.completedTasks++;
+                    studyState.totalStudyTime += task.duration;
+                    studyState.streakCount++;
+                    
+                    // Track the completed activity
+                    trackActivity(task.activityType, task.subject, task.duration);
+                    
+                    // Show celebration
+                    showCompletionCelebration(task);
+                } else {
+                    studyState.completedTasks = Math.max(0, studyState.completedTasks - 1);
+                    studyState.totalStudyTime = Math.max(0, studyState.totalStudyTime - task.duration);
+                }
+                
+                // Update displays
+                updateProgressDisplay();
+                renderTodayTasks();
+                renderWeeklyCalendar();
+                saveUserBehaviorData();
+                
+                if (task.completed) {
+                    suggestNextTask();
+                }
+            }
+        }
+
+        function showCompletionCelebration(task) {
+            const celebration = document.createElement('div');
+            celebration.innerHTML = `
+                <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onclick="this.remove()">
+                    <div class="bg-white rounded-3xl p-8 max-w-md mx-4 text-center animate-bounce">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h3 class="text-2xl font-bold text-green-600 mb-2">Task Completed!</h3>
+                        <p class="text-gray-600 mb-4">You completed ${task.name}!</p>
+                        <div class="bg-green-100 p-4 rounded-lg mb-4">
+                            <p class="text-green-800">+${task.duration} minutes study time</p>
+                            <p class="text-green-800">Streak: ${studyState.streakCount} tasks! 🔥</p>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                            Keep Learning! →
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(celebration);
+        }
+
+        function suggestNextTask() {
+            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const todayTasks = studyState.weeklyPlan[today] || [];
+            const nextTask = todayTasks.find(task => !task.completed);
+            
+            if (nextTask) {
+                const suggestion = document.createElement('div');
+                suggestion.innerHTML = `
+                    <div class="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded-lg shadow-lg z-50 max-w-sm">
+                        <h4 class="font-bold mb-2">🎯 Next Recommended:</h4>
+                        <p class="text-sm mb-3">${nextTask.name}</p>
+                        <div class="flex space-x-2">
+                            <button onclick="toggleTask('${nextTask.id}'); this.parentElement.parentElement.parentElement.remove();" 
+                                    class="bg-white text-blue-500 px-3 py-1 rounded text-sm hover:bg-gray-100">
+                                Start Now
+                            </button>
+                            <button onclick="this.parentElement.parentElement.parentElement.remove();" 
+                                    class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                Later
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(suggestion);
+                
+                setTimeout(() => {
+                    if (suggestion.parentNode) {
+                        suggestion.remove();
+                    }
+                }, 8000);
+            }
+        }
+
+        // 🎯 STEP 5: User-Friendly Display System
         function renderTodayTasks() {
-            const todayTasks = tasks.filter(task => task.day === "Monday"); // Assuming today is Monday
+            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const todayTasks = studyState.weeklyPlan[today] || [];
             const container = document.getElementById('today-tasks');
             
             container.innerHTML = todayTasks.map(task => `
@@ -240,11 +469,12 @@
                             <div>
                                 <div class="font-semibold text-gray-800">${task.name}</div>
                                 <div class="text-gray-600 text-sm">${task.time} • ${task.duration} min • ${task.priority} Priority</div>
+                                ${task.recommended ? '<div class="text-purple-600 text-xs font-medium">📍 AI Recommended</div>' : ''}
                             </div>
                         </div>
                         <div class="flex items-center space-x-3">
                             <span class="px-3 py-1 rounded-full text-xs font-semibold ${getPriorityColor(task.priority)}">${task.priority}</span>
-                            <button onclick="toggleTask(${task.id})" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${task.completed ? 'bg-green-500 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'}">
+                            <button onclick="toggleTask('${task.id}')" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${task.completed ? 'bg-green-500 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'}">
                                 ${task.completed ? '✓ Done' : 'Mark Done'}
                             </button>
                         </div>
@@ -255,23 +485,14 @@
         
         function renderWeeklyCalendar() {
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-            const dayTasks = {
-                'Monday': tasks.filter(t => t.day === 'Monday'),
-                'Tuesday': tasks.filter(t => t.day === 'Tuesday'),
-                'Wednesday': tasks.filter(t => t.day === 'Wednesday'),
-                'Thursday': [],
-                'Friday': [],
-                'Saturday': [],
-                'Sunday': []
-            };
-            
+            const fullDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
             const container = document.getElementById('weekly-calendar');
             
             container.innerHTML = days.map((day, index) => {
-                const fullDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][index];
-                const dayTaskList = dayTasks[fullDay] || [];
-                const completed = dayTaskList.filter(t => t.completed).length;
-                const total = dayTaskList.length;
+                const fullDay = fullDays[index];
+                const dayTasks = studyState.weeklyPlan[fullDay] || [];
+                const completed = dayTasks.filter(t => t.completed).length;
+                const total = dayTasks.length;
                 const progress = total > 0 ? (completed / total) * 100 : 0;
                 
                 return `
@@ -281,12 +502,12 @@
                             <div class="text-xs text-gray-600">${total} tasks</div>
                         </div>
                         <div class="space-y-2">
-                            ${dayTaskList.slice(0, 3).map(task => `
+                            ${dayTasks.slice(0, 2).map(task => `
                                 <div class="text-xs p-2 rounded-lg ${task.completed ? 'bg-green-100 text-green-800' : 'bg-white border'}">
-                                    ${task.name}
+                                    ${ACTIVITY_TYPES[task.activityType]?.icon || '📚'} ${task.subject}
                                 </div>
                             `).join('')}
-                            ${dayTaskList.length > 3 ? `<div class="text-xs text-gray-500 text-center">+${dayTaskList.length - 3} more</div>` : ''}
+                            ${dayTasks.length > 2 ? `<div class="text-xs text-gray-500 text-center">+${dayTasks.length - 2} more</div>` : ''}
                         </div>
                         <div class="mt-3">
                             <div class="w-full bg-gray-200 rounded-full h-2">
@@ -297,7 +518,92 @@
                 `;
             }).join('');
         }
-        
+
+        function updateProgressDisplay() {
+            // Calculate total tasks and completed across all days
+            let totalTasks = 0;
+            let completedTasks = 0;
+            
+            Object.values(studyState.weeklyPlan).forEach(dayTasks => {
+                totalTasks += dayTasks.length;
+                completedTasks += dayTasks.filter(t => t.completed).length;
+            });
+            
+            const weeklyProgress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            
+            document.getElementById('weekly-progress').textContent = weeklyProgress + '%';
+            document.getElementById('weekly-bar').style.width = weeklyProgress + '%';
+            
+            // Update other stats if elements exist
+            const completedElement = document.getElementById('completed-tasks');
+            const streakElement = document.getElementById('study-streak');
+            const timeElement = document.getElementById('total-time');
+            
+            if (completedElement) completedElement.textContent = studyState.completedTasks;
+            if (streakElement) streakElement.textContent = studyState.streakCount;
+            if (timeElement) timeElement.textContent = studyState.totalStudyTime;
+        }
+
+        // Utility Functions
+        function getTimeSlot(date) {
+            const hour = date.getHours();
+            if (hour < 12) return 'morning';
+            if (hour < 17) return 'afternoon';
+            return 'evening';
+        }
+
+        function getMostPreferredTime() {
+            const times = studyState.preferredTimes;
+            let maxCount = 0;
+            let preferredSlot = 'evening';
+            
+            Object.entries(times).forEach(([slot, count]) => {
+                if (count > maxCount) {
+                    maxCount = count;
+                    preferredSlot = slot;
+                }
+            });
+            
+            const timeMap = {
+                'morning': '09:00',
+                'afternoon': '14:00',
+                'evening': '17:00'
+            };
+            
+            return timeMap[preferredSlot] || '17:00';
+        }
+
+        function getTopPreferredSubjects() {
+            return Object.entries(studyState.subjectPreferences)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 3)
+                .map(([subject]) => subject);
+        }
+
+        function calculateSessionTime(baseTime, sessionIndex) {
+            const [hours, minutes] = baseTime.split(':').map(Number);
+            const sessionStart = new Date();
+            sessionStart.setHours(hours + sessionIndex, minutes, 0, 0);
+            
+            return sessionStart.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+            });
+        }
+
+        function addMinutes(timeString, minutes) {
+            const [hours, mins] = timeString.split(':').map(Number);
+            const date = new Date();
+            date.setHours(hours, mins + minutes, 0, 0);
+            
+            return date.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+            });
+        }
+
         function getSubjectColor(subject) {
             const colors = {
                 'Math': 'blue',
@@ -328,18 +634,98 @@
             };
             return colors[priority] || 'bg-gray-100 text-gray-800';
         }
-        
-        function toggleTask(taskId) {
-            const task = tasks.find(t => t.id === taskId);
-            if (task) {
-                task.completed = !task.completed;
-                completedTasksCount = tasks.filter(t => t.completed).length;
-                updateProgress();
-                renderTodayTasks();
-                renderWeeklyCalendar();
+
+        function setCurrentDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', options);
+        }
+
+        // Data Persistence
+        function saveUserBehaviorData() {
+            try {
+                localStorage.setItem('learnit-study-planner', JSON.stringify(studyState));
+                console.log('💾 Study planner data saved');
+            } catch (error) {
+                console.warn('Could not save study planner data:', error);
             }
         }
-        
+
+        function loadUserBehaviorData() {
+            try {
+                const saved = localStorage.getItem('learnit-study-planner');
+                if (saved) {
+                    const parsedData = JSON.parse(saved);
+                    studyState = { ...studyState, ...parsedData };
+                    console.log('📖 Study planner data loaded');
+                }
+            } catch (error) {
+                console.warn('Could not load study planner data:', error);
+            }
+        }
+
+        // Smart Plan Functions
+        function generateWeeklyPlan() {
+            generateAdaptivePlan();
+            renderTodayTasks();
+            renderWeeklyCalendar();
+            updateProgressDisplay();
+            
+            alert('🧠 Smart Weekly Plan Generated!\n\n' +
+                  'Based on your study behavior:\n' +
+                  `• Preferred study time: ${getMostPreferredTime()}\n` +
+                  `• Top subjects: ${getTopPreferredSubjects().slice(0, 2).join(', ')}\n` +
+                  `• Total study time: ${studyState.totalStudyTime} minutes\n` +
+                  `• Current streak: ${studyState.streakCount} tasks\n\n` +
+                  'Your plan adapts to your learning patterns! 🎯');
+        }
+
+        function startStudySession() {
+            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const todayTasks = studyState.weeklyPlan[today] || [];
+            const nextTask = todayTasks.find(task => !task.completed);
+            
+            if (nextTask) {
+                alert(`🎯 Study Session Started!\n\n` +
+                      `Current Task: ${nextTask.name}\n` +
+                      `Duration: ${nextTask.duration} minutes\n` +
+                      `Subject: ${nextTask.subject}\n` +
+                      `Priority: ${nextTask.priority}\n\n` +
+                      `🎵 Focus mode: Enabled\n` +
+                      `📱 Distractions: Blocked\n\n` +
+                      `Good luck with your studies! 🌟`);
+                
+                // Auto-mark as completed after a delay (for demo)
+                setTimeout(() => {
+                    if (confirm('Mark this session as completed?')) {
+                        toggleTask(nextTask.id);
+                    }
+                }, 5000);
+            } else {
+                alert('🎉 All tasks for today are completed!\n\nGreat job! Consider reviewing previous topics or preparing for tomorrow.');
+            }
+        }
+
+        function viewAnalytics() {
+            const topSubject = getTopPreferredSubjects()[0] || 'Math';
+            const preferredTime = getMostPreferredTime();
+            const timeSlot = preferredTime < '12:00' ? 'Morning' : preferredTime < '17:00' ? 'Afternoon' : 'Evening';
+            
+            alert('📈 Study Analytics\n\n' +
+                  '📊 Your Learning Profile:\n' +
+                  `• Total study time: ${studyState.totalStudyTime} minutes\n` +
+                  `• Tasks completed: ${studyState.completedTasks}\n` +
+                  `• Current streak: ${studyState.streakCount} tasks\n` +
+                  `• Favorite subject: ${topSubject}\n` +
+                  `• Preferred time: ${timeSlot}\n\n` +
+                  '🎯 AI Insights:\n' +
+                  '• Your consistency is improving\n' +
+                  '• Math sessions show strong focus\n' +
+                  `• ${timeSlot} study sessions are most productive\n\n` +
+                  'Keep up the excellent work! 🏆');
+        }
+
+        // Modal Functions
         function addCustomTask() {
             document.getElementById('task-modal').classList.remove('hidden');
         }
@@ -355,46 +741,41 @@
             const priority = document.getElementById('task-priority').value;
             
             if (name.trim()) {
+                const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
                 const newTask = {
-                    id: tasks.length + 1,
+                    id: `custom-${Date.now()}`,
                     name: name.trim(),
                     subject: subject,
-                    time: "TBD",
+                    time: 'Custom Time',
                     duration: duration,
                     completed: false,
                     priority: priority,
-                    day: "Monday" // Add to today for demo
+                    day: today,
+                    activityType: 'concept-fixer',
+                    recommended: false
                 };
                 
-                tasks.push(newTask);
-                totalTasksCount = tasks.length;
-                updateProgress();
+                if (!studyState.weeklyPlan[today]) {
+                    studyState.weeklyPlan[today] = [];
+                }
+                studyState.weeklyPlan[today].push(newTask);
+                
+                updateProgressDisplay();
                 renderTodayTasks();
                 renderWeeklyCalendar();
+                saveUserBehaviorData();
                 closeModal();
                 
                 // Clear form
                 document.getElementById('task-name').value = '';
             }
         }
-        
-        function generateWeeklyPlan() {
-            alert('🎯 Weekly Plan Generated!\n\nBased on your learning goals and available time, I\'ve optimized your study schedule for maximum efficiency and retention.\n\n📚 Key Features:\n• Spaced repetition for better memory\n• Balanced subject distribution\n• Break times included\n• Difficulty progression\n\nCheck your calendar for the updated plan!');
-        }
-        
-        function startStudySession() {
-            alert('▶️ Study Session Started!\n\n🎯 Current Task: Math Practice\n⏱️ Duration: 30 minutes\n🎵 Focus music: Enabled\n📱 Distractions: Blocked\n\nGood luck with your studies! 🌟');
-        }
-        
-        function viewAnalytics() {
-            alert('📈 Study Analytics\n\n📊 This Week:\n• Study time: 8h 45m\n• Tasks completed: 12/18\n• Accuracy rate: 87%\n• Favorite subject: Math\n\n🔥 Achievements:\n• 7-day study streak\n• 90% weekly goal achieved\n• Improvement in Science (+15%)\n\nKeep up the excellent work! 🏆');
-        }
-        
-        // Initialize
-        setCurrentDate();
-        updateProgress();
-        renderTodayTasks();
-        renderWeeklyCalendar();
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Dynamic Study Planner with Adaptive Scheduling initialized');
+            initializeStudyPlanner();
+        });
     </script>
 </body>
 </html>
