@@ -1,3 +1,4 @@
+// File removed as Smart Retry Strategy Predictor is deprecated
 // Smart Retry Strategy Predictor JavaScript
 class SmartRetryPredictor {
     constructor() {

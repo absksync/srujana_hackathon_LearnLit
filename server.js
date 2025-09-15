@@ -8,6 +8,7 @@
 
 const express = require('express');
 const path = require('path');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 // Conditional config loading for serverless environments
 let config, getSummary;
@@ -47,6 +48,21 @@ app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
 app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
 app.use('/audio', express.static(path.join(__dirname, 'public', 'audio')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Proxy API requests to Python backend
+const pythonBackendProxy = createProxyMiddleware({
+  target: 'http://localhost:5000',
+  changeOrigin: true,
+  onError: (err, req, res) => {
+    console.log('Backend proxy error:', err.message);
+    res.status(503).json({ 
+      error: 'Backend service unavailable', 
+      message: 'Please ensure Python backend is running on port 5000' 
+    });
+  }
+});
+
+app.use('/api', pythonBackendProxy);
 app.use(express.json());
 
 // Set up view engine
@@ -82,6 +98,10 @@ app.get('/doubt-resolver', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'doubt-resolver.html'));
 });
 
+app.get('/gamified-learning', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'gamified-learning.html'));
+});
+
 app.get('/concept-gaps', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'concept-gaps.html'));
 });
@@ -97,7 +117,7 @@ app.get('/vernacular-engine', (req, res) => {
 app.get('/smart-retry', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'smart-retry.html'));
 });
-
+// Removed Smart Retry Strategy Predictor route
 app.get('/mascot-buddy', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'mascot-buddy.html'));
 });

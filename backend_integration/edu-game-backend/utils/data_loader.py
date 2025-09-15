@@ -1,23 +1,100 @@
 import json
 import os
+import sys
 
 class DataLoader:
     def __init__(self):
-        self.questions_file = os.path.join(os.path.dirname(__file__), '..', 'data', 'questions.json')
         self.questions_data = None
         self.load_questions()
     
     def load_questions(self):
-        """Load questions from JSON file"""
+        """Load questions from NCERT question database"""
         try:
-            with open(self.questions_file, 'r', encoding='utf-8') as f:
-                self.questions_data = json.load(f)
-            print(f"Loaded {len(self.questions_data)} questions from dataset")
-        except FileNotFoundError:
-            print("Questions file not found. Creating empty dataset.")
+            # Add the data directory to Python path
+            data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+            sys.path.insert(0, data_dir)
+            
+            # Import NCERT questions
+            from ncert_questions import SCIENCE_QUESTIONS, MATHEMATICS_QUESTIONS
+            
+            # Convert NCERT questions to our format
             self.questions_data = []
-        except json.JSONDecodeError as e:
-            print(f"Error parsing JSON: {e}")
+            question_id = 1
+            
+            # Process Science questions
+            for topic, questions in SCIENCE_QUESTIONS.items():
+                for q in questions:
+                    formatted_q = {
+                        'id': question_id,
+                        'class': self._extract_class_from_source(q.get('source', '')),
+                        'subject': 'Science',
+                        'chapter': q.get('concept', topic.replace('-', ' ').title()),
+                        'question': q['text'],
+                        'type': 'mcq',
+                        'difficulty': q.get('difficulty', 'medium'),
+                        'options': q['options'],
+                        'correct_answer': q['options'][q['correct']],
+                        'correct_index': q['correct'],
+                        'explanation': q.get('explanation', ''),
+                        'gamify': q.get('concept', '')
+                    }
+                    self.questions_data.append(formatted_q)
+                    question_id += 1
+            
+            # Process Math questions
+            for topic, questions in MATHEMATICS_QUESTIONS.items():
+                for q in questions:
+                    formatted_q = {
+                        'id': question_id,
+                        'class': self._extract_class_from_source(q.get('source', '')),
+                        'subject': 'Maths',
+                        'chapter': q.get('concept', topic.replace('-', ' ').title()),
+                        'question': q['text'],
+                        'type': 'mcq',
+                        'difficulty': q.get('difficulty', 'medium'),
+                        'options': q['options'],
+                        'correct_answer': q['options'][q['correct']],
+                        'correct_index': q['correct'],
+                        'explanation': q.get('explanation', ''),
+                        'gamify': q.get('concept', '')
+                    }
+                    self.questions_data.append(formatted_q)
+                    question_id += 1
+            
+            print(f"Loaded {len(self.questions_data)} questions from NCERT dataset")
+            
+        except ImportError as e:
+            print(f"Could not load NCERT questions: {e}")
+            # Fallback to JSON file
+            self._load_json_fallback()
+        except Exception as e:
+            print(f"Error loading NCERT questions: {e}")
+            self._load_json_fallback()
+    
+    def _extract_class_from_source(self, source):
+        """Extract class number from source string"""
+        if 'Class 6' in source:
+            return 6
+        elif 'Class 7' in source:
+            return 7
+        elif 'Class 8' in source:
+            return 8
+        elif 'Class 9' in source:
+            return 9
+        elif 'Class 10' in source:
+            return 10
+        else:
+            return 8  # Default to class 8
+    
+    def _load_json_fallback(self):
+        """Fallback to JSON file if NCERT questions fail"""
+        try:
+            questions_file = os.path.join(os.path.dirname(__file__), '..', 'data', 'questions.json')
+            with open(questions_file, 'r', encoding='utf-8') as f:
+                self.questions_data = json.load(f)
+            print(f"Fallback: Loaded {len(self.questions_data)} questions from JSON dataset")
+        except Exception as e:
+            print(f"Error loading fallback questions: {e}")
             self.questions_data = []
     
     def get_question_by_id(self, question_id):

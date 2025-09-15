@@ -296,3 +296,118 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* LearnIt Global Theme Stylesheet */
+:root {
+    --primary-purple: #7C3AED;
+    --light-purple: #8B5CF6;
+    --accent-lavender: #A78BFA;
+    --background-dark: #1E1E2F;
+    --text-light: #F9FAFB;
+}
+
+body.learnit-bg {
+    background: var(--background-dark);
+    color: var(--text-light);
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--primary-purple);
+    margin-bottom: 1rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 24px rgba(124, 58, 237, 0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.input {
+    border-radius: 1rem;
+    border: 2px solid var(--primary-purple);
+    padding: 0.75rem 1.25rem;
+    font-size: 1.1rem;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+.input:focus {
+    border-color: var(--accent-lavender);
+}
+
+.button {
+    background: var(--primary-purple);
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.12);
+    transition: background 0.2s, transform 0.2s;
+}
+.button:hover {
+    background: var(--light-purple);
+    transform: scale(1.04);
+}
+
+.stars-earned {
+    font-size: 1.3rem;
+    color: var(--primary-purple);
+    font-family: 'Poppins', sans-serif;
+    margin-top: 1rem;
+}
+
+.mistake-box {
+    border: 2px solid var(--primary-purple);
+    background: var(--accent-lavender);
+    color: var(--background-dark);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+.mistake-box.hidden {
+    display: none;
+}
+
+.feedback {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+.feedback.success {
+    color: var(--primary-purple);
+}
+.feedback.error {
+    color: #e53e3e;
+}
+
+.star-anim {
+    font-size: 2rem;
+    animation: popStar 0.7s;
+}
+@keyframes popStar {
+    0% { transform: scale(0.5); opacity: 0.5; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Cards */
+@media (max-width: 600px) {
+    .card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    .input, .button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
